@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Emmenez-moi l&agrave;-bas &mdash; Myriam Abel</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -40,6 +40,8 @@
             background: var(--page);
             min-height: 100vh;
             box-shadow: 0 0 80px rgba(0,0,0,0.04);
+            transform-origin: top center;
+            transition: transform 0.15s ease;
         }
 
         /* ─── EN-TÊTE ─── */
@@ -226,15 +228,40 @@
             cursor: pointer;
             position: relative;
             touch-action: none;
-            margin: 0 14px;
+            margin: 16px 14px 0;
         }
 
         .daw-progress {
             height: 100%;
-            background: linear-gradient(90deg, rgba(201,168,108,0.25), rgba(192,101,26,0.25));
+            background: linear-gradient(90deg,
+                rgba(255,0,0,0.3),
+                rgba(255,165,0,0.3),
+                rgba(255,255,0,0.3),
+                rgba(0,200,0,0.3),
+                rgba(0,150,255,0.3),
+                rgba(130,0,255,0.3),
+                rgba(255,0,200,0.3)
+            );
             border-radius: 4px;
             width: 0%;
             pointer-events: none;
+        }
+
+        .daw-progress-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg,
+                rgba(255,0,0,0.08),
+                rgba(255,165,0,0.08),
+                rgba(255,255,0,0.08),
+                rgba(0,200,0,0.08),
+                rgba(0,150,255,0.08),
+                rgba(130,0,255,0.08),
+                rgba(255,0,200,0.08)
+            );
+            border-radius: 4px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .daw-playhead {
@@ -262,10 +289,10 @@
 
         .daw-marker {
             position: absolute;
-            top: 0;
+            top: -16px;
             bottom: 0;
-            width: 18px;
-            transform: translateX(-9px);
+            width: 22px;
+            transform: translateX(-11px);
             cursor: grab;
             z-index: 10;
             touch-action: none;
@@ -274,29 +301,41 @@
         .daw-marker::before {
             content: attr(data-label);
             position: absolute;
-            top: 1px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            background: #fff;
+            background: attr(data-color);
             color: #1e1e1e;
             font-size: 9px;
             font-weight: 700;
-            padding: 1px 4px;
+            padding: 1px 5px;
             border-radius: 3px;
             line-height: 1.2;
         }
 
+        .daw-marker[data-label='A']::before { background: #ff6b6b; color: #fff; }
+        .daw-marker[data-label='B']::before { background: #51cf66; color: #fff; }
+        .daw-marker[data-label='C']::before { background: #339af0; color: #fff; }
+        .daw-marker[data-label='D']::before { background: #fcc419; color: #1e1e1e; }
+        .daw-marker[data-label='E']::before { background: #cc5de8; color: #fff; }
+
         .daw-marker::after {
             content: '';
             position: absolute;
-            top: 14px;
+            top: 16px;
             bottom: 0;
             left: 50%;
             width: 2px;
             transform: translateX(-1px);
             background: #fff;
-            opacity: 0.8;
+            opacity: 0.9;
         }
+
+        .daw-marker[data-label='A']::after { background: #ff6b6b; }
+        .daw-marker[data-label='B']::after { background: #51cf66; }
+        .daw-marker[data-label='C']::after { background: #339af0; }
+        .daw-marker[data-label='D']::after { background: #fcc419; }
+        .daw-marker[data-label='E']::after { background: #cc5de8; }
 
         .daw-tracks {
             display: grid;
@@ -374,8 +413,13 @@
         }
 
         .daw-mbtn:hover { border-color: #fff; color: #fff; }
-        .daw-mbtn.set { border-color: var(--or); color: var(--or); background: rgba(201,168,108,0.15); }
+        .daw-mbtn.set-A { border-color: #ff6b6b; color: #ff6b6b; background: rgba(255,107,107,0.15); }
+        .daw-mbtn.set-B { border-color: #51cf66; color: #51cf66; background: rgba(81,207,102,0.15); }
+        .daw-mbtn.set-C { border-color: #339af0; color: #339af0; background: rgba(51,154,240,0.15); }
+        .daw-mbtn.set-D { border-color: #fcc419; color: #fcc419; background: rgba(252,196,25,0.15); }
+        .daw-mbtn.set-E { border-color: #cc5de8; color: #cc5de8; background: rgba(204,93,232,0.15); }
         .daw-mbtn.loop { border-color: #4a4; color: #4a4; background: rgba(68,170,68,0.12); }
+        .daw-mbtn.del { border-color: #e03131; color: #e03131; font-size: 0.75em; padding: 1px 6px; }
 
         .daw-minfo {
             font-size: 0.6em;
@@ -688,16 +732,18 @@
             .c { margin-left: 16px; }
             .legende { gap: 12px; padding: 12px 16px; font-size: 0.88em; }
             .section-head::before, .section-head::after { display: none; }
-            .daw-track-name { font-size: 0.6em; }
+            .daw-track-name { font-size: 0.55em; letter-spacing: 0; }
+            .daw-track-icon { font-size: 0.85em; }
+            .daw-track { gap: 3px; padding: 5px 3px; }
             .daw-vol-slider { width: 50px; }
             .daw-top { gap: 6px; padding: 6px 10px 4px; }
             .daw-time { font-size: 0.7em; min-width: 65px; }
             .daw-restart { width: 28px; height: 28px; font-size: 11px; }
             .daw-play { width: 36px; height: 36px; font-size: 15px; }
-            .daw-progress-wrap { height: 32px; border-radius: 5px; }
-            .daw-marker { width: 24px; transform: translateX(-12px); }
-            .daw-markers { gap: 4px; padding: 3px 10px 4px; }
-            .daw-mbtn { padding: 2px 7px; font-size: 0.63em; }
+            .daw-progress-wrap { height: 32px; border-radius: 5px; margin: 14px 10px 0; }
+            .daw-marker { width: 26px; transform: translateX(-13px); }
+            .daw-markers { gap: 3px; padding: 3px 10px 4px; }
+            .daw-mbtn { padding: 2px 6px; font-size: 0.6em; }
             .splash h1 { font-size: 2.2em; }
             .ctrl { top: 8px; right: 8px; }
             .ctrl button { width: 34px; height: 34px; font-size: 12px; }
@@ -706,9 +752,9 @@
         @media (max-width: 380px) {
             .daw-vol-slider { width: 36px; }
             .daw-time { font-size: 0.65em; min-width: 55px; }
-            .daw-track-name { font-size: 0.55em; }
-            .daw-track-icon { font-size: 0.85em; }
-            .daw-track { gap: 3px; padding: 6px 2px; }
+            .daw-track-name { font-size: 0.5em; }
+            .daw-track-icon { font-size: 0.8em; }
+            .daw-track { gap: 2px; padding: 4px 2px; }
             .daw-progress-wrap { height: 36px; }
         }
 
@@ -759,19 +805,25 @@
         Les passages <b style="color:var(--choeurs)">en orange italique</b> sont les ch&oelig;urs (d&eacute;j&agrave; enregistr&eacute;s, tu n'as rien &agrave; chanter dessus).
         Quand tu vois une <span style="border-left:3px solid var(--choeurs); padding-left:6px;">barre orange</span> &agrave; gauche, c'est toi qui chantes avec les ch&oelig;urs en m&ecirc;me temps.<br><br>
         Les petits traits bleus <span class="tempo-exemple">&#9472;&#9472;&#9472;&#9472;</span> indiquent la dur&eacute;e de tenue d'une note : plus le trait est long, plus tu restes sur la note.<br><br>
-        <b>&#127911; Le lecteur de musique :</b> tu vois une <b>bande noire en bas de l'&eacute;cran</b>, c'est le lecteur. Il reste toujours visible m&ecirc;me quand tu fais d&eacute;filer les paroles. Dedans tu as :<br>
-        &bull; <b>&#9654; Play / &#9646;&#9646; Pause</b> &mdash; pour lancer ou arr&ecirc;ter la musique<br>
-        &bull; <b>4 pistes</b> en dessous (Tout, Instru, Voix+Ch&oelig;urs, Voix solo) &mdash; appuie sur celle que tu veux &eacute;couter, la musique continue sans s'arr&ecirc;ter<br>
-        &bull; <b>La barre de progression</b> &mdash; tu peux appuyer dessus pour aller directement &agrave; n'importe quel moment de la chanson, comme sur YouTube<br>
-        &bull; <b>&#128266; Volume</b> &mdash; le curseur &agrave; droite pour monter ou baisser le son<br>
-        &bull; <b>La barre de lecture</b> (la grande barre grise) &mdash; tu peux <b>glisser ton doigt</b> dessus pour te d&eacute;placer dans la chanson. Un trait blanc te montre o&ugrave; tu en es.<br>
-        &bull; <b>Marqueurs A / B</b> &mdash; pour r&eacute;p&eacute;ter un passage : appuie sur &laquo;&nbsp;+ A&nbsp;&raquo; pour poser le d&eacute;but, &laquo;&nbsp;+ B&nbsp;&raquo; pour la fin. Tu verras les marqueurs appara&icirc;tre sur la barre avec une <b>zone verte</b> entre les deux. Tu peux <b>d&eacute;placer les marqueurs avec le doigt</b> directement sur la barre ! Ensuite appuie sur &laquo;&nbsp;Boucle&nbsp;&raquo; pour que &ccedil;a tourne en non-stop. Quand un marqueur est pos&eacute;, appuie sur son bouton (A ou B) pour revenir directement &agrave; cet endroit. La croix &#10005; efface tout.<br><br>
+        <b>&#127911; Le lecteur de musique :</b> tu vois une <b>bande noire en bas de l'&eacute;cran</b>, c'est ton mini-studio ! Il reste toujours visible. Dedans tu as :<br>
+        &bull; <b>&#9654; Play / &#9646;&#9646; Pause</b> &mdash; lancer ou arr&ecirc;ter la musique<br>
+        &bull; <b>4 pistes</b> (Tout, Instru, Voix+Ch&oelig;urs, Voix solo) &mdash; appuie sur celle que tu veux, la musique continue sans coupure<br>
+        &bull; <b>La barre color&eacute;e</b> &mdash; c'est la timeline ! Tu peux <b>glisser ton doigt</b> dessus pour naviguer dans la chanson. Le trait blanc te montre o&ugrave; tu en es.<br>
+        &bull; <b>&#128266; Volume</b> &mdash; le curseur pour monter ou baisser le son<br><br>
+        <b>&#127987; Les marqueurs (A, B, C, D, E) :</b> c'est comme dans un vrai logiciel de musique !<br>
+        &bull; Appuie sur <b>&laquo;&nbsp;+ A&nbsp;&raquo;</b> pour poser un rep&egrave;re &agrave; l'endroit o&ugrave; tu es dans la chanson. Pareil pour B, C, D, E.<br>
+        &bull; Chaque marqueur appara&icirc;t sur la barre avec <b>sa couleur</b> (rouge, vert, bleu, jaune, violet).<br>
+        &bull; Tu peux <b>d&eacute;placer un marqueur avec le doigt</b> en le glissant sur la barre !<br>
+        &bull; Quand un marqueur est pos&eacute;, appuie sur son bouton pour <b>revenir directement</b> &agrave; cet endroit.<br>
+        &bull; La <b>zone verte</b> entre les deux premiers marqueurs montre la r&eacute;gion s&eacute;lectionn&eacute;e.<br>
+        &bull; Appuie sur <b>&#128257;</b> pour <b>boucler</b> cette r&eacute;gion en non-stop (parfait pour r&eacute;p&eacute;ter un couplet ou un refrain).<br>
+        &bull; Pour <b>supprimer un marqueur</b> : double-tape dessus sur la barre. Ou appuie sur &laquo;&nbsp;&#10005; Tout&nbsp;&raquo; pour tout effacer.<br><br>
         <button class="scroll-btn" onclick="scrollToDAW()">&#127911; Voir le lecteur</button><br><br>
         <b>Les boutons en haut &agrave; droite :</b><br>
-        &bull; <b>Aa</b> &mdash; change la taille du texte (5 niveaux, appuie plusieurs fois)<br>
-        &bull; <b>&#9789;</b> &mdash; active le mode sombre (fond noir, plus reposant pour les yeux)<br>
-        &bull; <b>&#9974;</b> &mdash; passe en plein &eacute;cran (ou en sort)<br>
-        Sur t&eacute;l&eacute;phone, tu peux aussi &eacute;carter deux doigts sur le texte pour zoomer.<br><br>
+        &bull; <b>Aa</b> &mdash; change la taille du texte (5 niveaux)<br>
+        &bull; <b>&#9789;</b> &mdash; mode sombre (fond noir, reposant pour les yeux)<br>
+        &bull; <b>&#9974;</b> &mdash; plein &eacute;cran<br>
+        Sur t&eacute;l&eacute;phone, tu peux aussi <b>&eacute;carter deux doigts sur le texte</b> pour zoomer (le lecteur reste &agrave; sa taille).<br><br>
         <b>Ta touche personnelle :</b> la structure et les m&eacute;lodies que tu entends sur la d&eacute;mo sont la base du titre. Essaie de bien tenir les notes comme indiqu&eacute; par les traits bleus. Mais apr&egrave;s, tu es chez toi&nbsp;: si tu veux ajouter des vibes, des ad-libs, des variations ou toute autre touche qui te pla&icirc;t, tu es totalement libre. C'est ta voix qui donne vie &agrave; cette chanson, alors fais-toi plaisir&nbsp;!
         <button class="scroll-btn" onclick="document.getElementById('paroles').scrollIntoView({behavior:'smooth'})">&#9660; Aller aux paroles</button>
     </div>
@@ -950,6 +1002,7 @@
         </div>
     </div>
     <div class="daw-progress-wrap" id="dawBar">
+        <div class="daw-progress-bg"></div>
         <div class="daw-progress" id="dawProgress"></div>
         <div class="daw-playhead" id="dawPlayhead"></div>
         <div class="daw-region" id="dawRegion" style="display:none;"></div>
@@ -975,8 +1028,11 @@
     <div class="daw-markers" id="dawMarkers">
         <button class="daw-mbtn" id="btnA" onclick="placeOrGoMarker('A')">+ A</button>
         <button class="daw-mbtn" id="btnB" onclick="placeOrGoMarker('B')">+ B</button>
-        <button class="daw-mbtn" id="btnLoop" onclick="toggleLoop()">&#128257; Boucle</button>
-        <button class="daw-mbtn" onclick="clearMarkers()">&#10005;</button>
+        <button class="daw-mbtn" id="btnC" onclick="placeOrGoMarker('C')">+ C</button>
+        <button class="daw-mbtn" id="btnD" onclick="placeOrGoMarker('D')">+ D</button>
+        <button class="daw-mbtn" id="btnE" onclick="placeOrGoMarker('E')">+ E</button>
+        <button class="daw-mbtn" id="btnLoop" onclick="toggleLoop()">&#128257;</button>
+        <button class="daw-mbtn" onclick="clearAllMarkers()">&#10005; Tout</button>
         <span class="daw-minfo" id="markerInfo"></span>
     </div>
 </div>
@@ -1222,31 +1278,50 @@ function scrollToDAW() {
 }
 
 // ═══════════════════════════════════
-// MARQUEURS VISUELS + REGIONS + BOUCLE
+// MARQUEURS VISUELS A-E + REGIONS + BOUCLE
 // ═══════════════════════════════════
-let markers = {}; // { A: time, B: time }
-let markerEls = {}; // { A: DOM element, B: DOM element }
+const allLabels = ['A','B','C','D','E'];
+let markers = {};
+let markerEls = {};
 let looping = false;
+let loopPair = [null, null]; // les 2 marqueurs utilises pour la boucle
 
 function placeOrGoMarker(label) {
     if (!dawReady) return;
     if (markers[label] !== undefined) {
-        // Le marqueur existe deja : on y va
+        // Le marqueur existe : on y va
         audios.forEach(a => { a.currentTime = markers[label]; });
         updateDAW();
         return;
     }
-    // Placer un nouveau marqueur a la position actuelle
+    // Placer un nouveau marqueur
     markers[label] = audios[0].currentTime;
     createMarkerEl(label);
-    document.getElementById('btn' + label).classList.add('set');
-    document.getElementById('btn' + label).textContent = label;
-    updateRegion();
+    const btn = document.getElementById('btn' + label);
+    btn.classList.add('set-' + label);
+    btn.textContent = label;
+    autoDetectRegion();
+    updateMarkerInfo();
+}
+
+function removeMarker(label) {
+    if (markers[label] === undefined) return;
+    if (markerEls[label]) markerEls[label].remove();
+    delete markers[label];
+    delete markerEls[label];
+    const btn = document.getElementById('btn' + label);
+    btn.className = 'daw-mbtn';
+    btn.textContent = '+ ' + label;
+    // Si on supprime un marqueur de la boucle, desactiver la boucle
+    if (loopPair[0] === label || loopPair[1] === label) {
+        looping = false;
+        document.getElementById('btnLoop').classList.remove('loop');
+    }
+    autoDetectRegion();
     updateMarkerInfo();
 }
 
 function createMarkerEl(label) {
-    // Supprimer l'ancien si existant
     if (markerEls[label]) markerEls[label].remove();
     const el = document.createElement('div');
     el.className = 'daw-marker';
@@ -1254,6 +1329,12 @@ function createMarkerEl(label) {
     el.style.left = ((markers[label] / audios[0].duration) * 100) + '%';
     dawBar.appendChild(el);
     markerEls[label] = el;
+
+    // Double-clic / double-tap pour supprimer
+    el.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        removeMarker(label);
+    });
 
     // Drag au doigt / souris
     let dragging = false;
@@ -1264,7 +1345,7 @@ function createMarkerEl(label) {
         const pct = Math.max(0, Math.min(1, (cx - rect.left) / rect.width));
         markers[label] = pct * audios[0].duration;
         el.style.left = (pct * 100) + '%';
-        updateRegion();
+        autoDetectRegion();
         updateMarkerInfo();
     };
     const onEnd = () => {
@@ -1288,55 +1369,108 @@ function createMarkerEl(label) {
     }, { passive: true });
 }
 
-function updateRegion() {
+function autoDetectRegion() {
+    // Trouver les 2 premiers marqueurs poses (par ordre A-E)
     const region = document.getElementById('dawRegion');
-    if (markers.A !== undefined && markers.B !== undefined) {
+    const placed = allLabels.filter(l => markers[l] !== undefined);
+    if (placed.length >= 2) {
+        loopPair = [placed[0], placed[1]];
         const dur = audios[0].duration;
-        const startPct = (Math.min(markers.A, markers.B) / dur) * 100;
-        const endPct = (Math.max(markers.A, markers.B) / dur) * 100;
+        const t1 = markers[placed[0]];
+        const t2 = markers[placed[1]];
+        const startPct = (Math.min(t1, t2) / dur) * 100;
+        const endPct = (Math.max(t1, t2) / dur) * 100;
         region.style.left = startPct + '%';
         region.style.width = (endPct - startPct) + '%';
         region.style.display = 'block';
     } else {
+        loopPair = [null, null];
         region.style.display = 'none';
+        if (looping) {
+            looping = false;
+            document.getElementById('btnLoop').classList.remove('loop');
+        }
     }
 }
 
 function toggleLoop() {
-    if (markers.A === undefined || markers.B === undefined) return;
+    if (loopPair[0] === null || loopPair[1] === null) return;
     looping = !looping;
     document.getElementById('btnLoop').classList.toggle('loop', looping);
 }
 
-function clearMarkers() {
-    Object.keys(markerEls).forEach(k => { if (markerEls[k]) markerEls[k].remove(); });
+function clearAllMarkers() {
+    allLabels.forEach(l => {
+        if (markerEls[l]) markerEls[l].remove();
+        const btn = document.getElementById('btn' + l);
+        btn.className = 'daw-mbtn';
+        btn.textContent = '+ ' + l;
+    });
     markers = {};
     markerEls = {};
     looping = false;
-    document.getElementById('btnA').classList.remove('set');
-    document.getElementById('btnA').textContent = '+ A';
-    document.getElementById('btnB').classList.remove('set');
-    document.getElementById('btnB').textContent = '+ B';
+    loopPair = [null, null];
     document.getElementById('btnLoop').classList.remove('loop');
     document.getElementById('dawRegion').style.display = 'none';
     document.getElementById('markerInfo').textContent = '';
 }
 
 function updateMarkerInfo() {
-    let txt = '';
-    if (markers.A !== undefined) txt += 'A ' + fmt(markers.A);
-    if (markers.B !== undefined) txt += '  B ' + fmt(markers.B);
+    const placed = allLabels.filter(l => markers[l] !== undefined);
+    const txt = placed.map(l => l + ' ' + fmt(markers[l])).join('  ');
     document.getElementById('markerInfo').textContent = txt;
 }
 
 // Boucle pendant la lecture
 audios[0].addEventListener('timeupdate', () => {
-    if (looping && markers.A !== undefined && markers.B !== undefined) {
-        const start = Math.min(markers.A, markers.B);
-        const end = Math.max(markers.A, markers.B);
+    if (looping && loopPair[0] && loopPair[1]) {
+        const t1 = markers[loopPair[0]];
+        const t2 = markers[loopPair[1]];
+        if (t1 === undefined || t2 === undefined) return;
+        const start = Math.min(t1, t2);
+        const end = Math.max(t1, t2);
         if (audios[0].currentTime >= end || audios[0].currentTime < start) {
             audios.forEach(a => { a.currentTime = start; });
         }
+    }
+});
+
+// ═══════════════════════════════════
+// ZOOM TEXTE UNIQUEMENT (pinch-to-zoom custom)
+// ═══════════════════════════════════
+let textZoom = 1;
+const pageEl = document.querySelector('.page');
+
+document.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 2) {
+        // Verifier qu'on ne touche pas le DAW
+        const daw = document.getElementById('daw');
+        const r = daw.getBoundingClientRect();
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        if (t1.clientY > r.top || t2.clientY > r.top) return;
+        e.preventDefault();
+        this._pinchStart = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+        this._pinchZoom = textZoom;
+    }
+}, { passive: false });
+
+document.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 2 && this._pinchStart) {
+        e.preventDefault();
+        const dist = Math.hypot(
+            e.touches[1].clientX - e.touches[0].clientX,
+            e.touches[1].clientY - e.touches[0].clientY
+        );
+        const scale = dist / this._pinchStart;
+        textZoom = Math.max(0.8, Math.min(3, this._pinchZoom * scale));
+        pageEl.style.transform = 'scale(' + textZoom + ')';
+    }
+}, { passive: false });
+
+document.addEventListener('touchend', function(e) {
+    if (e.touches.length < 2) {
+        this._pinchStart = null;
     }
 });
 </script>
