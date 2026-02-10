@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Emmenez-moi l&agrave;-bas &mdash; Myriam Abel</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -102,17 +102,18 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             z-index: 200;
             background: var(--daw-bg);
             border-top: 2px solid #444;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            transition: transform 0.3s;
+            transition: none;
+            transform-origin: bottom left;
         }
 
-        .daw.hidden { transform: translateY(100%); }
+        .daw.hidden { transform: translateY(100%) !important; }
 
         .daw-top {
             display: flex;
@@ -229,7 +230,7 @@
             cursor: pointer;
             position: relative;
             touch-action: none;
-            margin: 16px 14px 8px;
+            margin: 16px 14px 12px;
         }
 
         .daw-progress {
@@ -434,6 +435,7 @@
             bottom: 8px;
             left: 8px;
             z-index: 201;
+            transform-origin: bottom left;
             background: var(--daw-bg);
             color: #ccc;
             border: 1px solid #555;
@@ -1437,85 +1439,29 @@ audios[0].addEventListener('timeupdate', () => {
 });
 
 // ═══════════════════════════════════
-// ZOOM TEXTE UNIQUEMENT (pinch-to-zoom custom)
+// ZOOM NATIF + DAW FIXE (contre-scale via visualViewport)
 // ═══════════════════════════════════
-let textZoom = 1;
-const pageEl = document.querySelector('.page');
-let _pinchStartDist = 0;
-let _pinchStartZoom = 1;
-let _pinchOriginX = 0;
-let _pinchOriginY = 0;
-let _pinchActive = false;
-
-function getPinchDist(e) {
-    return Math.hypot(
-        e.touches[1].clientX - e.touches[0].clientX,
-        e.touches[1].clientY - e.touches[0].clientY
-    );
-}
-
-function getPinchCenter(e) {
-    return {
-        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
-        y: (e.touches[0].clientY + e.touches[1].clientY) / 2
-    };
-}
-
-document.addEventListener('touchstart', function(e) {
-    if (e.touches.length === 2) {
-        const daw = document.getElementById('daw');
-        const r = daw.getBoundingClientRect();
-        if (e.touches[0].clientY > r.top || e.touches[1].clientY > r.top) return;
-        e.preventDefault();
-        _pinchActive = true;
-        _pinchStartDist = getPinchDist(e);
-        _pinchStartZoom = textZoom;
-        // Calculer le point focal dans le referentiel de .page
-        const center = getPinchCenter(e);
-        const pageRect = pageEl.getBoundingClientRect();
-        _pinchOriginX = ((center.x - pageRect.left) / pageRect.width) * 100;
-        _pinchOriginY = center.y - pageRect.top + pageEl.scrollTop;
-        pageEl.style.transformOrigin = _pinchOriginX + '% ' + _pinchOriginY + 'px';
-    }
-}, { passive: false });
-
-document.addEventListener('touchmove', function(e) {
-    if (e.touches.length === 2 && _pinchActive) {
-        e.preventDefault();
-        const dist = getPinchDist(e);
-        const rawScale = dist / _pinchStartDist;
-        // Ralentir le zoom : appliquer seulement 40% du delta
-        const dampened = 1 + (rawScale - 1) * 0.4;
-        textZoom = Math.max(1, Math.min(2.5, _pinchStartZoom * dampened));
-        pageEl.style.transform = 'scale(' + textZoom + ')';
-    }
-}, { passive: false });
-
-document.addEventListener('touchend', function(e) {
-    if (e.touches.length < 2) {
-        _pinchActive = false;
-    }
-});
-
-// Double-tap pour reset le zoom
-let _lastTap = 0;
-document.addEventListener('touchend', function(e) {
-    if (e.touches.length > 0) return;
-    const now = Date.now();
-    if (now - _lastTap < 300) {
-        // Double-tap detecte
-        const daw = document.getElementById('daw');
-        const r = daw.getBoundingClientRect();
-        const touch = e.changedTouches[0];
-        if (touch.clientY > r.top) return; // pas sur le DAW
-        if (textZoom !== 1) {
-            textZoom = 1;
-            pageEl.style.transform = '';
-            pageEl.style.transformOrigin = '';
+if (window.visualViewport) {
+    const dawEl = document.getElementById('daw');
+    const toggleEl = document.getElementById('dawToggle');
+    function fixDAWPosition() {
+        const vv = window.visualViewport;
+        const scale = vv.scale;
+        const invScale = 1 / scale;
+        // Positionner le DAW en bas du viewport visible
+        dawEl.style.transform = 'scale(' + invScale + ')';
+        dawEl.style.bottom = (window.innerHeight - vv.height - vv.offsetTop) * scale + 'px';
+        dawEl.style.left = vv.offsetLeft * scale + 'px';
+        dawEl.style.width = (vv.width * scale) + 'px';
+        // Meme chose pour le toggle
+        if (toggleEl) {
+            toggleEl.style.transform = 'scale(' + invScale + ')';
         }
     }
-    _lastTap = now;
-});
+    visualViewport.addEventListener('resize', fixDAWPosition);
+    visualViewport.addEventListener('scroll', fixDAWPosition);
+    fixDAWPosition();
+}
 </script>
 
 </body>
