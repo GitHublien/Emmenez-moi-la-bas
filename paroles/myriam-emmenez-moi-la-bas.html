@@ -40,8 +40,6 @@
             background: var(--page);
             min-height: 100vh;
             box-shadow: 0 0 80px rgba(0,0,0,0.04);
-            transform-origin: top center;
-            transition: transform 0.15s ease;
         }
 
         /* ─── EN-TÊTE ─── */
@@ -131,17 +129,20 @@
             border: 2px solid #888;
             background: transparent;
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
             flex-shrink: 0;
+            line-height: 1;
+            letter-spacing: -2px;
+            overflow: hidden;
         }
 
         .daw-play:hover { border-color: var(--or); color: var(--or); }
-        .daw-play.playing { border-color: var(--choeurs); color: var(--choeurs); }
+        .daw-play.playing { border-color: var(--choeurs); color: var(--choeurs); font-size: 13px; }
 
         .daw-restart {
             width: 32px;
@@ -228,7 +229,7 @@
             cursor: pointer;
             position: relative;
             touch-action: none;
-            margin: 16px 14px 0;
+            margin: 16px 14px 8px;
         }
 
         .daw-progress {
@@ -1440,38 +1441,80 @@ audios[0].addEventListener('timeupdate', () => {
 // ═══════════════════════════════════
 let textZoom = 1;
 const pageEl = document.querySelector('.page');
+let _pinchStartDist = 0;
+let _pinchStartZoom = 1;
+let _pinchOriginX = 0;
+let _pinchOriginY = 0;
+let _pinchActive = false;
+
+function getPinchDist(e) {
+    return Math.hypot(
+        e.touches[1].clientX - e.touches[0].clientX,
+        e.touches[1].clientY - e.touches[0].clientY
+    );
+}
+
+function getPinchCenter(e) {
+    return {
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+    };
+}
 
 document.addEventListener('touchstart', function(e) {
     if (e.touches.length === 2) {
-        // Verifier qu'on ne touche pas le DAW
         const daw = document.getElementById('daw');
         const r = daw.getBoundingClientRect();
-        const t1 = e.touches[0];
-        const t2 = e.touches[1];
-        if (t1.clientY > r.top || t2.clientY > r.top) return;
+        if (e.touches[0].clientY > r.top || e.touches[1].clientY > r.top) return;
         e.preventDefault();
-        this._pinchStart = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
-        this._pinchZoom = textZoom;
+        _pinchActive = true;
+        _pinchStartDist = getPinchDist(e);
+        _pinchStartZoom = textZoom;
+        // Calculer le point focal dans le referentiel de .page
+        const center = getPinchCenter(e);
+        const pageRect = pageEl.getBoundingClientRect();
+        _pinchOriginX = ((center.x - pageRect.left) / pageRect.width) * 100;
+        _pinchOriginY = center.y - pageRect.top + pageEl.scrollTop;
+        pageEl.style.transformOrigin = _pinchOriginX + '% ' + _pinchOriginY + 'px';
     }
 }, { passive: false });
 
 document.addEventListener('touchmove', function(e) {
-    if (e.touches.length === 2 && this._pinchStart) {
+    if (e.touches.length === 2 && _pinchActive) {
         e.preventDefault();
-        const dist = Math.hypot(
-            e.touches[1].clientX - e.touches[0].clientX,
-            e.touches[1].clientY - e.touches[0].clientY
-        );
-        const scale = dist / this._pinchStart;
-        textZoom = Math.max(0.8, Math.min(3, this._pinchZoom * scale));
+        const dist = getPinchDist(e);
+        const rawScale = dist / _pinchStartDist;
+        // Ralentir le zoom : appliquer seulement 40% du delta
+        const dampened = 1 + (rawScale - 1) * 0.4;
+        textZoom = Math.max(1, Math.min(2.5, _pinchStartZoom * dampened));
         pageEl.style.transform = 'scale(' + textZoom + ')';
     }
 }, { passive: false });
 
 document.addEventListener('touchend', function(e) {
     if (e.touches.length < 2) {
-        this._pinchStart = null;
+        _pinchActive = false;
     }
+});
+
+// Double-tap pour reset le zoom
+let _lastTap = 0;
+document.addEventListener('touchend', function(e) {
+    if (e.touches.length > 0) return;
+    const now = Date.now();
+    if (now - _lastTap < 300) {
+        // Double-tap detecte
+        const daw = document.getElementById('daw');
+        const r = daw.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        if (touch.clientY > r.top) return; // pas sur le DAW
+        if (textZoom !== 1) {
+            textZoom = 1;
+            pageEl.style.transform = '';
+            pageEl.style.transformOrigin = '';
+        }
+    }
+    _lastTap = now;
 });
 </script>
 
