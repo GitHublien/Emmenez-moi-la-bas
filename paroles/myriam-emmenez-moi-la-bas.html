@@ -31,8 +31,8 @@
             font-size: 18px;
             line-height: 1.85;
             -webkit-font-smoothing: antialiased;
-            touch-action: pan-x pan-y;
-            padding-bottom: 90px;
+            touch-action: manipulation;
+            padding-bottom: 120px;
         }
 
         .page {
@@ -265,8 +265,13 @@
             box-shadow: 0 -2px 8px rgba(201, 168, 108, 0.2);
         }
 
-        .daw-track.muted {
-            opacity: 0.35;
+        .daw.highlight {
+            animation: dawFlash 0.4s ease 3;
+        }
+
+        @keyframes dawFlash {
+            0%, 100% { border-top-color: #444; }
+            50% { border-top-color: var(--or); box-shadow: 0 -4px 30px rgba(201,168,108,0.5); }
         }
 
         .daw-track-name {
@@ -286,22 +291,51 @@
             flex-shrink: 0;
         }
 
-        .daw-track-vol {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 1.5px solid #666;
+        /* ─── MARQUEURS A/B ─── */
+        .daw-markers {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            color: #888;
-            flex-shrink: 0;
-            cursor: pointer;
+            gap: 6px;
+            padding: 4px 14px 6px;
+            border-top: 1px solid #333;
         }
 
-        .daw-track-vol:hover { border-color: #fff; color: #fff; }
-        .daw-track.muted .daw-track-vol { border-color: #c44; color: #c44; }
+        .daw-marker-btn {
+            background: transparent;
+            border: 1.5px solid #555;
+            color: #aaa;
+            border-radius: 14px;
+            padding: 3px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .daw-marker-btn:hover { border-color: #fff; color: #fff; }
+        .daw-marker-btn.set { border-color: var(--or); color: var(--or); background: rgba(201,168,108,0.1); }
+
+        .daw-loop-btn {
+            background: transparent;
+            border: 1.5px solid #555;
+            color: #aaa;
+            border-radius: 14px;
+            padding: 3px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .daw-loop-btn:hover { border-color: #fff; color: #fff; }
+        .daw-loop-btn.active { border-color: #4a4; color: #4a4; background: rgba(68,170,68,0.1); }
+
+        .daw-marker-info {
+            font-size: 0.65em;
+            color: #777;
+            margin-left: auto;
+            font-variant-numeric: tabular-nums;
+        }
 
         .daw-toggle {
             position: fixed;
@@ -593,8 +627,10 @@
         body.dark .e { background: linear-gradient(90deg, rgba(192,101,26,0.08), transparent); }
 
         /* ─── TAILLES ─── */
-        body.big { font-size: 22px; }
-        body.small { font-size: 15px; }
+        body.sz1 { font-size: 20px; }
+        body.sz2 { font-size: 23px; }
+        body.sz3 { font-size: 26px; }
+        body.sz4 { font-size: 15px; }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 600px) {
@@ -671,11 +707,18 @@
         Les passages <b style="color:var(--choeurs)">en orange italique</b> sont les ch&oelig;urs (d&eacute;j&agrave; enregistr&eacute;s, tu n'as rien &agrave; chanter dessus).
         Quand tu vois une <span style="border-left:3px solid var(--choeurs); padding-left:6px;">barre orange</span> &agrave; gauche, c'est toi qui chantes avec les ch&oelig;urs en m&ecirc;me temps.<br><br>
         Les petits traits bleus <span class="tempo-exemple">&#9472;&#9472;&#9472;&#9472;</span> indiquent la dur&eacute;e de tenue d'une note : plus le trait est long, plus tu restes sur la note.<br><br>
-        <b>Le lecteur en bas</b> te permet d'&eacute;couter 4 versions du titre. Tu peux basculer entre elles &agrave; tout moment sans arr&ecirc;ter la musique, ou couper une piste avec le petit rond &agrave; droite. Tu peux aussi zoomer avec deux doigts pour agrandir le texte.<br><br>
+        <b>&#127911; Le lecteur de musique :</b> tu vois une <b>bande noire en bas de l'&eacute;cran</b>, c'est le lecteur. Il reste toujours visible m&ecirc;me quand tu fais d&eacute;filer les paroles. Dedans tu as :<br>
+        &bull; <b>&#9654; Play / &#9646;&#9646; Pause</b> &mdash; pour lancer ou arr&ecirc;ter la musique<br>
+        &bull; <b>4 pistes</b> en dessous (Tout, Instru, Voix+Ch&oelig;urs, Voix solo) &mdash; appuie sur celle que tu veux &eacute;couter, la musique continue sans s'arr&ecirc;ter<br>
+        &bull; <b>La barre de progression</b> &mdash; tu peux appuyer dessus pour aller directement &agrave; n'importe quel moment de la chanson, comme sur YouTube<br>
+        &bull; <b>&#128266; Volume</b> &mdash; le curseur &agrave; droite pour monter ou baisser le son<br>
+        &bull; <b>A / B / Boucle</b> &mdash; pour r&eacute;p&eacute;ter un passage en boucle : appuie sur A au d&eacute;but du passage, B &agrave; la fin, puis Boucle pour que &ccedil;a tourne en non-stop. Appuie sur &laquo;&nbsp;Effacer&nbsp;&raquo; pour tout enlever.<br><br>
+        <button class="scroll-btn" onclick="scrollToDAW()">&#127911; Voir le lecteur</button><br><br>
         <b>Les boutons en haut &agrave; droite :</b><br>
-        &bull; <b>Aa</b> &mdash; change la taille du texte (3 niveaux : normal, grand, petit)<br>
+        &bull; <b>Aa</b> &mdash; change la taille du texte (5 niveaux, appuie plusieurs fois)<br>
         &bull; <b>&#9789;</b> &mdash; active le mode sombre (fond noir, plus reposant pour les yeux)<br>
-        &bull; <b>&#9974;</b> &mdash; passe en plein &eacute;cran (ou en sort)<br><br>
+        &bull; <b>&#9974;</b> &mdash; passe en plein &eacute;cran (ou en sort)<br>
+        Sur t&eacute;l&eacute;phone, tu peux aussi &eacute;carter deux doigts sur le texte pour zoomer.<br><br>
         <b>Ta touche personnelle :</b> la structure et les m&eacute;lodies que tu entends sur la d&eacute;mo sont la base du titre. Essaie de bien tenir les notes comme indiqu&eacute; par les traits bleus. Mais apr&egrave;s, tu es chez toi&nbsp;: si tu veux ajouter des vibes, des ad-libs, des variations ou toute autre touche qui te pla&icirc;t, tu es totalement libre. C'est ta voix qui donne vie &agrave; cette chanson, alors fais-toi plaisir&nbsp;!
         <button class="scroll-btn" onclick="document.getElementById('paroles').scrollIntoView({behavior:'smooth'})">&#9660; Aller aux paroles</button>
     </div>
@@ -860,23 +903,26 @@
         <div class="daw-track active" id="tr0" onclick="dawSelect(0)">
             <span class="daw-track-icon">&#127925;</span>
             <span class="daw-track-name">Tout</span>
-            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(0)" title="Couper">&#9679;</span>
         </div>
         <div class="daw-track" id="tr1" onclick="dawSelect(1)">
             <span class="daw-track-icon">&#127929;</span>
             <span class="daw-track-name">Instru</span>
-            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(1)" title="Couper">&#9679;</span>
         </div>
         <div class="daw-track" id="tr2" onclick="dawSelect(2)">
             <span class="daw-track-icon">&#127908;</span>
             <span class="daw-track-name">Voix+Ch&oelig;urs</span>
-            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(2)" title="Couper">&#9679;</span>
         </div>
         <div class="daw-track" id="tr3" onclick="dawSelect(3)">
             <span class="daw-track-icon">&#128483;</span>
             <span class="daw-track-name">Voix solo</span>
-            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(3)" title="Couper">&#9679;</span>
         </div>
+    </div>
+    <div class="daw-markers">
+        <button class="daw-marker-btn" id="btnA" onclick="setMarker('A')">A</button>
+        <button class="daw-marker-btn" id="btnB" onclick="setMarker('B')">B</button>
+        <button class="daw-loop-btn" id="btnLoop" onclick="toggleLoop()">&#128257; Boucle</button>
+        <button class="daw-marker-btn" id="btnClear" onclick="clearMarkers()">Effacer</button>
+        <span class="daw-marker-info" id="markerInfo"></span>
     </div>
 </div>
 
@@ -910,16 +956,15 @@ function toggleFS() {
 // TAILLE / DARK
 // ═══════════════════════════════════
 let sz = parseInt(localStorage.getItem('myriam-sz') || '0');
+const szClasses = ['', 'sz1', 'sz2', 'sz3', 'sz4'];
 (function initSize() {
-    if (sz === 1) document.body.classList.add('big');
-    if (sz === 2) document.body.classList.add('small');
+    if (sz > 0 && sz < szClasses.length) document.body.classList.add(szClasses[sz]);
 })();
 
 function resize() {
-    document.body.classList.remove('big','small');
-    sz = (sz + 1) % 3;
-    if (sz === 1) document.body.classList.add('big');
-    if (sz === 2) document.body.classList.add('small');
+    szClasses.forEach(c => { if (c) document.body.classList.remove(c); });
+    sz = (sz + 1) % szClasses.length;
+    if (sz > 0) document.body.classList.add(szClasses[sz]);
     localStorage.setItem('myriam-sz', sz);
 }
 
@@ -974,6 +1019,9 @@ audios[0].addEventListener('ended', () => {
     isPlaying = false;
     document.getElementById('dawPlay').innerHTML = '&#9654;';
     document.getElementById('dawPlay').classList.remove('playing');
+    // Auto-retour au debut
+    audios.forEach(a => { a.currentTime = 0; });
+    updateDAW();
 });
 
 function dawTogglePlay() {
@@ -994,28 +1042,17 @@ function dawTogglePlay() {
 }
 
 function dawSelect(idx) {
-    // Basculer la piste active (volume 1) et muter les autres
     activeTrack = idx;
     audios.forEach((a, i) => {
         const tr = document.getElementById('tr' + i);
         if (i === idx) {
-            if (!tr.classList.contains('muted')) a.volume = masterVol;
+            a.volume = masterVol;
             tr.classList.add('active');
         } else {
             a.volume = 0;
             tr.classList.remove('active');
         }
     });
-}
-
-function dawMute(idx) {
-    const tr = document.getElementById('tr' + idx);
-    tr.classList.toggle('muted');
-    if (tr.classList.contains('muted')) {
-        audios[idx].volume = 0;
-    } else if (idx === activeTrack) {
-        audios[idx].volume = masterVol;
-    }
 }
 
 function dawSeek(e) {
@@ -1041,13 +1078,7 @@ updateVolIcon();
 function dawSetVolume(val) {
     masterVol = val / 100;
     localStorage.setItem('myriam-vol', masterVol);
-    // Appliquer le volume a la piste active (les autres sont a 0)
-    audios.forEach((a, i) => {
-        const tr = document.getElementById('tr' + i);
-        if (i === activeTrack && !tr.classList.contains('muted')) {
-            a.volume = masterVol;
-        }
-    });
+    audios[activeTrack].volume = masterVol;
     updateVolIcon();
 }
 
@@ -1061,12 +1092,7 @@ function dawToggleMute() {
         slider.value = 100;
     }
     localStorage.setItem('myriam-vol', masterVol);
-    audios.forEach((a, i) => {
-        const tr = document.getElementById('tr' + i);
-        if (i === activeTrack && !tr.classList.contains('muted')) {
-            a.volume = masterVol;
-        }
-    });
+    audios[activeTrack].volume = masterVol;
     updateVolIcon();
 }
 
@@ -1101,6 +1127,70 @@ function showDaw() {
     document.getElementById('daw').classList.remove('hidden');
     document.getElementById('dawToggle').classList.remove('show');
 }
+
+// ═══════════════════════════════════
+// SCROLL VERS LE LECTEUR
+// ═══════════════════════════════════
+function scrollToDAW() {
+    const daw = document.getElementById('daw');
+    daw.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    daw.classList.add('highlight');
+    setTimeout(() => daw.classList.remove('highlight'), 1500);
+}
+
+// ═══════════════════════════════════
+// MARQUEURS A/B + BOUCLE
+// ═══════════════════════════════════
+let markerA = null;
+let markerB = null;
+let looping = false;
+
+function setMarker(which) {
+    if (!dawReady) return;
+    const t = audios[0].currentTime;
+    if (which === 'A') {
+        markerA = t;
+        document.getElementById('btnA').classList.add('set');
+    } else {
+        markerB = t;
+        document.getElementById('btnB').classList.add('set');
+    }
+    updateMarkerInfo();
+}
+
+function toggleLoop() {
+    if (markerA === null || markerB === null) return;
+    looping = !looping;
+    document.getElementById('btnLoop').classList.toggle('active', looping);
+}
+
+function clearMarkers() {
+    markerA = null;
+    markerB = null;
+    looping = false;
+    document.getElementById('btnA').classList.remove('set');
+    document.getElementById('btnB').classList.remove('set');
+    document.getElementById('btnLoop').classList.remove('active');
+    document.getElementById('markerInfo').textContent = '';
+}
+
+function updateMarkerInfo() {
+    let txt = '';
+    if (markerA !== null) txt += 'A: ' + fmt(markerA);
+    if (markerB !== null) txt += '  B: ' + fmt(markerB);
+    document.getElementById('markerInfo').textContent = txt;
+}
+
+// Verifier la boucle pendant la lecture
+audios[0].addEventListener('timeupdate', () => {
+    if (looping && markerA !== null && markerB !== null) {
+        const start = Math.min(markerA, markerB);
+        const end = Math.max(markerA, markerB);
+        if (audios[0].currentTime >= end) {
+            audios.forEach(a => { a.currentTime = start; });
+        }
+    }
+});
 </script>
 
 </body>
