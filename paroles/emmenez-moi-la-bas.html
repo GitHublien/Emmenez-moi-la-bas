@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmenez-moi là-bas — Paroles & Partition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a86c;
+            --gold-light: #e8d5a8;
+            --gold-dark: #8b7355;
+            --savane: #d4a053;
+            --terre: #a0522d;
+            --ciel-afrique: #e8913a;
+            --soliste: #1a1a1a;
+            --choeur: #b8540e;
+            --choeur-bg: rgba(184, 84, 14, 0.06);
+            --instrumental: #2d6b4f;
+            --indication: #7a6b8a;
+            --rythme: #4a6fa5;
+            --fond: #faf8f3;
+            --fond-page: #fffef9;
+            --texte: #2c2c2c;
+            --separateur: #e0ddd5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background-color: var(--fond);
+            color: var(--texte);
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        /* CONTENEUR LIVRE */
+        .book {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background-color: var(--fond-page);
+            min-height: 100vh;
+            box-shadow: 0 0 80px rgba(0,0,0,0.06);
+        }
+
+        /* COUVERTURE */
+        .cover {
+            text-align: center;
+            padding: 80px 30px 60px;
+            border-bottom: 2px solid var(--separateur);
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 160, 83, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cover-ornament {
+            font-size: 2em;
+            color: var(--gold);
+            letter-spacing: 15px;
+            margin-bottom: 30px;
+            opacity: 0.6;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 500;
+            color: var(--soliste);
+            margin-bottom: 8px;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .cover h1 em {
+            font-style: italic;
+            color: var(--ciel-afrique);
+        }
+
+        .cover .sous-titre {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-style: italic;
+            color: var(--gold-dark);
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+        }
+
+        .cover .credits {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: #888;
+            line-height: 2;
+        }
+
+        .cover .credits strong {
+            color: var(--texte);
+            font-weight: 600;
+        }
+
+        .cover .credits .role {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold-dark);
+        }
+
+        .cover-ornament-bottom {
+            margin-top: 35px;
+            font-size: 1.2em;
+            color: var(--gold);
+            letter-spacing: 10px;
+            opacity: 0.5;
+        }
+
+        /* LÉGENDE DES COULEURS */
+        .legende {
+            padding: 30px 40px;
+            border-bottom: 1px solid var(--separateur);
+            background: linear-gradient(135deg, #fdfcf8 0%, #f8f5ef 100%);
+        }
+
+        .legende h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            text-align: center;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .legende-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .legende-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+        }
+
+        .legende-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-soliste { background-color: var(--soliste); }
+        .dot-choeur { background-color: var(--choeur); }
+        .dot-duo { background: linear-gradient(135deg, var(--soliste), var(--choeur)); }
+        .dot-instrumental { background-color: var(--instrumental); }
+        .dot-indication { background-color: var(--indication); }
+        .dot-rythme { background-color: var(--rythme); }
+
+        /* SECTIONS DE LA CHANSON */
+        .chanson {
+            padding: 50px 40px;
+        }
+
+        /* SECTION (Verse, Refrain, Pont, Outro) */
+        .section-chanson {
+            margin-bottom: 55px;
+            position: relative;
+        }
+
+        /* LETTRINE DE SECTION */
+        .section-lettrine {
+            font-family: 'Playfair Display', serif;
+            font-size: 5em;
+            float: left;
+            line-height: 0.78;
+            padding-right: 14px;
+            padding-top: 6px;
+            color: var(--ciel-afrique);
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        /* TITRE DE SECTION */
+        .section-titre {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-titre h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            font-weight: 400;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .section-titre h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 12px auto 0;
+        }
+
+        .section-titre .section-num {
+            font-size: 0.7em;
+            color: #bbb;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* SÉPARATEUR ENTRE SECTIONS */
+        .separateur {
+            text-align: center;
+            margin: 45px 0;
+            color: var(--gold);
+            letter-spacing: 12px;
+            font-size: 0.9em;
+            opacity: 0.5;
+        }
+
+        /* LIGNES DE PAROLES */
+        .ligne {
+            margin-bottom: 6px;
+            padding: 4px 0;
+            clear: both;
+        }
+
+        .ligne-soliste {
+            color: var(--soliste);
+            font-size: 1.05em;
+        }
+
+        .ligne-choeur {
+            color: var(--choeur);
+            font-style: italic;
+            padding-left: 30px;
+            font-size: 0.98em;
+            position: relative;
+        }
+
+        .ligne-choeur::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            width: 10px;
+            height: 2px;
+            background-color: var(--choeur);
+            opacity: 0.4;
+        }
+
+        .ligne-duo {
+            color: var(--soliste);
+            font-size: 1.05em;
+            background: linear-gradient(90deg, rgba(184, 84, 14, 0.04), transparent);
+            padding-left: 10px;
+            border-left: 3px solid var(--ciel-afrique);
+        }
+
+        .ligne-instrumental {
+            color: var(--instrumental);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 15px 0;
+            letter-spacing: 1px;
+        }
+
+        .ligne-indication {
+            color: var(--indication);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-style: italic;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        /* NOTATION RYTHMIQUE */
+        .rythme-bloc {
+            background: linear-gradient(135deg, #f5f3ee 0%, #faf8f3 100%);
+            border: 1px solid #e8e4dc;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .rythme-notes {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            font-size: 1.8em;
+            color: var(--rythme);
+            margin-bottom: 5px;
+        }
+
+        .rythme-syllabes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1em;
+            color: var(--texte);
+            letter-spacing: 1px;
+        }
+
+        .rythme-syllabe {
+            text-align: center;
+            min-width: 40px;
+        }
+
+        /* TENUE (tirets pour la durée) */
+        .tenue {
+            color: var(--rythme);
+            letter-spacing: 0;
+            font-weight: 300;
+        }
+
+        .tenue-courte::after {
+            content: '──';
+            color: var(--rythme);
+            font-size: 0.85em;
+            opacity: 0.6;
+        }
+
+        .tenue-moyenne::after {
+            content: '────';
+            color: var(--rythme);
+            font-size: 0.85em;
+            opacity: 0.6;
+        }
+
+        .tenue-longue::after {
+            content: '────────';
+            color: var(--rythme);
+            font-size: 0.85em;
+            opacity: 0.6;
+        }
+
+        .tenue-tres-longue::after {
+            content: '────────────';
+            color: var(--rythme);
+            font-size: 0.85em;
+            opacity: 0.6;
+        }
+
+        /* EXCLAMATION / ACCENT */
+        .accent {
+            font-weight: 700;
+            font-size: 1.08em;
+        }
+
+        /* LABEL INLINE */
+        .label-choeur {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--choeur);
+            opacity: 0.7;
+        }
+
+        .label-soliste {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--soliste);
+            opacity: 0.5;
+        }
+
+        .label-duo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ciel-afrique);
+        }
+
+        /* DROITS D'AUTEUR */
+        .droits {
+            padding: 40px;
+            border-top: 2px solid var(--separateur);
+            text-align: center;
+            background: linear-gradient(135deg, #f8f5ef 0%, #fdfcf8 100%);
+        }
+
+        .droits h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--terre);
+            margin-bottom: 15px;
+        }
+
+        .droits p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+            color: #666;
+            line-height: 1.8;
+            max-width: 550px;
+            margin: 0 auto 8px;
+        }
+
+        .droits .copyright {
+            font-size: 1.2em;
+            color: var(--terre);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #bbb;
+            font-size: 0.85em;
+        }
+
+        .footer .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            font-style: italic;
+            color: var(--gold-dark);
+            margin-bottom: 5px;
+        }
+
+        /* CONTRÔLES */
+        .controls-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .ctrl-btn {
+            background: rgba(44, 44, 44, 0.85);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        .ctrl-btn:hover {
+            background: rgba(201, 168, 108, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .ctrl-btn.active {
+            background: var(--ciel-afrique);
+        }
+
+        /* AUDIO PLAYER INTÉGRÉ */
+        .audio-section {
+            padding: 30px 40px;
+            border-top: 1px solid var(--separateur);
+            border-bottom: 1px solid var(--separateur);
+            background: linear-gradient(135deg, #fdfcf8 0%, #f8f5ef 100%);
+        }
+
+        .audio-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            text-align: center;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .audio-card {
+            background: #fff;
+            border: 1px solid #e8e4dc;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .audio-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .audio-card .audio-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .audio-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: var(--texte);
+            margin-bottom: 10px;
+        }
+
+        .audio-card audio {
+            width: 100%;
+            height: 35px;
+        }
+
+        .audio-card .audio-desc {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .book {
+                padding: 0 10px;
+            }
+
+            .cover {
+                padding: 50px 15px 40px;
+            }
+
+            .cover h1 {
+                font-size: 2.2em;
+            }
+
+            .chanson {
+                padding: 30px 15px;
+            }
+
+            .legende {
+                padding: 20px 15px;
+            }
+
+            .legende-grid {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-lettrine {
+                font-size: 3.5em;
+            }
+
+            .ligne-choeur {
+                padding-left: 20px;
+            }
+
+            .rythme-notes {
+                font-size: 1.4em;
+                gap: 10px;
+            }
+
+            .audio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls-bar {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-chanson {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* TAILLE DE TEXTE AJUSTABLE */
+        body.text-large {
+            font-size: 20px;
+        }
+
+        body.text-large .cover h1 {
+            font-size: 4em;
+        }
+
+        body.text-small {
+            font-size: 15px;
+        }
+
+        /* MODE SOMBRE */
+        body.dark-mode {
+            --fond: #1a1a1a;
+            --fond-page: #222;
+            --texte: #e0ddd5;
+            --soliste: #f0ece4;
+            --choeur: #e8913a;
+            --separateur: #3a3a3a;
+            --gold-dark: #c9a86c;
+        }
+
+        body.dark-mode .legende,
+        body.dark-mode .audio-section,
+        body.dark-mode .droits {
+            background: linear-gradient(135deg, #252525 0%, #1e1e1e 100%);
+        }
+
+        body.dark-mode .audio-card {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+        }
+
+        body.dark-mode .rythme-bloc {
+            background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%);
+            border-color: #3a3a3a;
+        }
+
+        body.dark-mode .ligne-choeur::before {
+            background-color: var(--choeur);
+        }
+
+        /* IMPRESSION */
+        @media print {
+            .controls-bar { display: none; }
+            .audio-section { display: none; }
+            body { font-size: 12pt; }
+            .book { box-shadow: none; max-width: 100%; }
+            .cover { page-break-after: always; }
+            .section-chanson { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- CONTRÔLES FLOTTANTS -->
+<div class="controls-bar">
+    <button class="ctrl-btn" onclick="toggleTextSize()" title="Changer la taille du texte">Aa</button>
+    <button class="ctrl-btn" onclick="toggleDarkMode()" title="Mode sombre">☽</button>
+</div>
+
+<div class="book">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- COUVERTURE -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="cover">
+        <div class="cover-ornament">✦ ✦ ✦</div>
+        <h1>Emmenez-moi <em>là-bas</em></h1>
+        <div class="sous-titre">Partition vocale & Paroles</div>
+
+        <div class="credits">
+            <span class="role">Auteur &middot; Compositeur</span><br>
+            <strong>Micka&euml;l Guedj</strong><br><br>
+            <span class="role">Interpr&egrave;te</span><br>
+            <strong>Myriam Abel</strong><br><br>
+            <span class="role">Spectacle</span><br>
+            Savane &mdash; 25 f&eacute;vrier 2026<br>
+            Cagnes-sur-Mer
+        </div>
+
+        <div class="cover-ornament-bottom">&#9674; &#9674; &#9674;</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- LÉGENDE -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="legende">
+        <h3>L&eacute;gende</h3>
+        <div class="legende-grid">
+            <div class="legende-item">
+                <div class="legende-dot dot-soliste"></div>
+                <span>Soliste (Myriam)</span>
+            </div>
+            <div class="legende-item">
+                <div class="legende-dot dot-choeur"></div>
+                <span style="color: var(--choeur); font-style: italic;">Ch&oelig;urs</span>
+            </div>
+            <div class="legende-item">
+                <div class="legende-dot dot-duo"></div>
+                <span>Soliste + Ch&oelig;urs</span>
+            </div>
+            <div class="legende-item">
+                <div class="legende-dot dot-instrumental"></div>
+                <span style="color: var(--instrumental);">Instrumental</span>
+            </div>
+            <div class="legende-item">
+                <div class="legende-dot dot-rythme"></div>
+                <span style="color: var(--rythme);">Tenue / Rythme</span>
+            </div>
+            <div class="legende-item">
+                <div class="legende-dot dot-indication"></div>
+                <span style="color: var(--indication);">Indications</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SECTION AUDIO (à remplir avec les fichiers) -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="audio-section">
+        <h3>&Eacute;couter</h3>
+        <div class="audio-grid">
+            <div class="audio-card">
+                <div class="audio-icon">🎵</div>
+                <h4>Instrumental</h4>
+                <audio controls preload="none">
+                    <source src="../musiques/emmenez-moi-la-bas-instrumental.mp3" type="audio/mpeg">
+                </audio>
+                <div class="audio-desc">Musique seule</div>
+            </div>
+            <div class="audio-card">
+                <div class="audio-icon">🎤</div>
+                <h4>Voix d&eacute;mo</h4>
+                <audio controls preload="none">
+                    <source src="../musiques/emmenez-moi-la-bas-voix-demo.mp3" type="audio/mpeg">
+                </audio>
+                <div class="audio-desc">Avec la voix chant&eacute;e</div>
+            </div>
+            <div class="audio-card">
+                <div class="audio-icon">📝</div>
+                <h4>Voix seule</h4>
+                <audio controls preload="none">
+                    <source src="../musiques/emmenez-moi-la-bas-voix-seule.mp3" type="audio/mpeg">
+                </audio>
+                <div class="audio-desc">Paroles sans musique</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PAROLES -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="chanson">
+
+        <!-- INTRO MUSICALE -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">Introduction</span>Musique</h2>
+            </div>
+            <div class="ligne ligne-instrumental">&#9835; Ouverture orchestrale &#9835;</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ COUPLET 1 ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">I</span>Couplet</h2>
+            </div>
+
+            <span class="section-lettrine">Q</span>
+            <div class="ligne ligne-soliste">uand la nuit tombe sur l'Afrique</div>
+            <div class="ligne ligne-soliste">Les &eacute;toiles s'allument une &agrave; une</div>
+            <div class="ligne ligne-soliste">J'entends le chant des oiseaux</div>
+            <div class="ligne ligne-soliste">Qui s'endorment, sous la lune</div>
+
+            <br>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Elle r&ecirc;ve, elle r&ecirc;ve</div>
+            <div class="ligne ligne-soliste">Je ferme les yeux et je vois<span class="tenue-moyenne"></span></div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Elle r&ecirc;ve, elle r&ecirc;ve</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ REFRAIN 1 ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">II</span>Refrain</h2>
+            </div>
+
+            <span class="section-lettrine">E</span>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Emmenez-moi l&agrave;-bas !</div>
+
+            <div class="ligne ligne-indication">&#9839; violon puis :</div>
+
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">Au pays du soleil d'or</span><span class="tenue-courte"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Soleil d'or !</div>
+
+            <br>
+            <div class="ligne ligne-soliste">Emmenez-moi l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-soliste">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">O&ugrave; mon c&oelig;ur prend son envol</span><span class="tenue-tres-longue"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Aaaah... Aaaah...</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ INTERLUDE ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">III</span>Interlude</h2>
+            </div>
+            <div class="ligne ligne-instrumental">&#9835; Solo Violon majestueux &middot; Arp&egrave;ges de Harpe &#9835;</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Ohhh... Ohhh... <em>(en nappes)</em></div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ COUPLET 2 ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">IV</span>Couplet</h2>
+            </div>
+
+            <span class="section-lettrine">J</span>
+            <div class="ligne ligne-soliste">e vois les flamants roses danser</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Ohhh... Ohhh... Ohhh... Ohhh...</div>
+            <div class="ligne ligne-soliste">Sur le lac aux reflets d'argent</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Ohhh... Ohhh... Ohhh... Ohhh...</div>
+            <div class="ligne ligne-soliste">Les z&egrave;bres courent dans la poussi&egrave;re</div>
+            <div class="ligne ligne-soliste">Et le soleil<span class="tenue-courte"></span>, peint le firmament<span class="tenue-moyenne"></span></div>
+
+            <br>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Elle r&ecirc;ve, elle r&ecirc;ve</div>
+            <div class="ligne ligne-soliste">Et je tends les bras et je sens<span class="tenue-longue"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Elle sent, elle sent</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ REFRAIN 2 ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">V</span>Refrain</h2>
+            </div>
+
+            <span class="section-lettrine">E</span>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; mmenez-moi l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; <span class="accent">Au pays du soleil d'or</span><span class="tenue-courte"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Soleil d'or !</div>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; Emmenez-moi l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-duo"><span class="label-duo">soliste + ch&oelig;urs</span> &mdash; <span class="accent">O&ugrave; mon c&oelig;ur prend son envol</span><span class="tenue-tres-longue"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Prend son envol</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ PONT ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">VI</span>Pont</h2>
+            </div>
+
+            <div class="ligne ligne-indication">&#9839; Soliste voix et violon</div>
+
+            <span class="section-lettrine">U</span>
+            <div class="ligne ligne-soliste">n jour j'irai...</div>
+            <div class="ligne ligne-indication"><em>(Mmm... Mmm... Mmm... Mmm...)</em></div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Mmm... Mmm... Mmm... Mmm...</div>
+            <div class="ligne ligne-soliste">Un jour j'irai...</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Mmm... Mmm... Mmm... Mmm...</div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">Un jour j'irai toucher</span><span class="tenue-moyenne"></span> le ciel<span class="tenue-longue"></span> d'A&middot;fri<span class="tenue-longue"></span>que !</div>
+
+            <br>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; <span class="accent" style="font-size: 1.15em;">AAAAH !</span></div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ REFRAIN FINAL ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">VII</span>Refrain final</h2>
+            </div>
+
+            <span class="section-lettrine">E</span>
+            <div class="ligne ligne-soliste">mmenez-moi l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-soliste">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">Au pays du soleil d'or</span><span class="tenue-courte"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Oui, du soleil d'or<span class="tenue-courte"></span> !</div>
+
+            <br>
+            <div class="ligne ligne-soliste">Emmenez-moi l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-soliste">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas !</div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">O&ugrave; mon c&oelig;ur prend son envol</span><span class="tenue-tres-longue"></span> !</div>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; Prend son envol<span class="tenue-moyenne"></span> !</div>
+        </div>
+
+        <div class="separateur">&#9674; &middot; &#9674; &middot; &#9674;</div>
+
+        <!-- ═══════════ OUTRO ═══════════ -->
+        <div class="section-chanson">
+            <div class="section-titre">
+                <h2><span class="section-num">VIII</span>Outro</h2>
+            </div>
+
+            <div class="ligne ligne-indication">&#9839; Final avec Chorus</div>
+
+            <br>
+            <span class="section-lettrine">O</span>
+            <div class="ligne ligne-soliste">u&mdash; Ou Ou Ou&mdash;</div>
+            <div class="ligne ligne-soliste">Ou Ou Ou&mdash;</div>
+            <div class="ligne ligne-soliste">Ou Ou Ou<span class="tenue-moyenne"></span></div>
+
+            <br>
+            <div class="ligne ligne-soliste">Ou&mdash; Ou Ou Ou&mdash;</div>
+            <div class="ligne ligne-soliste">Ou Ou Ou&mdash;</div>
+            <div class="ligne ligne-soliste">Ou Ou Ou<span class="tenue-moyenne"></span></div>
+
+            <br>
+            <div class="ligne ligne-soliste"><span class="accent">Emmenez-moi l&agrave;-bas !</span></div>
+
+            <br>
+            <div class="ligne ligne-choeur"><span class="label-choeur">ch&oelig;urs</span> &mdash; L&agrave;-bas, l&agrave;-bas, l&agrave;-bas !</div>
+
+            <br>
+            <!-- NOTATION RYTHMIQUE FINALE -->
+            <div class="rythme-bloc">
+                <div class="rythme-notes">
+                    <span title="Noire">&#9833;</span>
+                    <span title="Croche">&#9834;</span>
+                    <span title="Croche">&#9834;</span>
+                    <span title="Noire">&#9833;</span>
+                    <span title="Croche">&#9834;</span>
+                    <span title="Ronde">&#119069;</span>
+                </div>
+                <div class="rythme-syllabes">
+                    <span class="rythme-syllabe">Mmm</span>
+                    <span class="rythme-syllabe">Mmm</span>
+                    <span class="rythme-syllabe">Mmm</span>
+                    <span class="rythme-syllabe">Mmm</span>
+                    <span class="rythme-syllabe">Mmm</span>
+                    <span class="rythme-syllabe">Mmm</span>
+                </div>
+            </div>
+
+            <br>
+            <div class="ligne ligne-indication">&#9839; Fin</div>
+        </div>
+
+    </div><!-- fin .chanson -->
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DROITS D'AUTEUR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="droits">
+        <h3>Droits d'auteur</h3>
+        <p>&laquo; Emmenez-moi l&agrave;-bas &raquo; est une &oelig;uvre originale prot&eacute;g&eacute;e par le droit d'auteur.</p>
+        <p><strong>Auteur &amp; Compositeur :</strong> Micka&euml;l Guedj</p>
+        <p><strong>Interpr&egrave;te :</strong> Myriam Abel</p>
+        <p>Toute reproduction, distribution ou utilisation non autoris&eacute;e est strictement interdite sans l'accord &eacute;crit de l'auteur-compositeur.</p>
+        <div class="copyright">&copy; 2026 Micka&euml;l Guedj &mdash; Tous droits r&eacute;serv&eacute;s</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="signature">Spectacle Savane &mdash; Cagnes-sur-Mer &mdash; 25 f&eacute;vrier 2026</div>
+        <div>Micka&euml;l Guedj &middot; Myriam Abel &middot; Claudel Bertili</div>
+    </div>
+
+</div><!-- fin .book -->
+
+<script>
+    // Taille du texte
+    let textSizeState = 0;
+    function toggleTextSize() {
+        document.body.classList.remove('text-large', 'text-small');
+        textSizeState = (textSizeState + 1) % 3;
+        if (textSizeState === 1) document.body.classList.add('text-large');
+        if (textSizeState === 2) document.body.classList.add('text-small');
+    }
+
+    // Mode sombre
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const btn = document.querySelector('.ctrl-btn:nth-child(2)');
+        if (document.body.classList.contains('dark-mode')) {
+            btn.textContent = '☀';
+            btn.classList.add('active');
+        } else {
+            btn.textContent = '☽';
+            btn.classList.remove('active');
+        }
+    }
+</script>
+
+</body>
+</html>

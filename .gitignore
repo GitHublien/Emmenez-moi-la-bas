@@ -1,0 +1,29 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+
+# Dossiers IDE
+.vscode/
+.idea/
+
+# Fichiers de déploiement Windsurf
+windsurf_deployment.yaml
+
+# Fichiers WAV volumineux (garder uniquement les MP3)
+*.wav
+
+# Fichiers temporaires Word
+~$*
+
+# Script de generation
+generer_word.py

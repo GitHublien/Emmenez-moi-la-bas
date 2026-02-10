@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Emmenez-moi l&agrave;-bas &mdash; Myriam Abel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --myriam: #2b2b2b;
+            --choeurs: #c0651a;
+            --ensemble: #8b4513;
+            --instru: #5a8a6a;
+            --note: #8a7ba0;
+            --tempo: #7a9cc0;
+            --fond: #faf8f4;
+            --page: #fff;
+            --or: #c9a86c;
+            --sep: #e8e4dc;
+            --gris: #999;
+            --daw-bg: #1e1e1e;
+            --daw-track: #2a2a2a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--fond);
+            color: var(--myriam);
+            font-size: 18px;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+            touch-action: pan-x pan-y;
+            padding-bottom: 90px;
+        }
+
+        .page {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--page);
+            min-height: 100vh;
+            box-shadow: 0 0 80px rgba(0,0,0,0.04);
+        }
+
+        /* ─── EN-TÊTE ─── */
+        header {
+            text-align: center;
+            padding: 50px 30px 35px;
+            background: linear-gradient(180deg, #f7f3ec 0%, var(--page) 100%);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        header .sous-titre {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25em;
+            color: var(--or);
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        header .credits {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: var(--gris);
+            line-height: 1.7;
+        }
+
+        header .credits strong { color: #555; }
+
+        /* ─── MESSAGE ─── */
+        .msg {
+            margin: 0 28px;
+            padding: 22px 26px;
+            background: #fdfcf9;
+            border: 1px solid var(--sep);
+            border-radius: 8px;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .msg b { color: var(--ensemble); }
+
+        .msg .tempo-exemple {
+            display: inline;
+            color: var(--tempo);
+            font-size: 0.88em;
+            letter-spacing: 1px;
+        }
+
+        /* ─── LECTEUR DAW FLOTTANT ─── */
+        .daw {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            background: var(--daw-bg);
+            border-top: 2px solid #444;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            transition: transform 0.3s;
+        }
+
+        .daw.hidden { transform: translateY(100%); }
+
+        .daw-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px 6px;
+            border-bottom: 1px solid #333;
+        }
+
+        .daw-play {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid #888;
+            background: transparent;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .daw-play:hover { border-color: var(--or); color: var(--or); }
+        .daw-play.playing { border-color: var(--choeurs); color: var(--choeurs); }
+
+        .daw-restart {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid #666;
+            background: transparent;
+            color: #aaa;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .daw-restart:hover { border-color: #fff; color: #fff; }
+
+        .daw-vol-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .daw-vol-icon {
+            font-size: 16px;
+            color: #aaa;
+            cursor: pointer;
+            user-select: none;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .daw-vol-icon:hover { color: #fff; }
+
+        .daw-vol-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .daw-vol-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--or);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        }
+
+        .daw-vol-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--or);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        }
+
+        .daw-time {
+            font-size: 0.78em;
+            color: #aaa;
+            font-variant-numeric: tabular-nums;
+            min-width: 80px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .daw-progress-wrap {
+            flex: 1;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .daw-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--or), var(--choeurs));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+            pointer-events: none;
+        }
+
+        .daw-tracks {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 0;
+        }
+
+        .daw-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 4px;
+            background: var(--daw-track);
+            border-right: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+        }
+
+        .daw-track:last-child { border-right: none; }
+
+        .daw-track.active {
+            background: #3a3a3a;
+            border-bottom: 2px solid var(--or);
+            box-shadow: 0 -2px 8px rgba(201, 168, 108, 0.2);
+        }
+
+        .daw-track.muted {
+            opacity: 0.35;
+        }
+
+        .daw-track-name {
+            font-size: 0.68em;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .daw-track.active .daw-track-name { color: #fff; font-weight: 600; }
+
+        .daw-track-icon {
+            font-size: 1em;
+            flex-shrink: 0;
+        }
+
+        .daw-track-vol {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1.5px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #888;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .daw-track-vol:hover { border-color: #fff; color: #fff; }
+        .daw-track.muted .daw-track-vol { border-color: #c44; color: #c44; }
+
+        .daw-toggle {
+            position: fixed;
+            bottom: 8px;
+            left: 8px;
+            z-index: 201;
+            background: var(--daw-bg);
+            color: #ccc;
+            border: 1px solid #555;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.72em;
+            cursor: pointer;
+            display: none;
+        }
+
+        .daw-toggle.show { display: block; }
+
+        .scroll-btn {
+            display: block;
+            margin: 18px auto 0;
+            background: none;
+            border: 1px solid var(--sep);
+            color: var(--or);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.92em;
+            padding: 8px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        .scroll-btn:hover { background: var(--or); color: #fff; border-color: var(--or); }
+
+        /* ─── LEGENDE ─── */
+        .legende {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 16px 28px;
+            border-bottom: 1px solid var(--sep);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+        }
+
+        .leg {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .dot-m { background: var(--myriam); }
+        .dot-c { background: var(--choeurs); }
+        .dot-e { background: linear-gradient(135deg, var(--myriam) 50%, var(--choeurs) 50%); }
+        .dot-i { background: var(--instru); }
+        .dot-t { background: var(--tempo); width: 20px; height: 3px; border-radius: 2px; }
+
+        .leg-label { color: #777; }
+
+        /* ─── PAROLES ─── */
+        .paroles {
+            padding: 35px 32px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .section-head::before,
+        .section-head::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 55px;
+            height: 1px;
+            background: var(--sep);
+        }
+
+        .section-head::before { right: calc(50% + 75px); }
+        .section-head::after { left: calc(50% + 75px); }
+
+        .section-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--or);
+            font-weight: 500;
+        }
+
+        .v { padding: 2px 0; }
+
+        .m {
+            color: var(--myriam);
+            font-size: 1.05em;
+        }
+
+        .c {
+            color: var(--choeurs);
+            font-style: italic;
+            margin-left: 28px;
+            font-size: 0.95em;
+        }
+
+        .e {
+            color: var(--myriam);
+            font-size: 1.05em;
+            padding-left: 12px;
+            border-left: 3px solid var(--choeurs);
+            background: linear-gradient(90deg, rgba(192, 101, 26, 0.04), transparent);
+        }
+
+        .i {
+            color: var(--instru);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.08em;
+            padding: 10px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .n {
+            color: var(--note);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-style: italic;
+            text-align: center;
+            padding: 3px 0;
+        }
+
+        .fort { font-weight: 700; }
+
+        .t::after {
+            color: var(--tempo);
+            font-size: 0.85em;
+            opacity: 0.65;
+        }
+        .t2::after { content: ' \2500\2500'; }
+        .t4::after { content: ' \2500\2500\2500\2500'; }
+        .t6::after { content: ' \2500\2500\2500\2500\2500\2500'; }
+        .t8::after { content: ' \2500\2500\2500\2500\2500\2500\2500\2500'; }
+        .t12::after { content: ' \2500\2500\2500\2500\2500\2500\2500\2500\2500\2500\2500\2500'; }
+
+        .gap { height: 14px; }
+
+        /* ─── DROITS ─── */
+        .droits {
+            text-align: center;
+            padding: 28px;
+            border-top: 1px solid var(--sep);
+            background: #fdfcf9;
+        }
+
+        .droits p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .droits .copy {
+            font-weight: 600;
+            color: var(--ensemble);
+            margin-top: 10px;
+            font-size: 1em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.88em;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* ─── CONTROLES ─── */
+        .ctrl {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 6px;
+            z-index: 150;
+        }
+
+        .ctrl button {
+            background: rgba(40,40,40,0.82);
+            color: #fff;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+        }
+
+        .ctrl button:hover { background: var(--or); transform: translateY(-1px); }
+        .ctrl button.on { background: var(--choeurs); }
+
+        /* ─── ECRAN ACCUEIL (plein ecran) ─── */
+        .splash {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: linear-gradient(135deg, #1a1208 0%, #2c1e0a 40%, #1a1208 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            transition: opacity 0.6s;
+        }
+
+        .splash.out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .splash .splash-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4em;
+            color: var(--or);
+            font-style: italic;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .splash .splash-tap {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ─── MODE SOMBRE ─── */
+        body.dark {
+            --myriam: #e8e4dc;
+            --fond: #181818;
+            --page: #222;
+            --sep: #3a3a3a;
+            --or: #c9a86c;
+            --gris: #888;
+        }
+
+        body.dark .msg,
+        body.dark .droits { background: #262626; border-color: #3a3a3a; }
+        body.dark header { background: linear-gradient(180deg, #1e1e1e, var(--page)); }
+        body.dark .e { background: linear-gradient(90deg, rgba(192,101,26,0.08), transparent); }
+
+        /* ─── TAILLES ─── */
+        body.big { font-size: 22px; }
+        body.small { font-size: 15px; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            header { padding: 35px 18px 25px; }
+            header h1 { font-size: 2em; }
+            .paroles { padding: 25px 16px 20px; }
+            .msg { margin: 0 16px; padding: 16px 18px; font-size: 0.85em; }
+            .c { margin-left: 16px; }
+            .legende { gap: 12px; padding: 12px 16px; font-size: 0.88em; }
+            .section-head::before, .section-head::after { display: none; }
+            .daw-track-name { font-size: 0.6em; }
+            .daw-vol-slider { width: 50px; }
+            .daw-top { gap: 6px; padding: 6px 10px 4px; }
+            .daw-time { font-size: 0.7em; min-width: 65px; }
+            .daw-restart { width: 28px; height: 28px; font-size: 11px; }
+            .daw-play { width: 36px; height: 36px; font-size: 15px; }
+            .splash h1 { font-size: 2.2em; }
+            .ctrl { top: 8px; right: 8px; }
+            .ctrl button { width: 34px; height: 34px; font-size: 12px; }
+        }
+
+        @media (max-width: 380px) {
+            .daw-vol-slider { width: 36px; }
+            .daw-time { font-size: 0.65em; min-width: 55px; }
+            .daw-track-name { font-size: 0.55em; }
+            .daw-track-icon { font-size: 0.85em; }
+            .daw-track { gap: 3px; padding: 6px 2px; }
+        }
+
+        /* ─── PRINT ─── */
+        @media print {
+            .ctrl, .daw, .splash, .daw-toggle { display: none !important; }
+            body { font-size: 11pt; padding-bottom: 0; }
+            .page { box-shadow: none; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ECRAN D'ACCUEIL -->
+<div class="splash" id="splash" onclick="enterPage()">
+    <h1>Emmenez-moi l&agrave;-bas</h1>
+    <div class="splash-sub">Myriam Abel</div>
+    <div class="splash-tap">Appuie pour commencer</div>
+</div>
+
+<!-- CONTROLES -->
+<div class="ctrl">
+    <button onclick="resize()" title="Taille du texte">Aa</button>
+    <button id="dk" onclick="dark()" title="Mode sombre">&#9789;</button>
+    <button id="fs" onclick="toggleFS()" title="Plein &eacute;cran">&#9974;</button>
+</div>
+
+<!-- BOUTON AFFICHER LECTEUR -->
+<button class="daw-toggle" id="dawToggle" onclick="showDaw()">&#9654; Lecteur</button>
+
+<div class="page">
+
+    <!-- EN-TÊTE -->
+    <header>
+        <h1>Emmenez-moi l&agrave;-bas</h1>
+        <div class="sous-titre">Myriam Abel</div>
+        <div class="credits">
+            <strong>Auteur &amp; Compositeur</strong> &mdash; Micka&euml;l Guedj<br>
+            Spectacle Savane &middot; 25 f&eacute;vrier 2026 &middot; Cagnes-sur-Mer
+        </div>
+    </header>
+
+    <!-- MESSAGE -->
+    <div class="msg">
+        <b>Myriam,</b> voici les paroles et la musique pour apprendre le titre.<br><br>
+        Tu chantes tout ce qui est <b>en noir</b>.
+        Les passages <b style="color:var(--choeurs)">en orange italique</b> sont les ch&oelig;urs (d&eacute;j&agrave; enregistr&eacute;s, tu n'as rien &agrave; chanter dessus).
+        Quand tu vois une <span style="border-left:3px solid var(--choeurs); padding-left:6px;">barre orange</span> &agrave; gauche, c'est toi qui chantes avec les ch&oelig;urs en m&ecirc;me temps.<br><br>
+        Les petits traits bleus <span class="tempo-exemple">&#9472;&#9472;&#9472;&#9472;</span> indiquent la dur&eacute;e de tenue d'une note : plus le trait est long, plus tu restes sur la note.<br><br>
+        <b>Le lecteur en bas</b> te permet d'&eacute;couter 4 versions du titre. Tu peux basculer entre elles &agrave; tout moment sans arr&ecirc;ter la musique, ou couper une piste avec le petit rond &agrave; droite. Tu peux aussi zoomer avec deux doigts pour agrandir le texte.<br><br>
+        <b>Les boutons en haut &agrave; droite :</b><br>
+        &bull; <b>Aa</b> &mdash; change la taille du texte (3 niveaux : normal, grand, petit)<br>
+        &bull; <b>&#9789;</b> &mdash; active le mode sombre (fond noir, plus reposant pour les yeux)<br>
+        &bull; <b>&#9974;</b> &mdash; passe en plein &eacute;cran (ou en sort)<br><br>
+        <b>Ta touche personnelle :</b> la structure et les m&eacute;lodies que tu entends sur la d&eacute;mo sont la base du titre. Essaie de bien tenir les notes comme indiqu&eacute; par les traits bleus. Mais apr&egrave;s, tu es chez toi&nbsp;: si tu veux ajouter des vibes, des ad-libs, des variations ou toute autre touche qui te pla&icirc;t, tu es totalement libre. C'est ta voix qui donne vie &agrave; cette chanson, alors fais-toi plaisir&nbsp;!
+        <button class="scroll-btn" onclick="document.getElementById('paroles').scrollIntoView({behavior:'smooth'})">&#9660; Aller aux paroles</button>
+    </div>
+
+    <!-- LEGENDE -->
+    <div class="legende">
+        <div class="leg"><div class="dot dot-m"></div> <span class="leg-label">Toi (soliste)</span></div>
+        <div class="leg"><div class="dot dot-c"></div> <span class="leg-label" style="color:var(--choeurs); font-style:italic;">Ch&oelig;urs</span></div>
+        <div class="leg"><div class="dot dot-e"></div> <span class="leg-label">Ensemble</span></div>
+        <div class="leg"><div class="dot dot-i"></div> <span class="leg-label" style="color:var(--instru)">Musique</span></div>
+        <div class="leg"><div class="dot dot-t"></div> <span class="leg-label" style="color:var(--tempo)">Tenue de note</span></div>
+    </div>
+
+    <!-- PAROLES -->
+    <div class="paroles" id="paroles">
+
+        <!-- INTRO -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Introduction</span></div>
+            <div class="v i">&#9835; Ouverture orchestrale &mdash; Violon &amp; Ch&oelig;urs &#9835;</div>
+        </div>
+
+        <!-- COUPLET 1 -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Couplet 1</span></div>
+            <div class="v m">Quand la nuit tombe sur l'Afrique</div>
+            <div class="v m">Les &eacute;toiles s'allument une &agrave; une</div>
+            <div class="v m">J'entends le chant des oiseaux</div>
+            <div class="v m">Qui s'endorment, sous la lune</div>
+            <div class="gap"></div>
+            <div class="v c">Elle r&ecirc;ve, elle r&ecirc;ve</div>
+            <div class="v m">Je ferme les yeux et je vois<span class="t t4"></span></div>
+            <div class="v c">Elle r&ecirc;ve, elle r&ecirc;ve</div>
+        </div>
+
+        <!-- REFRAIN 1 -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Refrain</span></div>
+            <div class="v c">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v n">&#9839; Violon</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v m"><span class="fort">Au pays du soleil d'or<span class="t t2"></span> !</span></div>
+            <div class="v c">Soleil d'or !</div>
+            <div class="gap"></div>
+            <div class="v m">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v m">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v m"><span class="fort">O&ugrave; mon c&oelig;ur prend son envol<span class="t t12"></span> !</span></div>
+            <div class="v c">Aaaah... Aaaah...</div>
+        </div>
+
+        <!-- INTERLUDE -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Interlude</span></div>
+            <div class="v i">&#9835; Solo Violon &middot; Arp&egrave;ges de Harpe &#9835;</div>
+            <div class="v c">Ohhh... Ohhh... (en nappes)</div>
+        </div>
+
+        <!-- COUPLET 2 -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Couplet 2</span></div>
+            <div class="v m">Je vois les flamants roses danser</div>
+            <div class="v c">Ohhh... Ohhh... Ohhh... Ohhh...</div>
+            <div class="v m">Sur le lac aux reflets d'argent</div>
+            <div class="v c">Ohhh... Ohhh... Ohhh... Ohhh...</div>
+            <div class="v m">Les z&egrave;bres courent dans la poussi&egrave;re</div>
+            <div class="v m">Et le soleil<span class="t t2"></span>, peint le firmament<span class="t t4"></span></div>
+            <div class="gap"></div>
+            <div class="v c">Elle r&ecirc;ve, elle r&ecirc;ve</div>
+            <div class="v m">Et je tends les bras et je sens<span class="t t6"></span> !</div>
+            <div class="v c">Elle sent, elle sent</div>
+        </div>
+
+        <!-- REFRAIN 2 -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Refrain 2</span></div>
+            <div class="v e">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v e">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v e"><span class="fort">Au pays du soleil d'or<span class="t t2"></span> !</span></div>
+            <div class="v c">Soleil d'or !</div>
+            <div class="v e">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v e">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v e"><span class="fort">O&ugrave; mon c&oelig;ur prend son envol<span class="t t12"></span> !</span></div>
+            <div class="v c">Prend son envol</div>
+        </div>
+
+        <!-- PONT -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Pont</span></div>
+            <div class="v n">&#9839; Ta voix seule, accompagn&eacute;e du violon</div>
+            <div class="gap"></div>
+            <div class="v m">Mmm... Mmm... Mmm...<span class="t t4"></span></div>
+            <div class="gap"></div>
+            <div class="v m">Un jour j'irai...</div>
+            <div class="v c">Mmm... Mmm... Mmm... Mmm...</div>
+            <div class="v m">Un jour j'irai...</div>
+            <div class="v c">Mmm... Mmm... Mmm... Mmm...</div>
+            <div class="gap"></div>
+            <div class="v m"><span class="fort">Un jour j'irai toucher<span class="t t4"></span> le ciel<span class="t t6"></span> d'Afrique<span class="t t6"></span> !</span></div>
+            <div class="gap"></div>
+            <div class="v c" style="font-size:1.1em; font-weight:600;">AAAAH !</div>
+        </div>
+
+        <!-- REFRAIN FINAL -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Refrain final</span></div>
+            <div class="v m">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v m">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v m"><span class="fort">Au pays du soleil d'or<span class="t t2"></span> !</span></div>
+            <div class="v c">Oui, du soleil d'or<span class="t t2"></span> !</div>
+            <div class="gap"></div>
+            <div class="v e">Emmenez-moi l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v m">L&agrave;-bas, l&agrave;-bas !</div>
+            <div class="v c">L&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v e">O&ugrave; mon c&oelig;ur prend<span class="t t2"></span></div>
+            <div class="v m"><span class="fort">son envol<span class="t t12"></span> !</span></div>
+            <div class="v c">Prend son envol<span class="t t4"></span> !</div>
+        </div>
+
+        <!-- OUTRO -->
+        <div class="section">
+            <div class="section-head"><span class="section-label">Outro</span></div>
+            <div class="v n">&#9839; Final avec chorus</div>
+            <div class="gap"></div>
+            <div class="v m">Ou&mdash; Ou Ou Ou&mdash;</div>
+            <div class="v m">Ou Ou Ou&mdash;</div>
+            <div class="v m">Ou Ou Ou<span class="t t4"></span></div>
+            <div class="gap"></div>
+            <div class="v m">Ou&mdash; Ou Ou Ou&mdash;</div>
+            <div class="v m">Ou Ou Ou&mdash;</div>
+            <div class="v m">Ou Ou Ou<span class="t t4"></span></div>
+            <div class="gap"></div>
+            <div class="v m"><span class="fort">Emmenez-moi l&agrave;-bas !</span></div>
+            <div class="gap"></div>
+            <div class="v c">L&agrave;-bas, l&agrave;-bas, l&agrave;-bas !</div>
+            <div class="gap"></div>
+            <div class="v m">Mmm Mmm Mmm<span class="t t8"></span></div>
+        </div>
+
+    </div>
+
+    <!-- DROITS -->
+    <div class="droits">
+        <p>&laquo; Emmenez-moi l&agrave;-bas &raquo; &mdash; Auteur &amp; Compositeur : <strong>Micka&euml;l Guedj</strong></p>
+        <p>Toute reproduction non autoris&eacute;e est interdite.</p>
+        <p class="copy">&copy; 2026 Micka&euml;l Guedj &mdash; Tous droits r&eacute;serv&eacute;s</p>
+    </div>
+
+    <footer>Spectacle Savane &middot; 25 f&eacute;vrier 2026</footer>
+
+</div>
+
+<!-- LECTEUR DAW FLOTTANT -->
+<div class="daw" id="daw">
+    <div class="daw-top">
+        <button class="daw-restart" onclick="dawRestart()" title="Retour au d&eacute;but">&#9198;</button>
+        <button class="daw-play" id="dawPlay" onclick="dawTogglePlay()">&#9654;</button>
+        <div class="daw-time" id="dawTime">0:00 / 0:00</div>
+        <div class="daw-progress-wrap" id="dawBar" onclick="dawSeek(event)">
+            <div class="daw-progress" id="dawProgress"></div>
+        </div>
+        <div class="daw-vol-wrap">
+            <span class="daw-vol-icon" id="volIcon" onclick="dawToggleMute()" title="Volume">&#128266;</span>
+            <input type="range" class="daw-vol-slider" id="volSlider" min="0" max="100" value="100" oninput="dawSetVolume(this.value)">
+        </div>
+    </div>
+    <div class="daw-tracks">
+        <div class="daw-track active" id="tr0" onclick="dawSelect(0)">
+            <span class="daw-track-icon">&#127925;</span>
+            <span class="daw-track-name">Tout</span>
+            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(0)" title="Couper">&#9679;</span>
+        </div>
+        <div class="daw-track" id="tr1" onclick="dawSelect(1)">
+            <span class="daw-track-icon">&#127929;</span>
+            <span class="daw-track-name">Instru</span>
+            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(1)" title="Couper">&#9679;</span>
+        </div>
+        <div class="daw-track" id="tr2" onclick="dawSelect(2)">
+            <span class="daw-track-icon">&#127908;</span>
+            <span class="daw-track-name">Voix+Ch&oelig;urs</span>
+            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(2)" title="Couper">&#9679;</span>
+        </div>
+        <div class="daw-track" id="tr3" onclick="dawSelect(3)">
+            <span class="daw-track-icon">&#128483;</span>
+            <span class="daw-track-name">Voix solo</span>
+            <span class="daw-track-vol" onclick="event.stopPropagation(); dawMute(3)" title="Couper">&#9679;</span>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════
+// SPLASH / PLEIN ECRAN
+// ═══════════════════════════════════
+function enterPage() {
+    document.getElementById('splash').classList.add('out');
+    setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 600);
+    // Tenter le plein ecran
+    try {
+        const el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    } catch(e) {}
+}
+
+function toggleFS() {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } else {
+        const el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    }
+}
+
+// ═══════════════════════════════════
+// TAILLE / DARK
+// ═══════════════════════════════════
+let sz = parseInt(localStorage.getItem('myriam-sz') || '0');
+(function initSize() {
+    if (sz === 1) document.body.classList.add('big');
+    if (sz === 2) document.body.classList.add('small');
+})();
+
+function resize() {
+    document.body.classList.remove('big','small');
+    sz = (sz + 1) % 3;
+    if (sz === 1) document.body.classList.add('big');
+    if (sz === 2) document.body.classList.add('small');
+    localStorage.setItem('myriam-sz', sz);
+}
+
+// Restaurer le mode sombre si sauvegarde
+if (localStorage.getItem('myriam-dark') === '1') {
+    document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded', () => {
+        const b = document.getElementById('dk');
+        b.innerHTML = '\u2606';
+        b.classList.add('on');
+    });
+}
+
+function dark() {
+    document.body.classList.toggle('dark');
+    const b = document.getElementById('dk');
+    const isDark = document.body.classList.contains('dark');
+    b.innerHTML = isDark ? '&#9788;' : '&#9789;';
+    b.classList.toggle('on');
+    localStorage.setItem('myriam-dark', isDark ? '1' : '0');
+}
+
+// ═══════════════════════════════════
+// LECTEUR DAW — 4 PISTES SYNCHRONISEES
+// ═══════════════════════════════════
+const files = [
+    '../musiques/tout.mp3',
+    '../musiques/instrumental.mp3',
+    '../musiques/voix-et-choeurs.mp3',
+    '../musiques/voix-solo.mp3'
+];
+
+const audios = [];
+let activeTrack = 0;
+let isPlaying = false;
+let dawReady = false;
+let masterVol = parseFloat(localStorage.getItem('myriam-vol') || '1');
+
+// Creer les 4 elements audio
+files.forEach((src, i) => {
+    const a = new Audio();
+    a.preload = 'auto';
+    a.src = src;
+    a.volume = (i === 0) ? masterVol : 0;
+    audios.push(a);
+});
+
+// Synchronisation : on utilise la piste 0 comme reference
+audios[0].addEventListener('timeupdate', updateDAW);
+audios[0].addEventListener('loadedmetadata', () => { dawReady = true; updateDAW(); });
+audios[0].addEventListener('ended', () => {
+    isPlaying = false;
+    document.getElementById('dawPlay').innerHTML = '&#9654;';
+    document.getElementById('dawPlay').classList.remove('playing');
+});
+
+function dawTogglePlay() {
+    if (!dawReady) return;
+    if (isPlaying) {
+        audios.forEach(a => a.pause());
+        isPlaying = false;
+        document.getElementById('dawPlay').innerHTML = '&#9654;';
+        document.getElementById('dawPlay').classList.remove('playing');
+    } else {
+        // Synchroniser toutes les pistes au meme temps
+        const t = audios[0].currentTime;
+        audios.forEach(a => { a.currentTime = t; a.play().catch(()=>{}); });
+        isPlaying = true;
+        document.getElementById('dawPlay').innerHTML = '&#9646;&#9646;';
+        document.getElementById('dawPlay').classList.add('playing');
+    }
+}
+
+function dawSelect(idx) {
+    // Basculer la piste active (volume 1) et muter les autres
+    activeTrack = idx;
+    audios.forEach((a, i) => {
+        const tr = document.getElementById('tr' + i);
+        if (i === idx) {
+            if (!tr.classList.contains('muted')) a.volume = masterVol;
+            tr.classList.add('active');
+        } else {
+            a.volume = 0;
+            tr.classList.remove('active');
+        }
+    });
+}
+
+function dawMute(idx) {
+    const tr = document.getElementById('tr' + idx);
+    tr.classList.toggle('muted');
+    if (tr.classList.contains('muted')) {
+        audios[idx].volume = 0;
+    } else if (idx === activeTrack) {
+        audios[idx].volume = masterVol;
+    }
+}
+
+function dawSeek(e) {
+    if (!dawReady) return;
+    const bar = document.getElementById('dawBar');
+    const rect = bar.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const t = pct * audios[0].duration;
+    audios.forEach(a => { a.currentTime = t; });
+}
+
+function dawRestart() {
+    audios.forEach(a => { a.currentTime = 0; });
+    updateDAW();
+}
+
+// ═══════════════════════════════════
+// VOLUME GLOBAL
+// ═══════════════════════════════════
+document.getElementById('volSlider').value = Math.round(masterVol * 100);
+updateVolIcon();
+
+function dawSetVolume(val) {
+    masterVol = val / 100;
+    localStorage.setItem('myriam-vol', masterVol);
+    // Appliquer le volume a la piste active (les autres sont a 0)
+    audios.forEach((a, i) => {
+        const tr = document.getElementById('tr' + i);
+        if (i === activeTrack && !tr.classList.contains('muted')) {
+            a.volume = masterVol;
+        }
+    });
+    updateVolIcon();
+}
+
+function dawToggleMute() {
+    const slider = document.getElementById('volSlider');
+    if (masterVol > 0) {
+        masterVol = 0;
+        slider.value = 0;
+    } else {
+        masterVol = 1;
+        slider.value = 100;
+    }
+    localStorage.setItem('myriam-vol', masterVol);
+    audios.forEach((a, i) => {
+        const tr = document.getElementById('tr' + i);
+        if (i === activeTrack && !tr.classList.contains('muted')) {
+            a.volume = masterVol;
+        }
+    });
+    updateVolIcon();
+}
+
+function updateVolIcon() {
+    const icon = document.getElementById('volIcon');
+    if (masterVol === 0) icon.innerHTML = '\uD83D\uDD07';
+    else if (masterVol < 0.5) icon.innerHTML = '\uD83D\uDD09';
+    else icon.innerHTML = '\uD83D\uDD0A';
+}
+
+function updateDAW() {
+    const a = audios[0];
+    if (!a.duration) return;
+    const pct = (a.currentTime / a.duration) * 100;
+    document.getElementById('dawProgress').style.width = pct + '%';
+    document.getElementById('dawTime').textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+}
+
+function fmt(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// Masquer / afficher le DAW
+function hideDaw() {
+    document.getElementById('daw').classList.add('hidden');
+    document.getElementById('dawToggle').classList.add('show');
+}
+
+function showDaw() {
+    document.getElementById('daw').classList.remove('hidden');
+    document.getElementById('dawToggle').classList.remove('show');
+}
+</script>
+
+</body>
+</html>

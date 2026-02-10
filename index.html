@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savane — Spectacle Musical · 25 Février 2026 · Cagnes-sur-Mer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --or: #c9a86c;
+            --or-clair: #e8d5a8;
+            --or-fonce: #8b7355;
+            --savane: #d4a053;
+            --terre: #a0522d;
+            --ciel: #e8913a;
+            --nuit: #1a1a2e;
+            --foret: #2d6b4f;
+            --sable: #f5e6c8;
+            --fond: #faf8f3;
+            --fond-page: #fffef9;
+            --texte: #2c2c2c;
+            --sep: #e0ddd5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background-color: var(--fond);
+            color: var(--texte);
+            line-height: 1.8;
+            font-size: 17px;
+            overflow-x: hidden;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* ÉCRAN D'ACCUEIL IMMERSIF              */
+        /* ══════════════════════════════════════ */
+        .welcome {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #1a0f00 0%, #2d1800 30%, #4a2800 60%, #1a0f00 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .welcome.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-content {
+            color: #fff;
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .welcome-stars {
+            font-size: 2em;
+            letter-spacing: 20px;
+            color: var(--or);
+            margin-bottom: 30px;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .welcome h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4em;
+            font-weight: 400;
+            color: var(--or);
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 40px rgba(201, 168, 108, 0.3);
+        }
+
+        .welcome .welcome-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-style: italic;
+            color: var(--or-clair);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .welcome .welcome-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: #b89a6a;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .welcome-enter {
+            display: inline-block;
+            padding: 16px 50px;
+            background: transparent;
+            border: 1px solid var(--or);
+            color: var(--or);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            border-radius: 3px;
+        }
+
+        .welcome-enter:hover {
+            background: var(--or);
+            color: #1a0f00;
+            box-shadow: 0 0 30px rgba(201, 168, 108, 0.3);
+        }
+
+        .welcome-animals {
+            margin-top: 40px;
+            font-size: 2.5em;
+            letter-spacing: 15px;
+            opacity: 0.4;
+            animation: walkAnimals 8s linear infinite;
+        }
+
+        @keyframes walkAnimals {
+            0% { transform: translateX(-20px); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(-20px); }
+        }
+
+        /* ══════════════════════════════════════ */
+        /* VIDÉO FOND (optionnel)                */
+        /* ══════════════════════════════════════ */
+        .video-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-bg video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .video-bg .overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(250, 248, 243, 0.92);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* CONTENEUR PRINCIPAL                   */
+        /* ══════════════════════════════════════ */
+        .book {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: var(--fond-page);
+            min-height: 100vh;
+            box-shadow: 0 0 80px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* EN-TÊTE / COUVERTURE                  */
+        /* ══════════════════════════════════════ */
+        .header-cover {
+            text-align: center;
+            padding: 80px 40px 60px;
+            border-bottom: 2px solid var(--sep);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(212, 160, 83, 0.06) 0%, transparent 100%);
+        }
+
+        .header-ornament {
+            font-size: 1.8em;
+            color: var(--or);
+            letter-spacing: 15px;
+            margin-bottom: 25px;
+            opacity: 0.5;
+        }
+
+        .header-cover h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.8em;
+            font-weight: 400;
+            color: var(--texte);
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .header-cover h1 span {
+            color: var(--ciel);
+        }
+
+        .header-cover .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            font-style: italic;
+            color: var(--or-fonce);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .header-info-item {
+            text-align: center;
+        }
+
+        .header-info-item .label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--or-fonce);
+            margin-bottom: 4px;
+        }
+
+        .header-info-item .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            color: var(--texte);
+        }
+
+        .header-ornament-bottom {
+            margin-top: 30px;
+            font-size: 1em;
+            color: var(--or);
+            letter-spacing: 10px;
+            opacity: 0.4;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* ARTISTES                              */
+        /* ══════════════════════════════════════ */
+        .artistes-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 400;
+            color: var(--texte);
+            text-align: center;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--or), transparent);
+            margin: 12px auto 0;
+        }
+
+        .artistes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .artiste-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #fdfcf8 0%, #f8f5ef 100%);
+            border-radius: 10px;
+            border: 1px solid #e8e4dc;
+            transition: all 0.3s;
+        }
+
+        .artiste-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .artiste-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--or), var(--ciel));
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+
+        .artiste-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: var(--texte);
+            margin-bottom: 5px;
+        }
+
+        .artiste-card .role {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            color: var(--or-fonce);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .artiste-card .detail {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* SYNOPSIS / HISTOIRE                   */
+        /* ══════════════════════════════════════ */
+        .synopsis-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+        }
+
+        .synopsis-text {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: justify;
+            color: #555;
+            line-height: 2;
+        }
+
+        .synopsis-text p {
+            margin-bottom: 15px;
+        }
+
+        .synopsis-text p:first-of-type::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            padding-right: 10px;
+            padding-top: 5px;
+            color: var(--ciel);
+        }
+
+        .synopsis-text em {
+            color: var(--terre);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROGRAMME                             */
+        /* ══════════════════════════════════════ */
+        .programme-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+        }
+
+        .programme-intro {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 35px;
+        }
+
+        /* Chaque morceau */
+        .morceau {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: default;
+            position: relative;
+        }
+
+        .morceau:hover {
+            background: linear-gradient(135deg, rgba(212, 160, 83, 0.05), transparent);
+        }
+
+        .morceau-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6em;
+            color: var(--or);
+            min-width: 40px;
+            text-align: center;
+            line-height: 1;
+            padding-top: 5px;
+        }
+
+        .morceau-info {
+            flex: 1;
+        }
+
+        .morceau-titre {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15em;
+            color: var(--texte);
+            margin-bottom: 3px;
+        }
+
+        .morceau-artiste {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: var(--or-fonce);
+            font-style: italic;
+        }
+
+        .morceau-details {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .morceau-meta {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .morceau-duree {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+            color: var(--texte);
+        }
+
+        .morceau-type {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .type-composition {
+            background: rgba(232, 145, 58, 0.12);
+            color: var(--ciel);
+        }
+
+        .type-cover {
+            background: rgba(45, 107, 79, 0.1);
+            color: var(--foret);
+        }
+
+        .type-duo {
+            background: rgba(160, 82, 45, 0.1);
+            color: var(--terre);
+        }
+
+        .type-danse {
+            background: rgba(201, 168, 108, 0.15);
+            color: var(--or-fonce);
+        }
+
+        /* Séparateur programme */
+        .programme-sep {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--or);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .programme-sep::before,
+        .programme-sep::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--or), transparent);
+            opacity: 0.3;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* HISTOIRE NARRATIVE                    */
+        /* ══════════════════════════════════════ */
+        .histoire-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+            background: linear-gradient(180deg, #fdfcf8 0%, var(--fond-page) 100%);
+        }
+
+        .histoire-chapitre {
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            border-left: 3px solid var(--or);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .histoire-chapitre h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            color: var(--ciel);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .histoire-chapitre .chanson-ref {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            color: var(--or-fonce);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .histoire-chapitre p {
+            color: #555;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* SECTION COMPOSITIONS                  */
+        /* ══════════════════════════════════════ */
+        .compositions-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+        }
+
+        .composition-highlight {
+            background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
+            color: #fff;
+            padding: 35px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .composition-highlight h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            color: var(--or);
+            margin-bottom: 8px;
+        }
+
+        .composition-highlight .comp-role {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: var(--or-clair);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .composition-highlight p {
+            font-size: 0.95em;
+            color: #ccc;
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .composition-highlight .comp-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 25px;
+            border: 1px solid var(--or);
+            color: var(--or);
+            text-decoration: none;
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .composition-highlight .comp-link:hover {
+            background: var(--or);
+            color: #2c2c2c;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* DANSEURS                              */
+        /* ══════════════════════════════════════ */
+        .danseurs-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+        }
+
+        .danseurs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .danseur-card {
+            text-align: center;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, var(--sable), #fdfcf8);
+            border-radius: 10px;
+            border: 1px solid #e8e4dc;
+        }
+
+        .danseur-card .danseur-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .danseur-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: var(--texte);
+        }
+
+        .danseur-card .danseur-titres {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* INFOS PRATIQUES                       */
+        /* ══════════════════════════════════════ */
+        .infos-section {
+            padding: 50px 40px;
+            border-bottom: 1px solid var(--sep);
+            background: linear-gradient(135deg, #f8f5ef 0%, #fdfcf8 100%);
+        }
+
+        .infos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 25px 15px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e8e4dc;
+        }
+
+        .info-card .info-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .info-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: var(--or-fonce);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .info-card p {
+            font-size: 0.95em;
+            color: var(--texte);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER                                */
+        /* ══════════════════════════════════════ */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #bbb;
+            font-size: 0.85em;
+        }
+
+        .footer .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-style: italic;
+            color: var(--or-fonce);
+            margin-bottom: 8px;
+        }
+
+        .footer .copyright {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* NAVIGATION FLOTTANTE                  */
+        /* ══════════════════════════════════════ */
+        .nav-float {
+            position: fixed;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--or);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .nav-dot:hover,
+        .nav-dot.active {
+            opacity: 1;
+            transform: scale(1.4);
+        }
+
+        /* CONTRÔLES BAS */
+        .controls-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .ctrl-btn {
+            background: rgba(44, 44, 44, 0.85);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        .ctrl-btn:hover {
+            background: rgba(201, 168, 108, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .ctrl-btn.active {
+            background: var(--ciel);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* MODE SOMBRE                           */
+        /* ══════════════════════════════════════ */
+        body.dark-mode {
+            --fond: #1a1a1a;
+            --fond-page: #222;
+            --texte: #e0ddd5;
+            --sep: #3a3a3a;
+            --or-fonce: #c9a86c;
+        }
+
+        body.dark-mode .artiste-card,
+        body.dark-mode .info-card,
+        body.dark-mode .danseur-card {
+            background: linear-gradient(135deg, #2a2a2a, #252525);
+            border-color: #3a3a3a;
+        }
+
+        body.dark-mode .infos-section,
+        body.dark-mode .histoire-section {
+            background: linear-gradient(135deg, #252525, #1e1e1e);
+        }
+
+        body.dark-mode .histoire-chapitre {
+            background: rgba(40, 40, 40, 0.5);
+        }
+
+        body.dark-mode .morceau:hover {
+            background: linear-gradient(135deg, rgba(201, 168, 108, 0.08), transparent);
+        }
+
+        body.dark-mode .video-bg .overlay {
+            background: rgba(30, 30, 30, 0.95);
+        }
+
+        /* TAILLE TEXTE */
+        body.text-large { font-size: 20px; }
+        body.text-small { font-size: 15px; }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                            */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .header-cover { padding: 50px 20px 40px; }
+            .header-cover h1 { font-size: 2.4em; }
+            .header-info { gap: 20px; }
+            .artistes-section,
+            .synopsis-section,
+            .programme-section,
+            .histoire-section,
+            .compositions-section,
+            .danseurs-section,
+            .infos-section { padding: 35px 20px; }
+            .artistes-grid { grid-template-columns: 1fr; }
+            .danseurs-grid { grid-template-columns: 1fr; }
+            .morceau { flex-direction: column; gap: 8px; }
+            .morceau-meta { text-align: left; }
+            .nav-float { display: none; }
+            .welcome h1 { font-size: 2.5em; }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .book > section,
+        .book > div:not(.header-cover) {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* IMPRESSION */
+        @media print {
+            .welcome, .controls-bar, .nav-float { display: none !important; }
+            .video-bg { display: none; }
+            body { font-size: 11pt; }
+            .book { box-shadow: none; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- ÉCRAN D'ACCUEIL                            -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="welcome" id="welcomeScreen">
+    <div class="welcome-content">
+        <div class="welcome-stars">&#10038; &#10038; &#10038;</div>
+        <h1>SAVANE</h1>
+        <div class="welcome-sub">Spectacle Musical pour Enfants</div>
+        <div class="welcome-date">25 f&eacute;vrier 2026 &middot; Cagnes-sur-Mer</div>
+        <button class="welcome-enter" onclick="enterSite()">D&eacute;couvrir le spectacle</button>
+        <div class="welcome-animals">&#128054; &#129427; &#128024; &#129409;</div>
+    </div>
+</div>
+
+<!-- VIDÉO FOND (optionnel — placer une vidéo dans /videos/) -->
+<div class="video-bg">
+    <video autoplay muted loop playsinline>
+        <source src="videos/fond-savane.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+</div>
+
+<!-- NAVIGATION FLOTTANTE -->
+<nav class="nav-float" id="navFloat">
+    <button class="nav-dot active" onclick="scrollToSection('top')" title="Accueil"></button>
+    <button class="nav-dot" onclick="scrollToSection('artistes')" title="Artistes"></button>
+    <button class="nav-dot" onclick="scrollToSection('synopsis')" title="Synopsis"></button>
+    <button class="nav-dot" onclick="scrollToSection('programme')" title="Programme"></button>
+    <button class="nav-dot" onclick="scrollToSection('histoire')" title="Histoire"></button>
+    <button class="nav-dot" onclick="scrollToSection('compositions')" title="Compositions"></button>
+    <button class="nav-dot" onclick="scrollToSection('infos')" title="Infos"></button>
+</nav>
+
+<!-- CONTRÔLES -->
+<div class="controls-bar">
+    <button class="ctrl-btn" onclick="toggleTextSize()" title="Taille du texte">Aa</button>
+    <button class="ctrl-btn" onclick="toggleDarkMode()" title="Mode sombre / clair">&#9789;</button>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONTENU PRINCIPAL                          -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="book">
+
+    <!-- COUVERTURE -->
+    <div class="header-cover" id="top">
+        <div class="header-ornament">&#10038; &#10038; &#10038;</div>
+        <h1>S<span>A</span>V<span>A</span>NE</h1>
+        <div class="tagline">Spectacle Musical pour Enfants</div>
+
+        <div class="header-info">
+            <div class="header-info-item">
+                <div class="label">Date</div>
+                <div class="value">25 f&eacute;vrier 2026</div>
+            </div>
+            <div class="header-info-item">
+                <div class="label">Heure</div>
+                <div class="value">15h30</div>
+            </div>
+            <div class="header-info-item">
+                <div class="label">Lieu</div>
+                <div class="value">Place de Cagnes-sur-Mer</div>
+            </div>
+            <div class="header-info-item">
+                <div class="label">Dur&eacute;e</div>
+                <div class="value">~40 minutes</div>
+            </div>
+        </div>
+
+        <div class="header-ornament-bottom">&#9674; &#9674; &#9674;</div>
+    </div>
+
+    <!-- ═══════════ ARTISTES ═══════════ -->
+    <section class="artistes-section" id="artistes">
+        <h2 class="section-title">Les Artistes</h2>
+        <div class="artistes-grid">
+            <div class="artiste-card">
+                <div class="artiste-avatar">&#127908;</div>
+                <h3>Micka&euml;l Guedj</h3>
+                <div class="role">Chanteur &middot; Auteur-Compositeur</div>
+                <div class="detail">Cr&eacute;ateur du spectacle<br>Compositions originales</div>
+            </div>
+            <div class="artiste-card">
+                <div class="artiste-avatar">&#127924;</div>
+                <h3>Myriam Abel</h3>
+                <div class="role">Chanteuse &middot; Interpr&egrave;te</div>
+                <div class="detail">Voix soliste<br>Interpr&egrave;te de &laquo; Emmenez-moi l&agrave;-bas &raquo;</div>
+            </div>
+            <div class="artiste-card">
+                <div class="artiste-avatar">&#128131;</div>
+                <h3>Claudel Bertili</h3>
+                <div class="role">Producteur &middot; Danseur</div>
+                <div class="detail">Organisation &middot; Costumes<br>Chor&eacute;graphie &middot; Danseurs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ SYNOPSIS ═══════════ -->
+    <section class="synopsis-section" id="synopsis">
+        <h2 class="section-title">Le Voyage</h2>
+        <div class="synopsis-text">
+            <p>Une jeune femme r&ecirc;ve d'horizons lointains. Fascin&eacute;e par les r&eacute;cits d'une terre o&ugrave; le soleil peint le firmament de teintes dor&eacute;es, elle ferme les yeux et s'envole en pens&eacute;e vers <em>l'Afrique</em>. L&agrave;-bas, les flamants roses dansent sur des lacs d'argent, les z&egrave;bres galopent dans la poussi&egrave;re ocre, et les &eacute;toiles s'allument une &agrave; une quand la nuit enveloppe la savane.</p>
+            <p>Au fil de son p&eacute;riple imaginaire, elle d&eacute;couvre les traditions, les rythmes envoutants et la beaut&eacute; sauvage de cette terre ancestrale. Puis, au d&eacute;tour d'un sentier bord&eacute; de baobabs, elle croise le regard d'un prince de la savane &mdash; un &ecirc;tre noble, gardien de ces terres immenses.</p>
+            <p>Leurs destins se m&ecirc;lent sous un ciel constell&eacute;. La musique les r&eacute;unit, la danse les rapproche, et l'amour na&icirc;t sous les &eacute;toiles d'Afrique. Ensemble, ils c&eacute;l&egrave;brent la vie, la nature et cette magie qui unit les c&oelig;urs par-del&agrave; les fronti&egrave;res.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════ PROGRAMME ═══════════ -->
+    <section class="programme-section" id="programme">
+        <h2 class="section-title">Programme</h2>
+        <div class="programme-intro">15h30 &mdash; Place de Cagnes-sur-Mer &mdash; Dur&eacute;e : ~40 minutes</div>
+
+        <!-- BLOC MYRIAM -->
+        <div class="programme-sep">Myriam Abel</div>
+
+        <div class="morceau">
+            <div class="morceau-num">1</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Emmenez-moi l&agrave;-bas</div>
+                <div class="morceau-artiste">Myriam Abel</div>
+                <div class="morceau-details">Elle r&ecirc;ve d'Afrique, le voyage commence...</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">4'09</div>
+                <span class="morceau-type type-composition">Composition</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">2</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">C'est l'histoire de la vie</div>
+                <div class="morceau-artiste">Myriam Abel</div>
+                <div class="morceau-details">Le Roi Lion &mdash; Elle d&eacute;couvre la beaut&eacute; de la savane</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'58</div>
+                <span class="morceau-type type-cover">Roi Lion</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">3</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Africa</div>
+                <div class="morceau-artiste">Myriam Abel</div>
+                <div class="morceau-details">Rose Laurens &mdash; Amoureuse de cette terre sauvage</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'31</div>
+                <span class="morceau-type type-cover">Reprise</span>
+            </div>
+        </div>
+
+        <!-- BLOC MICKAËL -->
+        <div class="programme-sep">Micka&euml;l Guedj</div>
+
+        <div class="morceau">
+            <div class="morceau-num">4</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Dans la savane</div>
+                <div class="morceau-artiste">Micka&euml;l Guedj</div>
+                <div class="morceau-details">Composition originale &mdash; Les animaux dansent sous les &eacute;toiles, le lion r&egrave;gne</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">4'27</div>
+                <span class="morceau-type type-composition">Composition</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">5</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Il vit en toi</div>
+                <div class="morceau-artiste">Micka&euml;l Guedj</div>
+                <div class="morceau-details">Le Roi Lion &mdash; La rencontre, il lui parle pour la premi&egrave;re fois</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'28</div>
+                <span class="morceau-type type-cover">Roi Lion</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">6</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Titre &agrave; cr&eacute;er</div>
+                <div class="morceau-artiste">Micka&euml;l Guedj</div>
+                <div class="morceau-details">Composition originale &mdash; Chanson d'amour, il pense &agrave; elle</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3-5'</div>
+                <span class="morceau-type type-composition">Composition</span>
+            </div>
+        </div>
+
+        <!-- BLOC DANSEURS -->
+        <div class="programme-sep">Danseurs</div>
+
+        <div class="morceau">
+            <div class="morceau-num">7</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Y&eacute;k&eacute; Y&eacute;k&eacute;</div>
+                <div class="morceau-artiste">Mory Kant&eacute;</div>
+                <div class="morceau-details">D&eacute;couverte des traditions &mdash; Rythme hypnotique de la Guin&eacute;e</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">4'00</div>
+                <span class="morceau-type type-danse">Danse</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">8</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Alane</div>
+                <div class="morceau-artiste">Wes</div>
+                <div class="morceau-details">&laquo; Emm&egrave;ne-moi avec toi, l'amour me fait surmonter les obstacles &raquo;</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'11</div>
+                <span class="morceau-type type-danse">Danse</span>
+            </div>
+        </div>
+
+        <div class="morceau">
+            <div class="morceau-num">9</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">Madan</div>
+                <div class="morceau-artiste">Salif Keita &amp; Martin Solveig</div>
+                <div class="morceau-details">&laquo; Mon fils, ne t'inqui&egrave;te pas, tout ira bien &raquo; &mdash; Message d'espoir universel</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'15</div>
+                <span class="morceau-type type-danse">Danse</span>
+            </div>
+        </div>
+
+        <!-- BLOC DUO -->
+        <div class="programme-sep">Duo &middot; Final</div>
+
+        <div class="morceau">
+            <div class="morceau-num">10</div>
+            <div class="morceau-info">
+                <div class="morceau-titre">L'amour brille sous les &Eacute;toiles</div>
+                <div class="morceau-artiste">Micka&euml;l Guedj &amp; Myriam Abel</div>
+                <div class="morceau-details">Le Roi Lion &mdash; Duo final, l'amour triomphe &middot; 2 danseurs &middot; Voix off</div>
+            </div>
+            <div class="morceau-meta">
+                <div class="morceau-duree">3'00</div>
+                <span class="morceau-type type-duo">Duo</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ HISTOIRE NARRATIVE ═══════════ -->
+    <section class="histoire-section" id="histoire">
+        <h2 class="section-title">Fil Narratif</h2>
+        <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1em; color: #888; font-style: italic; margin-bottom: 35px;">
+            Id&eacute;es pour la voix off du narrateur &mdash; &agrave; d&eacute;velopper
+        </p>
+
+        <div class="histoire-chapitre">
+            <h3>Acte I &mdash; Le R&ecirc;ve</h3>
+            <div class="chanson-ref">&#9835; Emmenez-moi l&agrave;-bas (Myriam) &#8594; C'est l'histoire de la vie (Myriam)</div>
+            <p>Une jeune femme, fascin&eacute;e par l'Afrique, r&ecirc;ve de d&eacute;couvrir la savane. Le narrateur pr&eacute;sente son d&eacute;sir ardent de voyager vers cette terre mythique. Les danseurs &eacute;voquent la beaut&eacute; sauvage de la nature africaine.</p>
+        </div>
+
+        <div class="histoire-chapitre">
+            <h3>Acte II &mdash; La D&eacute;couverte</h3>
+            <div class="chanson-ref">&#9835; Y&eacute;k&eacute; Y&eacute;k&eacute; (Danseurs) &#8594; Dans la savane (Micka&euml;l) &#8594; Africa (Myriam)</div>
+            <p>Elle arrive en Afrique et d&eacute;couvre les traditions, les rythmes, la danse. Les trois danseurs incarnent l'&eacute;nergie de cette terre. Le prince de la savane raconte son royaume &mdash; les animaux, les &eacute;toiles, la majest&eacute; du lion. Elle tombe amoureuse de cette terre sauvage.</p>
+        </div>
+
+        <div class="histoire-chapitre">
+            <h3>Acte III &mdash; La Rencontre</h3>
+            <div class="chanson-ref">&#9835; Il vit en toi (Micka&euml;l) &#8594; Alane (Danseurs) &#8594; Composition &agrave; cr&eacute;er (Micka&euml;l)</div>
+            <p>Le prince et la voyageuse se rencontrent enfin. Il lui parle de la force qui vit en chacun. Les danseurs c&eacute;l&egrave;brent cette rencontre &mdash; &laquo; Emm&egrave;ne-moi avec toi &raquo;. Le prince, touch&eacute;, compose une chanson d'amour pour elle.</p>
+        </div>
+
+        <div class="histoire-chapitre">
+            <h3>Acte IV &mdash; L'Amour</h3>
+            <div class="chanson-ref">&#9835; Madan (Danseurs) &#8594; L'amour brille sous les &Eacute;toiles (Duo)</div>
+            <p>Le message d'espoir de Madan r&eacute;sonne : &laquo; Tout ira bien &raquo;. Les deux amoureux se retrouvent pour le duo final. Deux danseurs incarnent leur amour tandis que Micka&euml;l et Myriam chantent c&ocirc;te &agrave; c&ocirc;te, puis se rejoignent au centre. L'amour triomphe sous les &eacute;toiles d'Afrique.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════ COMPOSITIONS ═══════════ -->
+    <section class="compositions-section" id="compositions">
+        <h2 class="section-title">Compositions Originales</h2>
+
+        <div class="composition-highlight">
+            <h3>&laquo; Emmenez-moi l&agrave;-bas &raquo;</h3>
+            <div class="comp-role">Auteur &amp; Compositeur : Micka&euml;l Guedj &middot; Interpr&egrave;te : Myriam Abel</div>
+            <p>Une chanson originale qui ouvre le spectacle. La soliste r&ecirc;ve d'Afrique, accompagn&eacute;e de ch&oelig;urs majestueux, d'un violon solo et d'arp&egrave;ges de harpe.</p>
+            <a href="paroles/emmenez-moi-la-bas.html" class="comp-link">Voir les paroles</a>
+            <a href="paroles/myriam-emmenez-moi-la-bas.html" class="comp-link" style="margin-left: 10px;">Page d&eacute;di&eacute;e Myriam</a>
+        </div>
+
+        <div class="composition-highlight">
+            <h3>&laquo; Dans la savane &raquo;</h3>
+            <div class="comp-role">Auteur, Compositeur &amp; Interpr&egrave;te : Micka&euml;l Guedj</div>
+            <p>Le prince de la savane raconte son royaume. Les animaux dansent sous les &eacute;toiles, le lion r&egrave;gne sur cette terre majestueuse. Titre enjou&eacute; avec danseurs.</p>
+        </div>
+
+        <div class="composition-highlight" style="opacity: 0.7;">
+            <h3>&laquo; Titre &agrave; cr&eacute;er &raquo;</h3>
+            <div class="comp-role">Auteur, Compositeur &amp; Interpr&egrave;te : Micka&euml;l Guedj</div>
+            <p>Chanson d'amour &mdash; Le prince pense &agrave; la voyageuse qu'il a rencontr&eacute;e. Paroles &agrave; &eacute;crire en fonction du fil narratif du spectacle.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════ DANSEURS ═══════════ -->
+    <section class="danseurs-section" id="danseurs">
+        <h2 class="section-title">Danseurs</h2>
+        <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.05em; color: #888; font-style: italic; margin-bottom: 10px;">
+            Chor&eacute;graphie &amp; costumes : Claudel Bertili
+        </p>
+        <div class="danseurs-grid">
+            <div class="danseur-card">
+                <div class="danseur-icon">&#128131;</div>
+                <h4>Danseuse 1</h4>
+                <div class="danseur-titres">Y&eacute;k&eacute; Y&eacute;k&eacute; &middot; Alane<br>Madan &middot; L'amour brille...</div>
+            </div>
+            <div class="danseur-card">
+                <div class="danseur-icon">&#128131;</div>
+                <h4>Danseuse 2</h4>
+                <div class="danseur-titres">Y&eacute;k&eacute; Y&eacute;k&eacute; &middot; Alane<br>Madan &middot; L'amour brille...</div>
+            </div>
+            <div class="danseur-card">
+                <div class="danseur-icon">&#128378;</div>
+                <h4>Danseur</h4>
+                <div class="danseur-titres">Y&eacute;k&eacute; Y&eacute;k&eacute; &middot; Alane<br>Madan &middot; Dans la savane</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ INFOS PRATIQUES ═══════════ -->
+    <section class="infos-section" id="infos">
+        <h2 class="section-title">Informations Pratiques</h2>
+        <div class="infos-grid">
+            <div class="info-card">
+                <div class="info-icon">&#128197;</div>
+                <h4>Date</h4>
+                <p>Mercredi 25 f&eacute;vrier 2026</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">&#9200;</div>
+                <h4>Horaire</h4>
+                <p>15h30 &mdash; ~16h10</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">&#128205;</div>
+                <h4>Lieu</h4>
+                <p>Place de Cagnes-sur-Mer</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">&#127926;</div>
+                <h4>Son</h4>
+                <p>Sono professionnelle<br>Sonorisateur sur place</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">&#127917;</div>
+                <h4>Public</h4>
+                <p>Spectacle pour enfants<br>Carnaval</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">&#127905;</div>
+                <h4>Commanditaire</h4>
+                <p>Mairie de Cagnes-sur-Mer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="signature">Spectacle Savane &mdash; Cagnes-sur-Mer</div>
+        <div>Micka&euml;l Guedj &middot; Myriam Abel &middot; Claudel Bertili</div>
+        <div class="copyright">&copy; 2026 Micka&euml;l Guedj &mdash; Toutes les compositions originales sont prot&eacute;g&eacute;es par le droit d'auteur</div>
+    </div>
+
+</div><!-- fin .book -->
+
+<script>
+    // Écran d'accueil
+    function enterSite() {
+        document.getElementById('welcomeScreen').classList.add('hidden');
+    }
+
+    // Taille du texte
+    let textSizeState = 0;
+    function toggleTextSize() {
+        document.body.classList.remove('text-large', 'text-small');
+        textSizeState = (textSizeState + 1) % 3;
+        if (textSizeState === 1) document.body.classList.add('text-large');
+        if (textSizeState === 2) document.body.classList.add('text-small');
+    }
+
+    // Mode sombre
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const btns = document.querySelectorAll('.ctrl-btn');
+        const darkBtn = btns[1];
+        if (document.body.classList.contains('dark-mode')) {
+            darkBtn.innerHTML = '&#9788;';
+            darkBtn.classList.add('active');
+        } else {
+            darkBtn.innerHTML = '&#9789;';
+            darkBtn.classList.remove('active');
+        }
+    }
+
+    // Navigation fluide
+    function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Navigation dots active state
+    const sections = ['top', 'artistes', 'synopsis', 'programme', 'histoire', 'compositions', 'infos'];
+    const dots = document.querySelectorAll('.nav-dot');
+
+    window.addEventListener('scroll', () => {
+        let current = 0;
+        sections.forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= 200) current = i;
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    });
+</script>
+
+</body>
+</html>
