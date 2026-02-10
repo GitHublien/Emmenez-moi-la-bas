@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Emmenez-moi l&agrave;-bas &mdash; Myriam Abel</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -102,25 +102,23 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             z-index: 200;
             background: var(--daw-bg);
             border-top: 2px solid #444;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            transition: none;
-            transform-origin: bottom left;
+            transition: transform 0.3s;
         }
 
-        .daw.hidden { transform: translateY(100%) !important; }
+        .daw.hidden { transform: translateY(100%); }
 
         .daw-top {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 8px 14px 6px;
-            border-bottom: 1px solid #333;
         }
 
         .daw-play {
@@ -226,11 +224,13 @@
         .daw-progress-wrap {
             height: 28px;
             background: #2a2a2a;
-            border-radius: 4px;
+            border-radius: 0;
             cursor: pointer;
             position: relative;
             touch-action: none;
-            margin: 16px 14px 12px;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #333;
         }
 
         .daw-progress {
@@ -291,7 +291,7 @@
 
         .daw-marker {
             position: absolute;
-            top: -16px;
+            top: 0;
             bottom: 0;
             width: 22px;
             transform: translateX(-11px);
@@ -303,10 +303,9 @@
         .daw-marker::before {
             content: attr(data-label);
             position: absolute;
-            top: 0;
+            top: 2px;
             left: 50%;
             transform: translateX(-50%);
-            background: attr(data-color);
             color: #1e1e1e;
             font-size: 9px;
             font-weight: 700;
@@ -324,7 +323,7 @@
         .daw-marker::after {
             content: '';
             position: absolute;
-            top: 16px;
+            top: 0;
             bottom: 0;
             left: 50%;
             width: 2px;
@@ -435,7 +434,6 @@
             bottom: 8px;
             left: 8px;
             z-index: 201;
-            transform-origin: bottom left;
             background: var(--daw-bg);
             color: #ccc;
             border: 1px solid #555;
@@ -722,9 +720,12 @@
 
         /* ─── TAILLES ─── */
         body.sz1 { font-size: 20px; }
-        body.sz2 { font-size: 23px; }
-        body.sz3 { font-size: 26px; }
-        body.sz4 { font-size: 15px; }
+        body.sz2 { font-size: 22px; }
+        body.sz3 { font-size: 25px; }
+        body.sz4 { font-size: 28px; }
+        body.sz5 { font-size: 32px; }
+        body.sz6 { font-size: 15px; }
+        body.sz7 { font-size: 13px; }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 600px) {
@@ -743,7 +744,7 @@
             .daw-time { font-size: 0.7em; min-width: 65px; }
             .daw-restart { width: 28px; height: 28px; font-size: 11px; }
             .daw-play { width: 36px; height: 36px; font-size: 15px; }
-            .daw-progress-wrap { height: 32px; border-radius: 5px; margin: 14px 10px 0; }
+            .daw-progress-wrap { height: 32px; }
             .daw-marker { width: 26px; transform: translateX(-13px); }
             .daw-markers { gap: 3px; padding: 3px 10px 4px; }
             .daw-mbtn { padding: 2px 6px; font-size: 0.6em; }
@@ -758,7 +759,7 @@
             .daw-track-name { font-size: 0.5em; }
             .daw-track-icon { font-size: 0.8em; }
             .daw-track { gap: 2px; padding: 4px 2px; }
-            .daw-progress-wrap { height: 36px; }
+            .daw-progress-wrap { height: 36px; border-radius: 0; }
         }
 
         /* ─── PRINT ─── */
@@ -823,10 +824,9 @@
         &bull; Pour <b>supprimer un marqueur</b> : double-tape dessus sur la barre. Ou appuie sur &laquo;&nbsp;&#10005; Tout&nbsp;&raquo; pour tout effacer.<br><br>
         <button class="scroll-btn" onclick="scrollToDAW()">&#127911; Voir le lecteur</button><br><br>
         <b>Les boutons en haut &agrave; droite :</b><br>
-        &bull; <b>Aa</b> &mdash; change la taille du texte (5 niveaux)<br>
+        &bull; <b>Aa</b> &mdash; change la taille du texte (<b>8 niveaux</b>, du plus petit au plus grand, appuie plusieurs fois pour trouver la taille qui te convient)<br>
         &bull; <b>&#9789;</b> &mdash; mode sombre (fond noir, reposant pour les yeux)<br>
-        &bull; <b>&#9974;</b> &mdash; plein &eacute;cran<br>
-        Sur t&eacute;l&eacute;phone, tu peux aussi <b>&eacute;carter deux doigts sur le texte</b> pour zoomer (le lecteur reste &agrave; sa taille).<br><br>
+        &bull; <b>&#9974;</b> &mdash; plein &eacute;cran<br><br>
         <b>Ta touche personnelle :</b> la structure et les m&eacute;lodies que tu entends sur la d&eacute;mo sont la base du titre. Essaie de bien tenir les notes comme indiqu&eacute; par les traits bleus. Mais apr&egrave;s, tu es chez toi&nbsp;: si tu veux ajouter des vibes, des ad-libs, des variations ou toute autre touche qui te pla&icirc;t, tu es totalement libre. C'est ta voix qui donne vie &agrave; cette chanson, alors fais-toi plaisir&nbsp;!
         <button class="scroll-btn" onclick="document.getElementById('paroles').scrollIntoView({behavior:'smooth'})">&#9660; Aller aux paroles</button>
     </div>
@@ -995,6 +995,12 @@
 
 <!-- LECTEUR DAW FLOTTANT -->
 <div class="daw" id="daw">
+    <div class="daw-progress-wrap" id="dawBar">
+        <div class="daw-progress-bg"></div>
+        <div class="daw-progress" id="dawProgress"></div>
+        <div class="daw-playhead" id="dawPlayhead"></div>
+        <div class="daw-region" id="dawRegion" style="display:none;"></div>
+    </div>
     <div class="daw-top">
         <button class="daw-restart" onclick="dawRestart()" title="Retour au d&eacute;but">&#9198;</button>
         <button class="daw-play" id="dawPlay" onclick="dawTogglePlay()">&#9654;</button>
@@ -1003,12 +1009,6 @@
             <span class="daw-vol-icon" id="volIcon" onclick="dawToggleMute()" title="Volume">&#128266;</span>
             <input type="range" class="daw-vol-slider" id="volSlider" min="0" max="100" value="100" oninput="dawSetVolume(this.value)">
         </div>
-    </div>
-    <div class="daw-progress-wrap" id="dawBar">
-        <div class="daw-progress-bg"></div>
-        <div class="daw-progress" id="dawProgress"></div>
-        <div class="daw-playhead" id="dawPlayhead"></div>
-        <div class="daw-region" id="dawRegion" style="display:none;"></div>
     </div>
     <div class="daw-tracks">
         <div class="daw-track active" id="tr0" onclick="dawSelect(0)">
@@ -1070,7 +1070,7 @@ function toggleFS() {
 // TAILLE / DARK
 // ═══════════════════════════════════
 let sz = parseInt(localStorage.getItem('myriam-sz') || '0');
-const szClasses = ['', 'sz1', 'sz2', 'sz3', 'sz4'];
+const szClasses = ['', 'sz1', 'sz2', 'sz3', 'sz4', 'sz5', 'sz6', 'sz7'];
 (function initSize() {
     if (sz > 0 && sz < szClasses.length) document.body.classList.add(szClasses[sz]);
 })();
@@ -1438,30 +1438,6 @@ audios[0].addEventListener('timeupdate', () => {
     }
 });
 
-// ═══════════════════════════════════
-// ZOOM NATIF + DAW FIXE (contre-scale via visualViewport)
-// ═══════════════════════════════════
-if (window.visualViewport) {
-    const dawEl = document.getElementById('daw');
-    const toggleEl = document.getElementById('dawToggle');
-    function fixDAWPosition() {
-        const vv = window.visualViewport;
-        const scale = vv.scale;
-        const invScale = 1 / scale;
-        // Positionner le DAW en bas du viewport visible
-        dawEl.style.transform = 'scale(' + invScale + ')';
-        dawEl.style.bottom = (window.innerHeight - vv.height - vv.offsetTop) * scale + 'px';
-        dawEl.style.left = vv.offsetLeft * scale + 'px';
-        dawEl.style.width = (vv.width * scale) + 'px';
-        // Meme chose pour le toggle
-        if (toggleEl) {
-            toggleEl.style.transform = 'scale(' + invScale + ')';
-        }
-    }
-    visualViewport.addEventListener('resize', fixDAWPosition);
-    visualViewport.addEventListener('scroll', fixDAWPosition);
-    fixDAWPosition();
-}
 </script>
 
 </body>
