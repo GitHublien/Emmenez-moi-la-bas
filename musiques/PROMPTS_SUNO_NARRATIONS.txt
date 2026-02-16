@@ -1,0 +1,345 @@
+═══════════════════════════════════════════════════════════════════════════════
+              PROMPTS SUNO — MUSIQUES DE NARRATION
+              Spectacle « Le Rêve de Savane »
+              8 voix off · 8 ambiances différentes
+              Durée cible : 30 à 45 secondes chacune
+═══════════════════════════════════════════════════════════════════════════════
+
+INSTRUCTIONS GÉNÉRALES :
+────────────────────────
+1. Aller sur https://suno.com → Create → Custom
+2. Coller le STYLE dans "Style of Music"
+3. Coller les LYRICS dans "Lyrics"
+4. Générer 2 à 4 versions, choisir la meilleure
+5. Chaque morceau doit durer ~30-45 secondes (la voix off sera posée dessus)
+6. Les tags et le style DOIVENT rester en anglais (même si le spectacle est en français)
+7. Les lyrics contiennent des vocalisations (oh, ah, mmm) et des indications
+   instrumentales entre crochets — PAS de vraies paroles chantées
+8. Garder la cohérence : la voix off 1 et la voix off finale utilisent
+   la MÊME musique (boucle narrative du rêve)
+
+CONSEILS SUNO v4.5 :
+────────────────────
+- Les ... (ellipses) ralentissent le rythme
+- Les ! accélèrent ou accentuent
+- Les (parenthèses) créent des couches secondaires
+- [Intro], [Verse], [Outro], [End] sont les tags principaux
+- Le style est une liste de genres/adjectifs séparés par des virgules
+- Moins c'est plus : un style précis + des lyrics simples = meilleur résultat
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🌙 VOIX OFF 1 — OUVERTURE : « Le rêve commence »
+    ~30 secondes · Scène vide · Douce, onirique
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur (posé sur la musique) :
+« Ce soir, une jeune femme ferme les yeux. Elle rêve d'une terre lointaine,
+où le soleil peint le ciel de teintes dorées, où les étoiles s'allument une
+à une quand la nuit enveloppe la savane. Elle tend les bras… et s'envole. »
+
+--- STYLE ---
+Ethereal African ambient, soft kora melody, gentle pad, dreamy,
+cinematic lullaby, warm strings, slow, intimate, magical,
+night atmosphere, savanna sounds, no drums, no percussion,
+pure and peaceful, emotional, innocent wonder
+
+--- LYRICS ---
+[Intro – Slow Dreamy]
+. . . . . .
+
+[Verse – Ethereal Female Whisper]
+Mmmmm... mmmmm...
+(soft kora melody underneath)
+Ohhh... ohhh...
+. . . . . .
+
+[Outro – Gentle Fade]
+Mmmmm...
+. . . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🌍 VOIX OFF 2 — L'ARRIVÉE EN AFRIQUE : « La terre vibre »
+    ~20 secondes · Transition · Percussions qui montent
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Et soudain, la voilà transportée au cœur de l'Afrique. La terre vibre
+sous ses pieds, les tambours résonnent, et la savane s'ouvre devant elle
+comme un monde nouveau. »
+
+--- STYLE ---
+African percussion build, djembe rhythm, tribal drums, energetic,
+cinematic transition, building intensity, savanna, powerful,
+world music, West African groove, celebratory, no vocals,
+short instrumental, dynamic crescendo
+
+--- LYRICS ---
+[Intro – Building Percussion]
+. . ! . . ! . ! . !
+
+[Verse – Intense]
+(djembe rhythm builds)
+! . ! . ! ! . ! ! !
+(tribal drums join)
+! ! ! ! . ! ! ! ! !
+
+[Outro – Peak Energy]
+! ! ! ! ! !
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    ✨ VOIX OFF 3 — FASCINATION : « Cette terre la fascine »
+    ~20 secondes · Envoûtante · Beauté sauvage
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Cette terre la fascine. Ses couleurs, ses parfums, sa beauté sauvage…
+Quelque chose l'attire ici, quelque chose de plus grand qu'elle. »
+
+--- STYLE ---
+Enchanting African ambient, balafon melody, soft female choir,
+mysterious, warm, golden, cinematic wonder, gentle strings,
+savanna atmosphere, ethereal African voices, mesmerizing,
+slow build, beautiful, no heavy drums
+
+--- LYRICS ---
+[Intro – Mysterious Warm]
+. . . . . .
+
+[Verse – Ethereal Female Choir]
+Ahhh... ahhh... ahhh...
+(balafon melody dances gently)
+Ohhh... ohhh...
+. . . . . .
+
+[Outro – Enchanting Fade]
+Ahhh...
+. . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🦁 VOIX OFF 4 — LE FILS DE LA SAVANE : « Un homme de cette terre »
+    ~25 secondes · Majestueux · Noble · Mystérieux
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Mais dans cette savane vit un homme. Un fils de cette terre, qui connaît
+chaque étoile par son nom, chaque souffle du vent par sa direction.
+Il va lui montrer son monde. »
+
+--- STYLE ---
+Majestic African orchestral, deep male choir, noble, powerful,
+kora and strings, cinematic epic, mysterious, regal,
+savanna king theme, low brass, warm cello, African grandeur,
+slow and dignified, no percussion, emotional depth
+
+--- LYRICS ---
+[Intro – Noble Slow]
+. . . . . .
+
+[Verse – Deep Male Choir]
+Ohhhhh... ohhhhh...
+(deep voices, noble and warm)
+Mmmmm... mmmmm...
+(strings swell gently underneath)
+. . . . . .
+
+[Outro – Majestic Fade]
+Ohhhhh...
+. . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    💫 VOIX OFF 5 — LE PREMIER REGARD : « Leurs regards se croisent »
+    ~20 secondes · Émotion pure · Bascule du spectacle
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Et puis, au détour d'un sentier, leurs regards se croisent pour la
+première fois. Quelque chose naît entre eux — quelque chose que seul
+le cœur peut comprendre. »
+
+--- STYLE ---
+Romantic cinematic, solo violin melody, emotional, intimate,
+heartfelt, gentle piano, love theme, tender, pure,
+first love feeling, warm strings crescendo, beautiful,
+African touches of kora, breathtaking moment, slow
+
+--- LYRICS ---
+[Intro – Intimate Piano]
+. . . . . .
+
+[Verse – Solo Violin Melody]
+(violin sings alone, tender)
+. . . . . .
+(piano joins softly)
+Mmmmm...
+(strings bloom gently)
+
+[Outro – Emotional Crescendo]
+Ohhh... ohhh...
+(warm strings swell)
+. . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    💔 VOIX OFF 6 — CHACUN PENSE À L'AUTRE : « Ils se séparent »
+    ~25 secondes · Mélancolique · Tendre · Deux solitudes
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Ils se séparent. Mais quelque chose a changé. De son côté, elle ferme
+les yeux et imagine un avenir — une famille, un enfant, le cycle éternel
+de la vie. De l'autre, lui pense à elle, et son cœur compose une mélodie. »
+
+--- STYLE ---
+Melancholic cinematic, gentle cello solo, bittersweet, tender,
+emotional piano, longing, intimate, African kora undertones,
+soft female voice humming, wistful, beautiful sadness,
+slow and reflective, warm strings, no drums
+
+--- LYRICS ---
+[Intro – Reflective Slow]
+. . . . . .
+
+[Verse – Gentle Cello]
+(cello sings alone, longing)
+Mmmmm... mmmmm...
+(soft female humming underneath)
+. . . . . .
+Ohhh...
+(piano enters tenderly)
+
+[Outro – Bittersweet Fade]
+Mmmmm...
+. . . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    ❤️ VOIX OFF 7 — L'AMOUR LES RAPPELLE : « Ils se retrouvent »
+    ~20 secondes · Espoir · Intensité montante · Joie
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« L'amour les rappelle l'un vers l'autre. Rien ne peut séparer deux cœurs
+qui battent au même rythme. Ils se retrouvent… »
+
+--- STYLE ---
+Uplifting African cinematic, joyful, hopeful, building energy,
+kora and djembe, warm choir, celebratory strings, emotional crescendo,
+love reunion theme, powerful but tender, West African rhythm,
+dynamic build, beautiful harmonies, triumphant
+
+--- LYRICS ---
+[Intro – Hopeful Building]
+. . . ! . . . !
+
+[Verse – Warm Choir Building]
+Ohhh... ohhh... ohhh!
+(kora melody dances joyfully)
+Ahhh... ahhh... ahhh!
+(choir grows, drums join)
+! . ! . ! ! . ! !
+
+[Outro – Triumphant Peak]
+Ohhhhh!
+! ! !
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🌙 VOIX OFF FINALE — LE RÉVEIL : « Tout cela n'était qu'un rêve »
+    ~30 secondes · Retour au calme · Même musique que l'ouverture
+═══════════════════════════════════════════════════════════════════════════════
+
+Texte du narrateur :
+« Et la jeune femme ouvrit les yeux… Tout cela n'était qu'un rêve.
+Mais dans son cœur, l'Afrique brillait pour toujours. »
+
+⚠️ IMPORTANT : Cette musique doit être LA MÊME que la Voix off 1 (ouverture).
+C'est la boucle narrative — le rêve se referme comme il s'est ouvert.
+→ Utiliser exactement le même prompt que la Voix off 1
+→ Ou mieux : utiliser le MÊME fichier audio que la Voix off 1
+
+Si tu veux une version légèrement différente (plus émotionnelle, plus finale) :
+
+--- STYLE ---
+Ethereal African ambient, soft kora melody, gentle pad, dreamy,
+cinematic lullaby, warm strings, slow, intimate, magical,
+night atmosphere, savanna sounds, no drums, no percussion,
+emotional resolution, peaceful ending, bittersweet beauty
+
+--- LYRICS ---
+[Intro – Slow Dreamy]
+. . . . . .
+
+[Verse – Ethereal Female Whisper]
+Mmmmm... mmmmm...
+(soft kora melody, same as opening)
+Ohhh... ohhh...
+(warm strings join, slightly fuller than opening)
+. . . . . .
+
+[Outro – Peaceful Resolution]
+Mmmmm...
+(everything fades gently)
+. . . . . .
+. . .
+[Fade to End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                        RÉSUMÉ DES 8 MUSIQUES
+═══════════════════════════════════════════════════════════════════════════════
+
+| #  | Narration              | Ambiance              | Instruments clés         | Durée  |
+|----|------------------------|-----------------------|--------------------------|--------|
+| 1  | Ouverture              | Onirique, douce       | Kora, pad, strings       | ~30s   |
+| 2  | Arrivée en Afrique     | Percussions montantes | Djembé, tambours         | ~20s   |
+| 3  | Fascination            | Envoûtante            | Balafon, chœur féminin   | ~20s   |
+| 4  | Fils de la savane      | Majestueux, noble     | Chœur masculin, kora     | ~25s   |
+| 5  | Premier regard         | Émotion pure          | Violon solo, piano       | ~20s   |
+| 6  | Chacun pense à l'autre | Mélancolique          | Violoncelle, piano       | ~25s   |
+| 7  | L'amour les rappelle   | Espoir, joie          | Kora, djembé, chœur      | ~20s   |
+| 8  | Révélation / Réveil    | Retour au calme       | = Même que Voix off 1    | ~30s   |
+
+═══════════════════════════════════════════════════════════════════════════════
+                        NOTES IMPORTANTES
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 COHÉRENCE NARRATIVE :
+- Voix off 1 et 8 = même musique (le rêve s'ouvre et se referme)
+- Voix off 2 = la seule avec des percussions fortes (arrivée en Afrique)
+- Voix off 4 = la seule avec un chœur masculin grave (le prince)
+- Voix off 5 = la plus intime (violon solo = premier regard)
+- Voix off 7 = la plus joyeuse (retrouvailles)
+
+🎵 INSTRUMENTS AFRICAINS À PRIVILÉGIER :
+- Kora (harpe africaine) → moments doux, oniriques
+- Djembé → moments énergiques, arrivée
+- Balafon (xylophone africain) → moments enchanteurs
+- Chœurs africains → moments majestueux ou mystérieux
+
+⚠️ ATTENTION :
+- Ces musiques servent de FOND pour la voix off du narrateur
+- Elles ne doivent PAS être trop fortes ni trop chargées
+- La voix du narrateur doit rester audible et claire
+- Les vocalisations (oh, ah, mmm) doivent rester en arrière-plan
+- Durée courte : 30-45 secondes maximum
+
+💡 ASTUCE SUNO :
+- Si le morceau généré est trop long, couper avec un éditeur audio
+- Si le morceau est trop chargé, régénérer avec moins de lyrics
+- Générer 3-4 versions de chaque et choisir la meilleure
+- Le mode Custom avec "instrumental" coché peut aussi fonctionner
+  pour les narrations sans vocalisations
+
+═══════════════════════════════════════════════════════════════════════════════
