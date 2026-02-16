@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Le R&ecirc;ve de Savane &mdash; D&eacute;roul&eacute; du Spectacle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --or: #c9a86c;
+            --or-clair: #e8d5a8;
+            --or-fonce: #8b7355;
+            --savane: #d4a053;
+            --terre: #a0522d;
+            --ciel: #e8913a;
+            --nuit: #1a1a2e;
+            --sable: #f5e6c8;
+            --fond: #0d0d0d;
+            --fond-carte: #161616;
+            --texte: #e8e0d4;
+            --sep: rgba(201,168,108,0.15);
+            --narr: #5b8a72;
+            --myriam: #e06c9f;
+            --mickael: #6ca8e0;
+            --danse: #e0a84c;
+            --duo: #c06ce0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background: var(--fond);
+            color: var(--texte);
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ═══ SPLASH ═══ */
+        .splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(135deg, #0a0500 0%, #1a0f00 30%, #2d1800 60%, #0a0500 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+        .splash.out { opacity: 0; visibility: hidden; pointer-events: none; }
+        .splash-inner { padding: 40px; max-width: 600px; }
+        .splash-stars {
+            font-size: 2em;
+            letter-spacing: 20px;
+            color: var(--or);
+            margin-bottom: 25px;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle { 0%,100%{opacity:0.5} 50%{opacity:1} }
+        .splash h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.2em;
+            font-weight: 400;
+            color: var(--or);
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(201,168,108,0.3);
+        }
+        .splash-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4em;
+            font-style: italic;
+            color: var(--or-clair);
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .splash-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+            color: #b89a6a;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+        }
+        .splash-tap {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 1.5px solid var(--or);
+            border-radius: 30px;
+            color: var(--or);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.03)} }
+
+        /* ═══ CONTROLES ═══ */
+        .ctrl {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            display: flex;
+            gap: 8px;
+            z-index: 200;
+        }
+        .ctrl button {
+            background: rgba(30,30,30,0.85);
+            color: var(--or);
+            border: 1px solid rgba(201,168,108,0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 17px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+        }
+        .ctrl button:hover { background: var(--or); color: #111; border-color: var(--or); }
+
+        /* ═══ NAV ═══ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 150;
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--sep);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            height: 56px;
+            gap: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            color: var(--or);
+            font-size: 0.95em;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+        .nav a:hover { color: var(--or); }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            padding: 120px 30px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(201,168,108,0.06) 0%, transparent 100%);
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--or);
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            color: var(--or);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3em;
+            font-weight: 400;
+            color: var(--or);
+            letter-spacing: 5px;
+            margin-bottom: 12px;
+        }
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            font-style: italic;
+            color: var(--or-clair);
+            margin-bottom: 8px;
+        }
+        .hero-info {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* ═══ CONTENEUR ═══ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ═══ SECTIONS ═══ */
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6em;
+            font-weight: 400;
+            color: var(--or);
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .section-intro {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        /* ═══ SYNOPSIS ═══ */
+        .synopsis {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--sep);
+        }
+        .synopsis-text {
+            background: linear-gradient(135deg, rgba(201,168,108,0.05), rgba(201,168,108,0.02));
+            border: 1px solid var(--sep);
+            border-radius: 12px;
+            padding: 35px 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            line-height: 2;
+            color: #ccc;
+        }
+        .synopsis-text p { margin-bottom: 18px; }
+        .synopsis-text p:last-child { margin-bottom: 0; }
+        .synopsis-text em { color: var(--or); font-style: italic; }
+        .synopsis-text strong { color: var(--or-clair); }
+
+        /* ═══ EQUIPE ═══ */
+        .equipe {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--sep);
+        }
+        .equipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .equipe-card {
+            background: var(--fond-carte);
+            border: 1px solid var(--sep);
+            border-radius: 10px;
+            padding: 22px 16px;
+            text-align: center;
+        }
+        .equipe-avatar {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+        }
+        .equipe-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: var(--or);
+            margin-bottom: 4px;
+        }
+        .equipe-card .role {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* ═══ ACTES ═══ */
+        .actes {
+            padding: 50px 0 30px;
+        }
+        .acte {
+            margin-bottom: 50px;
+        }
+        .acte-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--sep);
+        }
+        .acte-num {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75em;
+            color: var(--or);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .acte-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* ═══ CARTES MOMENT ═══ */
+        .moment {
+            background: var(--fond-carte);
+            border: 1px solid var(--sep);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .moment:hover { border-color: rgba(201,168,108,0.4); }
+
+        .moment-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 20px;
+            cursor: pointer;
+        }
+        .moment-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            flex-shrink: 0;
+            color: #fff;
+        }
+        .moment-num.narr { background: var(--narr); }
+        .moment-num.myriam { background: var(--myriam); }
+        .moment-num.mickael { background: var(--mickael); }
+        .moment-num.danse { background: var(--danse); }
+        .moment-num.duo { background: var(--duo); }
+
+        .moment-info { flex: 1; min-width: 0; }
+        .moment-titre {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05em;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        .moment-artiste {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.88em;
+            color: #999;
+            font-style: italic;
+        }
+        .moment-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .moment-duree {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            color: #777;
+        }
+        .moment-type {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.7em;
+            padding: 3px 10px;
+            border-radius: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .type-narr { background: rgba(91,138,114,0.2); color: var(--narr); }
+        .type-myriam { background: rgba(224,108,159,0.15); color: var(--myriam); }
+        .type-mickael { background: rgba(108,168,224,0.15); color: var(--mickael); }
+        .type-danse { background: rgba(224,168,76,0.15); color: var(--danse); }
+        .type-duo { background: rgba(192,108,224,0.15); color: var(--duo); }
+
+        .moment-toggle {
+            font-size: 0.9em;
+            color: #555;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .moment.open .moment-toggle { transform: rotate(180deg); }
+
+        .moment-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .moment.open .moment-body { max-height: 800px; }
+
+        .moment-content {
+            padding: 0 20px 20px;
+            border-top: 1px solid var(--sep);
+        }
+
+        .moment-scene {
+            margin-top: 16px;
+        }
+        .moment-scene h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            color: var(--or);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .moment-scene p {
+            font-size: 0.92em;
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .moment-danseurs {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .danseur-tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78em;
+            padding: 3px 12px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        .danseur-tag.repos {
+            border-color: rgba(100,100,100,0.3);
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ═══ NARRATION ═══ */
+        .narration-box {
+            margin-top: 14px;
+            background: rgba(91,138,114,0.08);
+            border-left: 3px solid var(--narr);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 18px;
+        }
+        .narration-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78em;
+            color: var(--narr);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .narration-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: #ccc;
+            font-style: italic;
+            line-height: 1.9;
+        }
+        .narration-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ═══ YOUTUBE ═══ */
+        .yt-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 6px 16px;
+            background: rgba(255,0,0,0.08);
+            border: 1px solid rgba(255,0,0,0.2);
+            border-radius: 20px;
+            color: #e44;
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .yt-link:hover { background: rgba(255,0,0,0.15); border-color: rgba(255,0,0,0.4); }
+        .yt-icon { font-size: 1.1em; }
+
+        /* ═══ PLAN SCENE ═══ */
+        .plan-scene {
+            padding: 50px 0;
+            border-top: 1px solid var(--sep);
+        }
+        .scene-diagram {
+            background: var(--fond-carte);
+            border: 1px solid var(--sep);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        .scene-stage {
+            background: rgba(201,168,108,0.06);
+            border: 2px solid var(--sep);
+            border-radius: 8px;
+            padding: 40px 20px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .scene-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            color: var(--or);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .scene-positions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .scene-pos {
+            text-align: center;
+        }
+        .scene-pos-icon { font-size: 1.8em; margin-bottom: 4px; }
+        .scene-pos-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            color: #aaa;
+        }
+        .scene-public {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+
+        /* ═══ LEGENDE ═══ */
+        .legende {
+            padding: 40px 0;
+            border-top: 1px solid var(--sep);
+        }
+        .legende-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .legende-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--fond-carte);
+            border: 1px solid var(--sep);
+            border-radius: 20px;
+        }
+        .legende-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .legende-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            color: #aaa;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            text-align: center;
+            padding: 40px 20px 30px;
+            border-top: 1px solid var(--sep);
+        }
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.8;
+        }
+        footer .copy {
+            color: var(--or-fonce);
+            margin-top: 8px;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 600px) {
+            .splash h1 { font-size: 2.2em; letter-spacing: 3px; }
+            .splash-sub { font-size: 1.1em; }
+            .hero { padding: 100px 20px 40px; }
+            .hero h1 { font-size: 2em; letter-spacing: 3px; }
+            .container { padding: 0 16px; }
+            .moment-head { padding: 14px 14px; gap: 10px; }
+            .moment-content { padding: 0 14px 16px; }
+            .moment-titre { font-size: 0.95em; }
+            .equipe-grid { grid-template-columns: repeat(2, 1fr); }
+            .scene-positions { flex-direction: column; gap: 20px; }
+            .nav { padding: 0 12px; gap: 14px; }
+            .ctrl { top: 10px; right: 10px; }
+            .ctrl button { width: 36px; height: 36px; font-size: 15px; }
+            .acte-name { font-size: 1.15em; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ SPLASH ═══════════ -->
+<div class="splash" id="splash" onclick="enterPage()">
+    <div class="splash-inner">
+        <div class="splash-stars">&#10022; &#10022; &#10022;</div>
+        <h1>SAVANE</h1>
+        <div class="splash-sub">Le R&ecirc;ve de Savane</div>
+        <div class="splash-date">25 f&eacute;vrier 2026 &middot; 15h30 &middot; Cagnes-sur-Mer</div>
+        <div class="splash-tap">Appuie pour d&eacute;couvrir</div>
+    </div>
+</div>
+
+<!-- ═══════════ CONTROLES ═══════════ -->
+<div class="ctrl">
+    <button onclick="toggleFS()" title="Plein &eacute;cran" style="font-size:18px;">&#9974;</button>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+    <div class="nav-logo">SAVANE</div>
+    <a href="#synopsis">Synopsis</a>
+    <a href="#equipe">&Eacute;quipe</a>
+    <a href="#deroulement">D&eacute;roul&eacute;</a>
+    <a href="#scene">Sc&egrave;ne</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="hero-badge">D&eacute;roul&eacute; du spectacle</div>
+    <h1>Le R&ecirc;ve de Savane</h1>
+    <div class="hero-sub">Spectacle musical pour enfants &mdash; Carnaval de Cagnes-sur-Mer</div>
+    <div class="hero-info">25 f&eacute;vrier 2026 &middot; 15h30 &middot; Place de Cagnes-sur-Mer &middot; ~40 minutes</div>
+</section>
+
+<div class="container">
+
+    <!-- ═══════════ SYNOPSIS ═══════════ -->
+    <section class="synopsis" id="synopsis">
+        <h2 class="section-title">Synopsis</h2>
+        <div class="section-intro">L'histoire que nous racontons au public</div>
+
+        <div class="synopsis-text">
+            <p>Une jeune femme ferme les yeux et s'envole en pens&eacute;e vers <em>l'Afrique</em>. Elle r&ecirc;ve d'une terre lointaine o&ugrave; le soleil peint le ciel de teintes dor&eacute;es, o&ugrave; les rythmes r&eacute;sonnent et o&ugrave; la savane s'&eacute;tend &agrave; l'infini.</p>
+            <p>Transport&eacute;e au c&oelig;ur de ce continent, elle d&eacute;couvre ses traditions, ses danses et sa beaut&eacute; sauvage. Elle tombe amoureuse de cette terre &mdash; de ses couleurs, de ses parfums, de son &eacute;nergie.</p>
+            <p>Puis, au d&eacute;tour d'un sentier, elle croise le regard d'un <strong>fils de la savane</strong> &mdash; un homme noble, ancr&eacute; dans sa terre, gardien de ses secrets. Il lui montre son monde, ses &eacute;toiles, la force qui vit en chacun.</p>
+            <p>S&eacute;par&eacute;s, chacun pense &agrave; l'autre. Elle imagine <em>le cycle de la vie</em> &mdash; un enfant, une famille, un avenir sous le ciel d'Afrique. Lui compose dans son c&oelig;ur une m&eacute;lodie pour elle.</p>
+            <p>L'amour les rappelle l'un vers l'autre. Ils se retrouvent, et <strong>sous les &eacute;toiles d'Afrique, l'amour triomphe</strong>. La f&ecirc;te &eacute;clate, la savane vibre de joie.</p>
+            <p>Et puis&hellip; la jeune femme ouvre les yeux. <em>Ce n'&eacute;tait qu'un r&ecirc;ve.</em> Mais dans son c&oelig;ur, l'Afrique brille pour toujours.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════ EQUIPE ═══════════ -->
+    <section class="equipe" id="equipe">
+        <h2 class="section-title">&Eacute;quipe</h2>
+        <div class="equipe-grid">
+            <div class="equipe-card">
+                <div class="equipe-avatar">&#127908;</div>
+                <h3>Micka&euml;l Guedj</h3>
+                <div class="role">Chanteur &middot; Auteur-Compositeur<br>Cr&eacute;ateur du spectacle</div>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">&#127925;</div>
+                <h3>Myriam Abel</h3>
+                <div class="role">Chanteuse &middot; Interpr&egrave;te</div>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">&#128131;</div>
+                <h3>Claudel Bertili</h3>
+                <div class="role">Producteur &middot; Danseur<br>Costumes &middot; Chor&eacute;graphie</div>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">&#128131;&#128131;&#128131;</div>
+                <h3>3 Danseurs</h3>
+                <div class="role">2 danseuses + 1 danseur</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ DEROULEMENT ═══════════ -->
+    <section class="actes" id="deroulement">
+        <h2 class="section-title">D&eacute;roul&eacute;</h2>
+        <div class="section-intro">Chaque moment du spectacle, dans l'ordre &middot; Appuie sur un bloc pour voir les d&eacute;tails</div>
+
+        <!-- ═══ LEGENDE ═══ -->
+        <div class="legende-grid" style="margin-bottom:35px;">
+            <div class="legende-item"><div class="legende-dot" style="background:var(--narr)"></div><span class="legende-label">Voix off (narrateur)</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--myriam)"></div><span class="legende-label">Myriam chante</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--mickael)"></div><span class="legende-label">Micka&euml;l chante</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--danse)"></div><span class="legende-label">Danse</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--duo)"></div><span class="legende-label">Duo</span></div>
+        </div>
+
+        <!-- ══════════════════════════════════ -->
+        <!-- ACTE I — L'APPEL                  -->
+        <!-- ══════════════════════════════════ -->
+        <div class="acte">
+            <div class="acte-header">
+                <span class="acte-num">Acte I</span>
+                <span class="acte-name">L'Appel</span>
+            </div>
+
+            <!-- VOIX OFF 1 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Ouverture</div>
+                        <div class="moment-artiste">Narrateur (voix pr&eacute;enregistr&eacute;e + musique originale)</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~30s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Ce soir, une jeune femme ferme les yeux. Elle r&ecirc;ve d'une terre lointaine, o&ugrave; le soleil peint le ciel de teintes dor&eacute;es, o&ugrave; les &eacute;toiles s'allument une &agrave; une quand la nuit enveloppe la savane. Elle tend les bras&hellip; et s'envole.&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; Musique originale douce en fond (kora, pad africain). La sc&egrave;ne est vide. Myriam entre c&ocirc;t&eacute; gauche &agrave; la fin de la narration.</div>
+                        </div>
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Sc&egrave;ne vide. La voix off r&eacute;sonne avec une musique douce. Le public est plong&eacute; dans l'atmosph&egrave;re. On ne dit pas que c'est un r&ecirc;ve &mdash; on reste volontairement vague. Myriam appara&icirc;t sur le c&ocirc;t&eacute; gauche de la sc&egrave;ne.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag repos">Aucun danseur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. EMMENEZ-MOI LA-BAS -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num myriam">1</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Emmenez-moi l&agrave;-bas</div>
+                        <div class="moment-artiste">Myriam Abel &mdash; Composition originale (Micka&euml;l Guedj)</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">4'09</span>
+                        <span class="moment-type type-myriam">Myriam</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Myriam chante c&ocirc;t&eacute; gauche de la sc&egrave;ne. C'est le d&eacute;part du voyage &mdash; elle veut partir, elle r&ecirc;ve d'Afrique. Les <strong>2 danseuses</strong> entrent pendant le premier couplet : l'une (la blonde) mime l'imaginaire, le r&ecirc;ve qui prend forme ; l'autre &eacute;voque l'Afrique en dansant. Pas d'homme encore &mdash; c'est un moment f&eacute;minin, intime, a&eacute;rien.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1 (blonde)</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag repos">&#128104; Danseur &mdash; repos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════ -->
+        <!-- ACTE II — LA DECOUVERTE           -->
+        <!-- ══════════════════════════════════ -->
+        <div class="acte">
+            <div class="acte-header">
+                <span class="acte-num">Acte II</span>
+                <span class="acte-name">La D&eacute;couverte</span>
+            </div>
+
+            <!-- VOIX OFF 2 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; L'arriv&eacute;e en Afrique</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~20s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Et soudain, la voil&agrave; transport&eacute;e au c&oelig;ur de l'Afrique. La terre vibre sous ses pieds, les tambours r&eacute;sonnent, et la savane s'ouvre devant elle comme un monde nouveau.&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; Transition musicale &mdash; les percussions montent. Les 3 danseurs se pr&eacute;parent en coulisses.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. YEKE YEKE -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num danse">2</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Y&eacute;k&eacute; Y&eacute;k&eacute;</div>
+                        <div class="moment-artiste">Mory Kant&eacute; &mdash; Danse</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">4'00</span>
+                        <span class="moment-type type-danse">Danse</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Les <strong>3 danseurs</strong> envahissent la sc&egrave;ne. C'est une f&ecirc;te, une c&eacute;l&eacute;bration. Elle d&eacute;couvre les rythmes africains, les traditions, la joie de vivre. Le danseur (l'homme) est pr&eacute;sent mais <strong>elle ne le remarque pas encore</strong> &mdash; il fait partie de la danse collective. Le public voit un spectacle de traditions africaines.</p>
+                            <p style="margin-top:10px;"><em>&#128218; &Agrave; savoir :</em> Y&eacute;k&eacute; Y&eacute;k&eacute; est une chanson traditionnelle mandingue. Les paroles parlent d'un jeune homme qui vient chercher sa bien-aim&eacute;e : &laquo;&nbsp;Je suis venu ici pour te trouver, je t'aime, tu es mon c&oelig;ur, je veux te faire mon &eacute;pouse.&nbsp;&raquo; Dans la tradition des griots, les jeunes se courtisent &agrave; travers la musique et la danse. Le sens profond de la chanson r&eacute;sonne avec l'histoire &mdash; m&ecirc;me si &agrave; ce stade, la rencontre n'a pas encore eu lieu.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag">&#128104; Danseur</span>
+                        </div>
+                        <a href="https://youtu.be/pXxb0e2kNus" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VOIX OFF 3 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Fascination</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~20s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Cette terre la fascine. Ses couleurs, ses parfums, sa beaut&eacute; sauvage&hellip; Quelque chose l'attire ici, quelque chose de plus grand qu'elle.&nbsp;&raquo;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. AFRICA -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num myriam">3</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Africa</div>
+                        <div class="moment-artiste">Myriam Abel &mdash; Reprise (Rose Laurens)</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'31</span>
+                        <span class="moment-type type-myriam">Myriam</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Myriam chante au centre. Elle tombe amoureuse de <strong>la terre elle-m&ecirc;me</strong> &mdash; l'Afrique, sa beaut&eacute;, sa puissance. Les <strong>3 danseurs</strong> incarnent cette beaut&eacute; autour d'elle. L'homme danse, mais <strong>leurs regards ne se croisent pas encore</strong>. Elle le voit peut-&ecirc;tre du coin de l'&oelig;il, mais lui ne la remarque pas. La tension monte discr&egrave;tement.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag">&#128104; Danseur</span>
+                        </div>
+                        <a href="https://youtu.be/5MMJNGshTL8" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════ -->
+        <!-- ACTE III — LA RENCONTRE           -->
+        <!-- ══════════════════════════════════ -->
+        <div class="acte">
+            <div class="acte-header">
+                <span class="acte-num">Acte III</span>
+                <span class="acte-name">La Rencontre</span>
+            </div>
+
+            <!-- VOIX OFF 4 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Le fils de la savane</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~25s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Mais dans cette savane vit un homme. Un fils de cette terre, qui conna&icirc;t chaque &eacute;toile par son nom, chaque souffle du vent par sa direction. Il va lui montrer son monde.&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; Musique originale &mdash; ambiance myst&eacute;rieuse, noble. Le danseur entre seul, lentement, pendant la voix off. Micka&euml;l se positionne c&ocirc;t&eacute; droit.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. DANS LA SAVANE -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num mickael">4</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Dans la savane</div>
+                        <div class="moment-artiste">Micka&euml;l Guedj &mdash; Composition originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">4'27</span>
+                        <span class="moment-type type-mickael">Micka&euml;l</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Micka&euml;l chante c&ocirc;t&eacute; droit. Il EST cet homme de la savane. Il raconte son monde &mdash; les animaux, les &eacute;toiles, la majest&eacute; du lion. Le <strong>danseur seul</strong> illustre ce r&eacute;cit au centre de la sc&egrave;ne. Les danseuses se reposent. <strong>Il n'a pas encore vu la jeune femme.</strong> C'est son moment &agrave; lui, sa terre, son royaume.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128104; Danseur (seul)</span>
+                            <span class="danseur-tag repos">&#128131; Danseuses &mdash; repos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VOIX OFF 5 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Le premier regard</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~20s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Et puis, au d&eacute;tour d'un sentier, leurs regards se croisent pour la premi&egrave;re fois. Quelque chose na&icirc;t entre eux &mdash; quelque chose que seul le c&oelig;ur peut comprendre.&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; La danseuse (celle qui repr&eacute;sente &laquo;&nbsp;elle&nbsp;&raquo;) entre doucement c&ocirc;t&eacute; sc&egrave;ne pendant la narration.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. IL VIT EN TOI -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num mickael">5</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Il vit en toi</div>
+                        <div class="moment-artiste">Micka&euml;l Guedj &mdash; Le Roi Lion</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'28</span>
+                        <span class="moment-type type-mickael">Micka&euml;l</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Micka&euml;l chante. Le <strong>danseur et une danseuse</strong> sont sur sc&egrave;ne. Leurs regards se croisent. Ils dansent ensemble pour la premi&egrave;re fois &mdash; timidement, avec respect. Il lui montre la force de cette terre, la vie qui pulse en chacun. &laquo;&nbsp;Il vit en toi, il vit en moi.&nbsp;&raquo; C'est le premier &eacute;change, l'attirance qui na&icirc;t.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128104; Danseur</span>
+                            <span class="danseur-tag">&#128131; Danseuse (repr&eacute;sente &laquo;&nbsp;elle&nbsp;&raquo;)</span>
+                            <span class="danseur-tag repos">&#128131; Danseuse 2 &mdash; repos</span>
+                        </div>
+                        <a href="https://youtu.be/U0kimXFxCbo" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════ -->
+        <!-- ACTE IV — L'AMOUR                 -->
+        <!-- ══════════════════════════════════ -->
+        <div class="acte">
+            <div class="acte-header">
+                <span class="acte-num">Acte IV</span>
+                <span class="acte-name">L'Amour</span>
+            </div>
+
+            <!-- VOIX OFF 6 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Chacun pense &agrave; l'autre</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~25s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Ils se s&eacute;parent. Mais quelque chose a chang&eacute;. De son c&ocirc;t&eacute;, elle ferme les yeux et imagine un avenir &mdash; une famille, un enfant, le cycle &eacute;ternel de la vie. De l'autre, lui pense &agrave; elle, et son c&oelig;ur compose une m&eacute;lodie.&nbsp;&raquo;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. C'EST L'HISTOIRE DE LA VIE -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num myriam">6</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">C'est l'histoire de la vie</div>
+                        <div class="moment-artiste">Myriam Abel &mdash; Le Roi Lion</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'58</span>
+                        <span class="moment-type type-myriam">Myriam</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Myriam <strong>seule au centre de la sc&egrave;ne</strong>. Aucun danseur. C'est un moment intime et puissant. Elle pense &agrave; lui. Elle imagine le cycle de la vie &mdash; un enfant, une famille, l'&eacute;ternit&eacute;. &laquo;&nbsp;C'est l'histoire de la vie, le cycle &eacute;ternel, qu'un enfant b&eacute;ni rend immortel.&nbsp;&raquo; Les danseurs se reposent. Toute l'attention est sur Myriam et sa voix.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag repos">Aucun danseur &mdash; moment solo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. CHANSON D'AMOUR -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num mickael">7</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Chanson d'amour (composition &agrave; cr&eacute;er)</div>
+                        <div class="moment-artiste">Micka&euml;l Guedj &mdash; Composition originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3-5'</span>
+                        <span class="moment-type type-mickael">Micka&euml;l</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Micka&euml;l <strong>seul</strong>, c&ocirc;t&eacute; droit. Moment miroir avec Myriam. De son c&ocirc;t&eacute;, lui aussi pense &agrave; elle. Il chante l'amour qu'il ressent &mdash; pas une s&eacute;r&eacute;nade pour elle, mais une m&eacute;lodie qu'il porte en lui, pour lui-m&ecirc;me. Aucun danseur. Deux solitudes qui pensent l'une &agrave; l'autre sans le savoir.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag repos">Aucun danseur &mdash; moment solo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════ -->
+        <!-- ACTE V — L'UNION ET LE REVEIL     -->
+        <!-- ══════════════════════════════════ -->
+        <div class="acte">
+            <div class="acte-header">
+                <span class="acte-num">Acte V</span>
+                <span class="acte-name">L'Union &amp; le R&eacute;veil</span>
+            </div>
+
+            <!-- VOIX OFF 7 -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; L'amour les rappelle</div>
+                        <div class="moment-artiste">Narrateur + musique originale</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~20s</span>
+                        <span class="moment-type type-narr">Narration</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;L'amour les rappelle l'un vers l'autre. Rien ne peut s&eacute;parer deux c&oelig;urs qui battent au m&ecirc;me rythme. Ils se retrouvent&hellip;&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; Musique qui monte en intensit&eacute;. Micka&euml;l et Myriam se rapprochent du centre.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. L'AMOUR BRILLE SOUS LES ETOILES -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num duo">8</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">L'amour brille sous les &Eacute;toiles</div>
+                        <div class="moment-artiste">Micka&euml;l Guedj &amp; Myriam Abel &mdash; Le Roi Lion (Duo)</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'00</span>
+                        <span class="moment-type type-duo">Duo</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Le grand moment. Micka&euml;l et Myriam chantent <strong>c&ocirc;te &agrave; c&ocirc;te</strong>, d'abord chacun sur un c&ocirc;t&eacute;, puis se rejoignent au centre. Les <strong>2 danseuses</strong> incarnent la magie de l'instant &mdash; deux amoureux qui dansent ensemble. Vers la fin, Micka&euml;l et Myriam se retrouvent au milieu de la sc&egrave;ne.</p>
+                            <p style="margin-top:10px;"><em>&#127916; Id&eacute;e :</em> Laisser la voix off du dessin anim&eacute; (Pumba et Timon) au d&eacute;but, comme dans la version YouTube. Les deux chanteurs sont sur les c&ocirc;t&eacute;s pendant cette intro, puis viennent au centre pour chanter.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag repos">&#128104; Danseur &mdash; repos</span>
+                        </div>
+                        <a href="https://youtu.be/qYwJn8j9F0U" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. ALANE -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num danse">9</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Alane</div>
+                        <div class="moment-artiste">Wes &mdash; Danse</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'11</span>
+                        <span class="moment-type type-danse">Danse</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>Les <strong>3 danseurs</strong> c&eacute;l&egrave;brent l'amour. &laquo;&nbsp;Emm&egrave;ne-moi avec toi&nbsp;&raquo; &mdash; la joie &eacute;clate. C'est festif, lumineux, &eacute;nergique. Alane est une chanson d'amour en langue Duala (Cameroun) : &laquo;&nbsp;Il y a un amour, un sentiment si fort.&nbsp;&raquo; L'&eacute;nergie monte vers le final.</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag">&#128104; Danseur</span>
+                        </div>
+                        <a href="https://youtu.be/3gl5OEZ8j_o" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. MADAN -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num danse">10</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Madan</div>
+                        <div class="moment-artiste">Salif Keita &amp; Martin Solveig &mdash; Danse &middot; Final</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">3'15</span>
+                        <span class="moment-type type-danse">Final</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p><strong>Le grand final.</strong> Les 3 danseurs donnent tout. &laquo;&nbsp;Mon fils, ne t'inqui&egrave;te pas, tout ira bien.&nbsp;&raquo; C'est un message d'espoir universel. Le public tape dans les mains, l'&eacute;nergie est &agrave; son maximum. On finit sur la danse, la f&ecirc;te, la joie &mdash; pas sur une note calme.</p>
+                            <p style="margin-top:10px;">Vers la fin de Madan, la musique baisse doucement&hellip;</p>
+                        </div>
+                        <div class="moment-danseurs">
+                            <span class="danseur-tag">&#128131; Danseuse 1</span>
+                            <span class="danseur-tag">&#128131; Danseuse 2</span>
+                            <span class="danseur-tag">&#128104; Danseur</span>
+                        </div>
+                        <a href="https://youtu.be/PTwYFZ70tKU" target="_blank" class="yt-link"><span class="yt-icon">&#9654;</span> &Eacute;couter sur YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VOIX OFF FINALE -->
+            <div class="moment" onclick="toggleMoment(this)">
+                <div class="moment-head">
+                    <div class="moment-num narr">&#9998;</div>
+                    <div class="moment-info">
+                        <div class="moment-titre">Voix off &mdash; Le r&eacute;veil</div>
+                        <div class="moment-artiste">Narrateur + musique douce &middot; R&eacute;v&eacute;lation du r&ecirc;ve</div>
+                    </div>
+                    <div class="moment-meta">
+                        <span class="moment-duree">~15s</span>
+                        <span class="moment-type type-narr">Fin</span>
+                    </div>
+                    <div class="moment-toggle">&#9660;</div>
+                </div>
+                <div class="moment-body">
+                    <div class="moment-content">
+                        <div class="narration-box">
+                            <div class="narration-label">&#127897; Texte du narrateur &mdash; R&eacute;v&eacute;lation</div>
+                            <div class="narration-text">
+                                &laquo;&nbsp;Et la jeune femme ouvrit les yeux&hellip; Tout cela n'&eacute;tait qu'un r&ecirc;ve. Mais dans son c&oelig;ur, l'Afrique brillait pour toujours.&nbsp;&raquo;
+                            </div>
+                            <div class="narration-note">&#127925; Musique douce, la m&ecirc;me que l'ouverture. Myriam est au centre, elle ferme les yeux et sourit. Tous les artistes reviennent saluer. Applaudissements.</div>
+                        </div>
+                        <div class="moment-scene">
+                            <h4>&#127917; Mise en sc&egrave;ne</h4>
+                            <p>C'est la r&eacute;v&eacute;lation. Le public comprend que tout &eacute;tait un r&ecirc;ve. Myriam ferme les yeux, sourit. Un silence de quelques secondes. Puis tous les artistes (chanteurs + danseurs) reviennent sur sc&egrave;ne pour le salut final.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PLAN DE SCENE ═══════════ -->
+    <section class="plan-scene" id="scene">
+        <h2 class="section-title">Plan de sc&egrave;ne</h2>
+        <div class="section-intro">Sc&egrave;ne en longueur &middot; Place de Cagnes-sur-Mer &middot; Ext&eacute;rieur &middot; 15h30</div>
+
+        <div class="scene-diagram">
+            <div class="scene-stage">
+                <div class="scene-label">Sc&egrave;ne</div>
+                <div class="scene-positions">
+                    <div class="scene-pos">
+                        <div class="scene-pos-icon">&#127925;</div>
+                        <div class="scene-pos-name"><strong>Myriam</strong><br>C&ocirc;t&eacute; gauche<br><em style="font-size:0.85em;color:#666;">(le r&ecirc;ve)</em></div>
+                    </div>
+                    <div class="scene-pos">
+                        <div class="scene-pos-icon">&#128131;&#128131;&#128131;</div>
+                        <div class="scene-pos-name"><strong>Danseurs</strong><br>Centre</div>
+                    </div>
+                    <div class="scene-pos">
+                        <div class="scene-pos-icon">&#127908;</div>
+                        <div class="scene-pos-name"><strong>Micka&euml;l</strong><br>C&ocirc;t&eacute; droit<br><em style="font-size:0.85em;color:#666;">(la savane)</em></div>
+                    </div>
+                </div>
+            </div>
+            <div class="scene-public">&#9660; &nbsp; PUBLIC &nbsp; &#9660;</div>
+        </div>
+    </section>
+
+    <!-- ═══════════ LEGENDE ═══════════ -->
+    <section class="legende">
+        <h2 class="section-title">R&eacute;sum&eacute;</h2>
+        <div class="section-intro">10 morceaux &middot; 8 narrations &middot; ~40 minutes</div>
+        <div class="legende-grid">
+            <div class="legende-item"><div class="legende-dot" style="background:var(--narr)"></div><span class="legende-label">8 voix off</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--myriam)"></div><span class="legende-label">3 titres Myriam</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--mickael)"></div><span class="legende-label">3 titres Micka&euml;l</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--danse)"></div><span class="legende-label">3 danses</span></div>
+            <div class="legende-item"><div class="legende-dot" style="background:var(--duo)"></div><span class="legende-label">1 duo final</span></div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+    <p>&laquo;&nbsp;Le R&ecirc;ve de Savane&nbsp;&raquo; &mdash; Spectacle musical pour enfants</p>
+    <p>Auteur &amp; Compositeur : <strong>Micka&euml;l Guedj</strong></p>
+    <p class="copy">&copy; 2026 Micka&euml;l Guedj &mdash; Tous droits r&eacute;serv&eacute;s</p>
+</footer>
+
+<script>
+// ═══ SPLASH ═══
+function enterPage() {
+    document.getElementById('splash').classList.add('out');
+    setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 900);
+}
+
+// ═══ PLEIN ECRAN ═══
+function toggleFS() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen().catch(() => {});
+    }
+}
+
+// ═══ ACCORDEONS ═══
+function toggleMoment(el) {
+    el.classList.toggle('open');
+}
+
+// Ouvrir tous les moments au clic sur le titre de section
+document.querySelectorAll('.acte-header').forEach(h => {
+    h.style.cursor = 'pointer';
+    h.addEventListener('click', () => {
+        const acte = h.parentElement;
+        const moments = acte.querySelectorAll('.moment');
+        const allOpen = [...moments].every(m => m.classList.contains('open'));
+        moments.forEach(m => {
+            if (allOpen) m.classList.remove('open');
+            else m.classList.add('open');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
