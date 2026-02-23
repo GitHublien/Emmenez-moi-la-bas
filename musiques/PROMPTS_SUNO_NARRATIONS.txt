@@ -1,0 +1,392 @@
+═══════════════════════════════════════════════════════════════════════════════
+    📢 PROMPTS SUNO — NARRATIONS DU SPECTACLE SAVANE
+    🎭 Spectacle — 25 février 2026 — Cagnes-sur-Mer
+    ⚠️  FICHIER LOCAL UNIQUEMENT — NE PAS POUSSER SUR GITHUB
+═══════════════════════════════════════════════════════════════════════════════
+
+Ce fichier contient tous les prompts Suno pour générer les voix off du spectacle.
+Chaque voix off a 2 sections : STYLE et LYRICS.
+
+IMPORTANT :
+- Copier-coller le STYLE dans le champ "Style of Music" de Suno
+- Copier-coller les LYRICS dans le champ "Lyrics" de Suno
+- Générer en mode "Custom" pour avoir le contrôle total
+- Les pistes sont à capella (pas de musique) sauf indication contraire
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    � VOIX OFF 1 — OUVERTURE : « Ce soir, une jeune femme ferme les yeux »
+    🎙️ Voix d'homme — narrateur doux, onirique
+    🎬 ACTE I — L'Appel
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+deep male narrator, soft dreamy storyteller, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. SOFT. DREAMY.]
+Ce soir, une jeune femme ferme les yeux.
+Elle rêve d'une terre lointaine, où le soleil peint le ciel de teintes dorées,
+où les étoiles s'allument une à une quand la nuit enveloppe la savane.
+[PAUSE]
+Elle tend les bras… et s'envole.
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🌍 VOIX OFF 2 — L'ARRIVÉE EN AFRIQUE : « Et soudain, la voilà transportée »
+    🎙️ Voix d'homme — narrateur énergique
+    🎬 ACTE II — La Découverte
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+deep male narrator, energetic storyteller, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. ENERGETIC. VIBRANT.]
+Et soudain, la voilà transportée au cœur de l'Afrique.
+La terre vibre sous ses pieds, les tambours résonnent,
+et la savane s'ouvre devant elle comme un monde nouveau.
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    ✨ VOIX OFF 3 — FASCINATION : « Cette terre la fascine »
+    🎙️ Voix d'homme — narrateur envoûtant
+    🎬 ACTE II — La Découverte
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+deep male narrator, mysterious enchanting, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. MYSTERIOUS. ENCHANTING.]
+Cette terre la fascine.
+Ses couleurs, ses parfums, sa beauté sauvage…
+[PAUSE]
+Quelque chose l'attire ici, quelque chose de plus grand qu'elle.
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🦁 VOIX OFF 4 — LE FILS DE LA SAVANE : « Mais dans cette savane vit un homme »
+    🎙️ Voix d'homme — narrateur majestueux, parle aux enfants
+    🎬 ACTE III — La Rencontre
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+deep male narrator, majestic noble storyteller, speaking to children, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. DEEP. MAJESTIC. TO CHILDREN.]
+Mais dans cette savane vit un homme.
+Un fils de cette terre, qui connaît chaque étoile par son nom,
+chaque souffle du vent.
+[PAUSE]
+Écoutez bien les enfants, car il a une histoire à vous raconter...
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    💫 VOIX OFF 5 — LE PREMIER REGARD : « Leurs regards se croisent »
+    🎙️ 2 PROMPTS À CAPELLA → enchaîner dans l'ordre 5A → 5B
+    🎭 Jeu d'acteur : le danseur et la danseuse jouent la scène, le chanteur reste côté cour
+    ⚡ Pas de musique de fond — voix sèches uniquement
+═══════════════════════════════════════════════════════════════════════════════
+
+    📌 VOIX OFF 5A — NARRATION + VOIX HOMME (le danseur s'approche de la danseuse)
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+cinematic narration then deep male voice, intimate, short
+
+--- LYRICS ---
+[NARRATION] [SPOKEN. NEUTRAL. CINEMATIC.]
+Leurs regards se croisent. Un silence. Puis... tout commence.
+[MALE VOICE] [SPOKEN. DEEP. WARM.]
+Mamela... Cette terre a une mémoire.
+Chaque souffle du vent, chaque étoile...
+Il vit en toi. Il vit en moi.
+[End]
+
+═══════════════════════════════════════════════════════════════════════════════
+    💫 VOIX OFF 5B — LE PREMIER REGARD : « Voix Femme »
+    🎙️ VOIX DE FEMME — Audrey, troublée, attirée
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+female narrator, tender mysterious, short
+
+--- LYRICS ---
+[FEMALE VOICE] [SPOKEN. SOFT. WONDERING.]
+Il vit en moi...
+[PAUSE]
+Il vit... en toi ?
+[End]
+
+⚠️ ORDRE DE LECTURE : 5A → 5B → puis le chanteur entre avec "Il vit en toi"
+   Coller 5A et 5B dans Audacity sans chevauchement, sans musique entre eux.
+   Silence total entre les deux pistes (0.5s max).
+   → Le chanteur entre en chant immédiatement après la dernière réplique de 5B.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    💔 VOIX OFF 6 — CHACUN PENSE À L'AUTRE : « Ils se séparent »
+    🎙️ 2 PROMPTS SÉPARÉS (femme + homme) → mixer dans Audacity
+═══════════════════════════════════════════════════════════════════════════════
+
+    📌 VOIX OFF 6A — NARRATION SUR L'INTRO MUSICALE DE « C'est l'histoire de la vie »
+    ⚠️ Ce texte est dit PAR-DESSUS l'introduction instrumentale de la chanson
+    ⚠️ À capella Suno — tu poses la musique africaine dessous dans Reaper
+
+--- STYLE ---
+a cappella spoken word, no music, no instruments, no background,
+pure voice only, voiceover forward, European French, Parisian accent,
+female narrator, neutral cinematic, storyteller, short
+
+--- LYRICS ---
+[NARRATION] [FEMALE VOICE] [SPOKEN. SOFT. NEUTRAL.]
+Il avait sa terre. Ses étoiles.
+[PAUSE]
+Il s'éloigne... doucement.
+[PAUSE]
+Mais son souvenir... il brille en elle.
+Comme un soleil.
+[PAUSE]
+Elle ferme les yeux... et voit déjà.
+Un enfant béni. Avec lui.
+Ce cycle éternel.
+C'est l'histoire de la vie.
+[End]
+
+    📌 VOIX OFF 6B — PARTIE HOMME (après "C'est l'histoire de la vie", avant "Est-ce toi")
+
+--- STYLE ---
+spoken word with ethereal African dream music, soft kalimba, distant kora,
+gentle djembe heartbeat, African tribal choir voices (oohs, aahs), no singing,
+voiceover forward, European French, Parisian accent,
+deep male narrator, mysterious dreamlike, African fantasy atmosphere,
+African choir background only, mystical tribal, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. DEEP. MYSTERIOUS.]
+De l'autre côté...
+[PAUSE]
+Il pense à elle comme on rêve d'une étoile.
+[PAUSE]
+Il voudrait lui dire... mais les mots se perdent dans le vent.
+A-t-il un secret ? Un secret que même la nuit n'ose murmurer.
+[PAUSE]
+Les étoiles savent ce que je n'ose pas dire.
+[PAUSE]
+Alors... il chante son amour naissant.
+[End]
+
+⚠️ NOTE : Cette voix off introduit "Est-ce toi" (Mickaël). Elle plante le mystère
+   du "secret" qui sera révélé plus tard dans le duo "L'amour brille sous les étoiles".
+   Le secret = c'est un rêve. Le subconscient le sait, mais pas elle.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🌀 VOIX OFF 7 — ENSORCELÉE : « Elle danse dans l'Afrique fantasmagorique »
+    🎙️ Voix de femme — ensorcelante, vaudou africain doux
+    🎬 ACTE V — L'Union & le Réveil
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+spoken word over south african choral, Zulu chanting, call and response,
+large tribal choir, polyrhythmic djembe, talking drums, hypnotic percussion,
+mbira, kalimba, distant kora, spiritual African voices,
+voiceover forward, European French, Parisian accent,
+female narrator, enchanted mysterious, no singing in French,
+African tribal mysticism, bewitching dreamlike, short
+
+--- LYRICS ---
+[NARRATION] [FEMALE VOICE] [SPOKEN. SOFT. ENCHANTED. MYSTERIOUS.]
+Elle a entendu sa voix... comme un écho dans le vent.
+[PAUSE]
+Ensorcelée par la beauté de cette terre, par ce qu'elle ressent,
+elle danse avec les esprits de la savane.
+[PAUSE]
+Dans cet Afrique fantasmagorique... tout est possible.
+[End]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    ✨ VOIX OFF 8 — LES RETROUVAILLES : « Et soudain... ils sont là. Ensemble. »
+    🎙️ Voix d'homme — narrateur mystérieux et tendre
+    🎬 ACTE V — L'Union & le Réveil (avant "L'amour brille sous les étoiles")
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+spoken word with romantic African night music, soft kora melody,
+gentle kalimba, warm strings, distant choir whispers,
+starlight atmosphere, magical reunion, intimate and warm,
+voiceover forward, European French, Parisian accent,
+deep male narrator, mysterious tender, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. DEEP. TENDER. MYSTERIOUS.]
+Et soudain... ils sont là. Ensemble.
+[PAUSE]
+Comme une apparition... la savane les a réunis.
+[PAUSE]
+Était-ce cela, le secret que même les étoiles n'osaient murmurer ?
+[PAUSE]
+L'amour brille... sous les étoiles.
+[End]
+
+⚠️ NOTE : Cette voix off introduit le duo "L'amour brille sous les étoiles".
+   Entrée en miroir : Mickaël+Biba côté cour / Myriam+Audrey côté jardin.
+   Le public croit que le secret = les retrouvailles. Le vrai secret (le rêve) sera révélé dans la VO 9.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    � VOIX OFF 8B — LA TERRE DANSE : « Ils s'éloignent ensemble... »
+    🎙️ 2 PROMPTS SÉPARÉS (homme + femme) → mixer dans Reaper
+    🎬 ACTE V — Sur la fin de "L'amour brille sous les étoiles", avant Madan
+    ⚠️ À poser sur la musique de fin de "L'amour brille" dans Reaper
+═══════════════════════════════════════════════════════════════════════════════
+
+    📌 VOIX OFF 8B-HOMME — PARTIE HOMME
+
+--- STYLE ---
+spoken word, solo voice only, no music, no instruments, no background,
+no harmonies, no backing vocals, no humming, no singing,
+voiceover forward, European French, Parisian accent,
+male narrator, warm joyful, uplifting, smiling tone, short
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. WARM. JOYFUL. UPLIFTING.]
+Regardez-les... pendant leur idylle, la savane les porte, les enveloppe.
+[PAUSE]
+Ils s'éloignent ensemble... mais la terre n'a pas fini de danser.
+[End]
+
+    📌 VOIX OFF 8B-FEMME — PARTIE FEMME
+
+--- STYLE ---
+narration only, voice acting, audiobook style, NOT singing,
+solo female voice only, no music, no instruments, no background,
+no harmonies, no backing vocals, no humming, no melody,
+voiceover forward, European French, Parisian accent,
+female narrator, warm joyful, smiling tone, short
+
+--- LYRICS ---
+[NARRATION] [FEMALE VOICE] [SPOKEN ONLY. NOT SINGING. WARM. JOYFUL.]
+Et oui... c'est la fête des esprits de la savane.
+[PAUSE]
+Car ici... tout vibre, tout vit, tout danse.
+[End]
+
+⚠️ NOTE : Cette voix off joue pendant la FIN de "L'amour brille sous les étoiles".
+   Mickaël et Myriam descendent dans le public puis repartent en coulisses ensemble.
+   Marion rejoint Biba et Audrey sur scène. Enchaîne directement sur Madan.
+   Mixer homme puis femme dans Reaper, posé sur la musique de fin du duo.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    🔮 VOIX OFF 9 — RÉVÉLATION + MESSAGE FINAL
+    🎙️ Voix d'homme (révélation) PUIS voix de femme (message positif)
+    🎬 ACTE V — Après le FREEZE de Madan → révélation → message → merci
+    ⚠️ UN SEUL PROMPT SUNO — la musique évolue et monte en puissance
+═══════════════════════════════════════════════════════════════════════════════
+
+--- STYLE ---
+spoken word over deep African mystical music building to uplifting celebration,
+massive tribal drums, ethereal mbira, haunting kora, distant thunder,
+African dreamlike fantasy, otherworldly, grandiose, epic revelation,
+polyrhythmic djembe crescendo, mystical choir whispers building to joyful choir,
+rising strings, triumphant horns, emotional climax, grand finale,
+voiceover forward, European French, Parisian accent,
+male and female narrators, mysterious then warm positive, medium length
+
+--- LYRICS ---
+[NARRATION] [MALE VOICE] [SPOKEN. DEEP. MYSTERIOUS. POWERFUL. DRAMATIC.]
+Regardez... plus personne ne bouge.
+[PAUSE]
+Tout ceci... n'était qu'un mirage.
+[PAUSE]
+Un songe... un rêve... son rêve.
+[PAUSE]
+La savane, les danses, les chants, les étoiles...
+tout vivait dans son esprit.
+[PAUSE]
+Et vous... sans le savoir...
+vous êtes entrés dans son rêve.
+[PAUSE]
+Vous avez voyagé avec elle... avec eux...
+dans ce rêve de savane.
+[PAUSE]
+Le secret que même les étoiles n'osaient murmurer...
+c'était cela.
+[PAUSE]
+Vous étiez... dans son rêve.
+[PAUSE]
+[NARRATION] [FEMALE VOICE] [SPOKEN. WARM. POSITIVE. EMOTIONAL. SMILING.]
+L'Afrique sera toujours là... dans son cœur.
+[PAUSE]
+Aujourd'hui, ici à Cagnes-sur-Mer...
+vous avez voyagé avec elle... avec eux...
+dans ce rêve magnifique.
+[PAUSE]
+Et souvenez-vous, les enfants...
+les plus beaux voyages commencent dans nos rêves.
+[PAUSE]
+Alors rêvez... rêvez grand... rêvez loin.
+[PAUSE]
+Merci à vous tous.
+[PAUSE]
+Merci à nos artistes.
+[End]
+
+⚠️ NOTE : C'est LE moment clé du spectacle — la grande révélation + le message final.
+   FREEZE : tout le monde figé sauf Myriam.
+   Mickaël en demi-profil, main tendue. Myriam enlève sa main, passe entre les figés.
+   Pendant la voix homme : Myriam se replace à côté de Mickaël et SE FIGE AUSSI.
+   Pendant la voix femme : TOUT LE MONDE est figé (y compris Myriam).
+   La musique évolue : fantasmagorique mystérieuse → positive et puissante.
+   Après "Merci à nos artistes" → les artistes se défigent → saluts → présentation.
+   Présentation dans l'ordre : Marion, Biba, Audrey, Myriam Abel, Mickaël Guedj
+   (créateur du spectacle, auteur-compositeur-interprète).
+   Puis : Claudel (producteur), merci à la régie, merci à la mairie de Cagnes-sur-Mer.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+    📝 NOTES IMPORTANTES
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Utiliser le mode "Custom" dans Suno pour avoir le contrôle total
+2. Les voix doivent être en français parisien, accent neutre
+3. Les pauses [PAUSE] et [BEAT] sont importantes pour le rythme
+4. Mixer les pistes dans Audacity/Reaper selon les indications
+5. Certaines VO ont de la musique intégrée (6B, 7, 8), d'autres sont à capella
+
+STRUCTURE COMPLÈTE DES VOIX OFF :
+- Voix Off 1 : Ouverture (rêve commence) — homme
+- Voix Off 2 : Arrivée en Afrique — homme
+- Voix Off 3 : Fascination — homme
+- Voix Off 4 : Le fils de la savane — homme
+- Voix Off 5A : Premier regard (le danseur s'approche) — homme
+- Voix Off 5B : Premier regard (la danseuse) — homme
+- Voix Off 6A : Chacun pense à l'autre — femme (sur intro "C'est l'histoire de la vie")
+- Voix Off 6B : Le secret — homme (avant "Est-ce toi") + musique rêve africaine
+- Voix Off 7 : Ensorcelée — femme (avant Alane) + chœurs tribaux zoulou
+- Voix Off 8 : Les retrouvailles — homme (avant "L'amour brille") + nuit étoilée
+- Voix Off 8B : La terre danse — homme + femme (sur fin "L'amour brille", avant Madan)
+- Voix Off 9 : Révélation + Message final — homme PUIS femme (1 seul prompt, musique qui évolue)
+
+═══════════════════════════════════════════════════════════════════════════════
+    FIN DU FICHIER
+═══════════════════════════════════════════════════════════════════════════════
