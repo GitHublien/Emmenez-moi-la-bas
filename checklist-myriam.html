@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Myriam — Spectacle Savane</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #1a1a1a;
+            --text: #e0e0e0;
+            --accent: #e040a0;
+            --accent-light: #ff69b4;
+            --border: rgba(224,64,160,0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(224,64,160,0.1), rgba(224,64,160,0.05));
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 2px solid var(--border);
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            font-size: 1.3em;
+            color: #aaa;
+            font-style: italic;
+        }
+        .role-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: rgba(224,64,160,0.2);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-size: 1.1em;
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+        .section {
+            background: var(--card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: var(--accent-light);
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+        .moment-card {
+            background: rgba(224,64,160,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        .moment-title {
+            font-size: 1.5em;
+            color: var(--accent-light);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .audio-player {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(224,64,160,0.08);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .audio-label {
+            font-size: 1.1em;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            outline: none;
+        }
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        .info-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+        .info-list li::before {
+            content: '♪';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .important-box {
+            background: rgba(255,200,50,0.1);
+            border-left: 4px solid #f0c030;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        .important-box strong {
+            color: #f0c030;
+        }
+        .critical-box {
+            background: rgba(255,50,50,0.1);
+            border-left: 4px solid #ff3333;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        .critical-box strong {
+            color: #ff6666;
+        }
+        .note {
+            font-style: italic;
+            color: #999;
+            font-size: 1.05em;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: rgba(224,64,160,0.15);
+            color: var(--accent-light);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(224,64,160,0.25);
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 MYRIAM</h1>
+            <div class="subtitle">Spectacle "Emmenez-moi là-bas"</div>
+            <div class="role-badge">🎤 CHANTEUSE</div>
+        </header>
+
+        <div class="section">
+            <h2>🎵 Tes chansons dans le spectacle</h2>
+
+            <div class="moment-card">
+                <div class="moment-title">✅ MOMENT 1 — Emmenez-moi (TOI !)</div>
+                <div class="audio-player">
+                    <div class="audio-label">🎧 Écouter : Voix off 1 + Emmenez-moi</div>
+                    <audio controls preload="metadata">
+                        <source src="musiques/01-voix-off-1-emmenez-moi.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <ul class="info-list">
+                    <li><strong>Entrée :</strong> Tu entres côté jardin (gauche) à la fin de la voix off 1</li>
+                    <li><strong>Placement :</strong> Côté jardin (gauche), tu chantes</li>
+                    <li><strong>Rôle :</strong> C'est le départ du voyage — tu veux partir, tu rêves d'Afrique</li>
+                    <li><strong>Avec :</strong> Audrey entre pendant le 1er couplet (elle est ton miroir dansé)</li>
+                    <li><strong>Sortie :</strong> Tu quittes la scène côté jardin à la fin (pendant la voix off 2)</li>
+                </ul>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-title">✅ MOMENT 3 — Africa (TOI !)</div>
+                <div class="audio-player">
+                    <div class="audio-label">🎧 Écouter : Voix off 3 + Africa</div>
+                    <audio controls preload="metadata">
+                        <source src="musiques/03-voix-off-3-africa.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <ul class="info-list">
+                    <li><strong>Entrée :</strong> Tu entres côté jardin (gauche) pendant la voix off 3, tu rejoins le centre</li>
+                    <li><strong>Placement :</strong> Au centre, tu chantes</li>
+                    <li><strong>Avec :</strong> Audrey + Marion entrent dès le début et dansent autour de toi</li>
+                    <li><strong>Sortie :</strong> Tu quittes la scène côté jardin à la fin</li>
+                </ul>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-title">✅ MOMENT 6 — C'est l'histoire de la vie (TOI !)</div>
+                <div class="audio-player">
+                    <div class="audio-label">🎧 Écouter : Voix off 6 + C'est l'histoire de la vie</div>
+                    <audio controls preload="metadata">
+                        <source src="musiques/06-voix-off-6-histoire-de-la-vie.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <ul class="info-list">
+                    <li><strong>Entrée :</strong> Tu entres seule côté jardin (gauche) pendant l'intro</li>
+                    <li><strong>Placement :</strong> Seule au centre, tu chantes</li>
+                    <li><strong>Rôle :</strong> Tu imagines le cycle de la vie — un enfant, une famille, un avenir sous le ciel d'Afrique</li>
+                    <li><strong>Sortie :</strong> Tu quittes la scène côté jardin à la fin</li>
+                </ul>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-title">✅ MOMENT 9 — L'amour brille sous les étoiles (DUO avec Mickaël)</div>
+                <div class="audio-player">
+                    <div class="audio-label">🎧 Écouter : Voix off 9 + L'amour brille + Madan</div>
+                    <audio controls preload="metadata">
+                        <source src="musiques/09-voix-off-9-amour-brille-madan.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <ul class="info-list">
+                    <li><strong>Entrée :</strong> Tu entres côté jardin (gauche) avec Audrey pendant la voix off 8B (entrée en miroir)</li>
+                    <li><strong>Placement :</strong> Au centre face à face avec Mickaël</li>
+                    <li><strong>Rôle :</strong> Le grand moment — duo d'amour</li>
+                    <li><strong>Avec :</strong> Biba et Audrey dansent en arrière-plan</li>
+                    <li><strong>Action spéciale :</strong> Vers le milieu, vous descendez dans le public avec Mickaël pour chanter parmi les spectateurs</li>
+                    <li><strong>Sortie :</strong> Sur la fin de la chanson, vous remontez du public et repartez en coulisses <strong>ensemble</strong> (en amoureux)</li>
+                </ul>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-title">✅ MOMENT 10 — Madan (Salif Keita) — FREEZE FINAL</div>
+                <ul class="info-list">
+                    <li><strong>Entrée :</strong> Tu reviens sur scène pour la grande fête (Madan)</li>
+                    <li><strong>Placement :</strong> Au centre avec Mickaël, entourés de Marion, Biba et Audrey</li>
+                    <li><strong>Rôle :</strong> Tu CHANTES avec Mickaël — vous ne dansez PAS (seuls les 3 danseurs dansent)</li>
+                    <li><strong>Vers la fin :</strong> Mickaël et toi vous rejoignez au centre et vous tenez la main</li>
+                </ul>
+                <div class="critical-box">
+                    <strong>🔴 MOMENT CRITIQUE — FREEZE FINAL</strong><br><br>
+                    C'est le moment le plus important du spectacle :<br><br>
+                    1. À la fin de Madan, tout le monde se fige — <strong>SAUF TOI</strong><br>
+                    2. Tu es la seule à bouger pendant la voix off 9 (révélation)<br>
+                    3. Tu passes entre les statues vivantes, tu cherches des réponses<br>
+                    4. La voix femme chante : "Vous étiez... dans son rêve..." → tu te prépares<br>
+                    5. <strong>SIGNAL</strong> : Voix homme dit "Et elle aussi... se fige... dans son propre songe" → <strong>TU TE FIGES !</strong><br>
+                    6. Tu restes figée jusqu'à ce que ton nom soit prononcé pour les saluts
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Points importants</h2>
+
+            <h3>Entrées/Sorties</h3>
+            <ul class="info-list">
+                <li><strong>Côté jardin</strong> = gauche (côté femmes) — c'est TON côté</li>
+                <li><strong>Côté cour</strong> = droit (côté hommes)</li>
+                <li><strong>Toi (Myriam)</strong> : Tu entres toujours côté jardin (gauche)</li>
+            </ul>
+
+            <h3>Tes chansons</h3>
+            <ul class="info-list">
+                <li><strong>Emmenez-moi</strong> — Composition originale (Mickaël Guedj)</li>
+                <li><strong>Africa</strong> — Reprise (Rose Laurens)</li>
+                <li><strong>C'est l'histoire de la vie</strong> — Le Roi Lion</li>
+                <li><strong>L'amour brille sous les étoiles</strong> — Le Roi Lion (duo avec Mickaël)</li>
+            </ul>
+
+            <h3>Ordre des saluts (finale)</h3>
+            <div class="important-box">
+                Marion, Biba, Audrey → saluent ensemble<br>
+                <strong>Myriam (toi)</strong> → tu salues seule<br>
+                Mickaël → salue en dernier<br><br>
+                Ensuite tous ensemble : geste vers la régie (JB) + inclinaison finale
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Notes de répétition</h2>
+            <ul class="info-list">
+                <li>Emmenez-moi = le départ du voyage, moment féminin et intime</li>
+                <li>Africa = tu es au centre, Audrey et Marion dansent autour de toi</li>
+                <li>C'est l'histoire de la vie = seule, tu imagines un enfant, une famille</li>
+                <li>Duo = descente dans le public avec Mickaël, moment magique</li>
+                <li>Madan = tu CHANTES avec Mickaël, vous ne dansez PAS (seuls les 3 danseurs dansent)</li>
+                <li><strong>FREEZE FINAL</strong> = TU ES LA CLÉ DU SPECTACLE — seule à bouger, puis tu te figes sur le signal</li>
+            </ul>
+        </div>
+
+        <footer>
+            <a href="deroulement-spectacle.html" class="back-link">← Retour au plan complet</a>
+            <p><strong>RDV demain 25 février à 11h pour la répétition générale</strong> 🎭</p>
+            <p style="margin-top:10px; color:#555;">© 2026 Mickaël Guedj — Spectacle "Emmenez-moi là-bas"</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const audios = document.querySelectorAll('audio');
+        audios.forEach(audio => {
+            audio.addEventListener('play', function() {
+                audios.forEach(otherAudio => {
+                    if (otherAudio !== audio) {
+                        otherAudio.pause();
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
