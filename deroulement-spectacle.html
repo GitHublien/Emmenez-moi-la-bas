@@ -527,20 +527,32 @@
 
         /* ═══ FICHIER MP3 ═══ */
         .fichier-mp3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             margin-top: 14px;
-            padding: 12px 18px;
+            padding: 16px 18px;
             background: rgba(76,175,80,0.08);
             border: 1px solid rgba(76,175,80,0.25);
             border-radius: 10px;
+        }
+        .fichier-mp3-titre {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.15em;
             color: #8bc34a;
+            margin-bottom: 12px;
         }
-        .fichier-mp3 strong { color: #aed581; }
+        .fichier-mp3-titre strong { color: #aed581; }
         .fichier-mp3-icon { font-size: 1.3em; }
+        .fichier-mp3 audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            outline: none;
+        }
+        .fichier-mp3 audio::-webkit-media-controls-panel {
+            background: rgba(76,175,80,0.15);
+        }
 
         /* ═══ MESSAGE EQUIPE ═══ */
         .message-equipe {
@@ -956,7 +968,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 1 (ouverture) + Emmenez-moi</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 1 (ouverture) + Emmenez-moi</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/01-voix-off-1-emmenez-moi.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1068,7 +1086,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 2 + Y&eacute;k&eacute; Y&eacute;k&eacute;</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 2 + Yéké Yéké</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/02-voix-off-2-yeke-yeke.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1158,7 +1182,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 3 + Africa</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 3 + Africa</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/03-voix-off-3-africa.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1257,7 +1287,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 4 + Dans la savane</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 4 + Dans la savane</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/04-voix-off-4-dans-la-savane.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1346,7 +1382,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 5 + Il vit en toi</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 5 + Il vit en toi</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/05-voix-off-5-il-vit-en-toi.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1461,7 +1503,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 6 + C'est l'histoire de la vie</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 6 + C'est l'histoire de la vie</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/06-voix-off-6-histoire-de-la-vie.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1558,7 +1606,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 7 + Est-ce toi</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 7 + Est-ce toi</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/07-voix-off-7-est-ce-toi.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1658,7 +1712,13 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 8 + Alane (Wes)</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 8 + Alane (Wes)</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/08-voix-off-8-alane.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte de la narratrice</div>
                             <div class="narration-text">
@@ -1754,7 +1814,14 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 9 + L'amour brille sous les &eacute;toiles + Madan</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 9 + L'amour brille sous les étoiles + Madan (Salif Keita)</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/09-voix-off-9-amour-brille-madan.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                            <div style="margin-top:8px; padding:8px; background:rgba(255,200,50,0.1); border-left:3px solid #f0c030; border-radius:4px; font-size:0.95em; color:#ccc;">&#9888; Ce fichier contient <strong>2 chansons</strong> : L'amour brille sous les étoiles (duo) + Madan de Salif Keita</div>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1941,7 +2008,14 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
-                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 10 (freeze + r&eacute;v&eacute;lation + saluts) &mdash; voix off uniquement</strong></div>
+                        <div class="fichier-mp3">
+                            <div class="fichier-mp3-titre"><span class="fichier-mp3-icon">&#127911;</span> <strong>Voix off 10 (freeze + révélation + saluts) — FINALE</strong></div>
+                            <audio controls preload="metadata">
+                                <source src="musiques/10-voix-off-10-freeze-final.mp3" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                            <div style="margin-top:8px; padding:8px; background:rgba(224,64,160,0.1); border-left:3px solid #e040a0; border-radius:4px; font-size:0.95em; color:#ccc;">&#10024; <strong>VOIX OFF UNIQUEMENT</strong> — Pas de chanson après. C'est la voix off qui termine le spectacle avec le freeze, la révélation et les saluts.</div>
+                        </div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte complet &mdash; Alternance HOMME / FEMME / CH&OElig;UR</div>
                             <div class="narration-note">&#127925; Musique africaine fantasmagorique EXTRAORDINAIRE &mdash; djemb&eacute;, mbira, kora, tonnerre lointain, ch&oelig;urs mystiques. Le moment le plus puissant du spectacle.</div>
