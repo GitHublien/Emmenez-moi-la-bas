@@ -525,6 +525,66 @@
             font-style: italic;
         }
 
+        /* ═══ FICHIER MP3 ═══ */
+        .fichier-mp3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+            padding: 12px 18px;
+            background: rgba(76,175,80,0.08);
+            border: 1px solid rgba(76,175,80,0.25);
+            border-radius: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: #8bc34a;
+        }
+        .fichier-mp3 strong { color: #aed581; }
+        .fichier-mp3-icon { font-size: 1.3em; }
+
+        /* ═══ MESSAGE EQUIPE ═══ */
+        .message-equipe {
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(76,175,80,0.08), rgba(76,175,80,0.03));
+            border: 2px solid rgba(76,175,80,0.3);
+            border-radius: 16px;
+        }
+        .message-equipe h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: #8bc34a;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+        .message-equipe p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            color: #ccc;
+            line-height: 2;
+            margin-bottom: 12px;
+        }
+        .message-equipe ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+        .message-equipe li {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: #ccc;
+            line-height: 2.2;
+            padding-left: 24px;
+            position: relative;
+        }
+        .message-equipe li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #8bc34a;
+            font-weight: bold;
+        }
+
         /* ═══ YOUTUBE ═══ */
         .yt-link {
             display: inline-flex;
@@ -793,6 +853,33 @@
         </div>
     </section>
 
+    <!-- ═══════════ MESSAGE EQUIPE ═══════════ -->
+    <div class="message-equipe">
+        <h3>&#128220; Message &agrave; toute l'&eacute;quipe</h3>
+        <p>Bonjour &agrave; tous ! Voici le <strong>plan complet du spectacle</strong>. Prenez le temps de le lire tranquillement &mdash; tout est d&eacute;taill&eacute; ici.</p>
+        <p><strong>Ce n'est pas compliqu&eacute;.</strong> Le travail est d&eacute;j&agrave; bien m&acirc;ch&eacute;. Tout est &eacute;crit, tout est pr&eacute;vu. Il faut juste bien lire et s'impr&eacute;gner.</p>
+        <ul>
+            <li><strong>Danseurs :</strong> vous connaissez d&eacute;j&agrave; vos chor&eacute;graphies &mdash; ici vous trouverez les entr&eacute;es, sorties et placements</li>
+            <li><strong>Chanteurs :</strong> vous connaissez vos chansons &mdash; ici vous trouverez les moments cl&eacute;s et la mise en sc&egrave;ne</li>
+            <li><strong>Les fichiers MP3</strong> sont envoy&eacute;s dans le groupe &mdash; chaque fichier contient la voix off + la chanson qui suit, dans l'ordre</li>
+            <li><strong>&Eacute;coutez les MP3</strong> en suivant ce plan pour bien comprendre l'encha&icirc;nement</li>
+        </ul>
+        <p>Le <strong>25 f&eacute;vrier</strong>, on se retrouve &agrave; <strong>11h</strong> sur place. On se remettra les id&eacute;es en place ensemble avant de faire un filage. Le jour J, je vous donnerai quelques petites indications si vous le permettez.</p>
+        <p style="color:var(--or); font-size:1.3em; margin-top:16px;"><strong>&#127925; 10 fichiers MP3 &agrave; &eacute;couter dans l'ordre :</strong></p>
+        <ol style="margin:12px 0; padding-left:24px;">
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 1 (ouverture) + Emmenez-moi</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 2 + Y&eacute;k&eacute; Y&eacute;k&eacute;</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 3 + Africa</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 4 + Dans la savane</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 5 + Il vit en toi</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 6 + C'est l'histoire de la vie</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 7 + Est-ce toi</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 8 + Alane (Wes)</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 9 + L'amour brille sous les &eacute;toiles + Madan</li>
+            <li style="font-family:'Cormorant Garamond',serif; font-size:1.15em; color:#ccc; line-height:2.2;">Voix off 10 (freeze + r&eacute;v&eacute;lation + saluts) &mdash; voix off uniquement</li>
+        </ol>
+    </div>
+
     <!-- ═══════════ EQUIPE ═══════════ -->
     <section class="equipe" id="equipe">
         <h2 class="section-title">&Eacute;quipe</h2>
@@ -869,6 +956,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 1 (ouverture) + Emmenez-moi</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -980,6 +1068,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 2 + Y&eacute;k&eacute; Y&eacute;k&eacute;</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1069,6 +1158,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 3 + Africa</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1167,6 +1257,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 4 + Dans la savane</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1255,6 +1346,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 5 + Il vit en toi</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1369,6 +1461,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 6 + C'est l'histoire de la vie</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1465,6 +1558,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 7 + Est-ce toi</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1564,6 +1658,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 8 + Alane (Wes)</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte de la narratrice</div>
                             <div class="narration-text">
@@ -1659,6 +1754,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 9 + L'amour brille sous les &eacute;toiles + Madan</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte du narrateur</div>
                             <div class="narration-text">
@@ -1845,6 +1941,7 @@
                 </div>
                 <div class="moment-body">
                     <div class="moment-content">
+                        <div class="fichier-mp3"><span class="fichier-mp3-icon">&#127911;</span> Fichier MP3 : <strong>Voix off 10 (freeze + r&eacute;v&eacute;lation + saluts) &mdash; voix off uniquement</strong></div>
                         <div class="narration-box">
                             <div class="narration-label">&#127897; Texte complet &mdash; Alternance HOMME / FEMME / CH&OElig;UR</div>
                             <div class="narration-note">&#127925; Musique africaine fantasmagorique EXTRAORDINAIRE &mdash; djemb&eacute;, mbira, kora, tonnerre lointain, ch&oelig;urs mystiques. Le moment le plus puissant du spectacle.</div>
