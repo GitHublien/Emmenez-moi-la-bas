@@ -775,22 +775,6 @@
             color: #aaa;
         }
 
-        /* ═══ MODE SIMPLIFIÉ ═══ */
-        body.mode-simple .narration-note,
-        body.mode-simple .schema-coulisses,
-        body.mode-simple .moment-danseurs,
-        body.mode-simple .legende-grid,
-        body.mode-simple .fichier-mp3 audio {
-            display: none;
-        }
-        body.mode-simple .moment-titre { font-size: 1.3em; }
-        body.mode-simple .moment-scene p,
-        body.mode-simple .narration-text,
-        body.mode-simple .entrees-sorties li { font-size: 1.3em; line-height: 2.2; }
-        body.mode-simple .moment-scene h4,
-        body.mode-simple .entrees-sorties h4 { font-size: 1.2em; }
-        body.mode-simple .fichier-mp3-titre { font-size: 1.4em; }
-
         /* ═══ FOOTER ═══ */
         footer {
             text-align: center;
@@ -842,7 +826,6 @@
 
 <!-- ═══════════ CONTROLES ═══════════ -->
 <div class="ctrl">
-    <button onclick="toggleSimple()" id="btnSimple" title="Mode simplifi&eacute;" style="font-size:16px;">&#128065;</button>
     <button onclick="toggleFS()" title="Plein &eacute;cran" style="font-size:18px;">&#9974;</button>
 </div>
 
@@ -2185,18 +2168,19 @@ function enterPage() {
     setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 900);
 }
 
-// ═══ MODE SIMPLIFIÉ ═══
-function toggleSimple() {
-    document.body.classList.toggle('mode-simple');
-    const btn = document.getElementById('btnSimple');
-    if (document.body.classList.contains('mode-simple')) {
-        btn.innerHTML = '&#128064;'; // Œil fermé
-        btn.title = 'Mode complet';
-    } else {
-        btn.innerHTML = '&#128065;'; // Œil ouvert
-        btn.title = 'Mode simplifié';
-    }
-}
+// ═══ ARRÊT AUTO DES AUTRES LECTEURS AUDIO ═══
+document.addEventListener('DOMContentLoaded', function() {
+    const audios = document.querySelectorAll('audio');
+    audios.forEach(audio => {
+        audio.addEventListener('play', function() {
+            audios.forEach(otherAudio => {
+                if (otherAudio !== audio) {
+                    otherAudio.pause();
+                }
+            });
+        });
+    });
+});
 
 // ═══ PLEIN ECRAN ═══
 function toggleFS() {
